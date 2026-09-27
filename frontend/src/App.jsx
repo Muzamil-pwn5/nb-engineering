@@ -10,7 +10,7 @@ import Generators from "./pages/generators.jsx";
 import GeneratorDetail from "./pages/GeneratorDetail.jsx";
 import Services from "./pages/Services.jsx";
 import ServiceDetail from "./pages/ServiceDetail.jsx";
-import contact from "./pages/contact.jsx";
+import Contact from "./pages/Contact.jsx";
 import Brand from "./pages/Brand.jsx";
 
 import SEO from "./components/SEO.jsx";
