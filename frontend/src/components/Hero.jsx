@@ -1,67 +1,43 @@
 function Hero() {
   return (
     <section className="hero" id="home">
-
-      {/* Full-width hero image */}
+      {/* Full-width industrial generator photograph */}
       <div className="hero-image-wrapper">
         <div className="hero-image-frame">
           <img
-            src="https://images.unsplash.com/photo-1705051278299-7e64ba21437a?auto=format&fit=crop&fm=jpg&q=85&w=2400"
-            alt="Industrial diesel generator"
+            src="https://s7d2.scene7.com/is/image/Caterpillar/CM20190415-34be1-04810"
+            alt="Caterpillar diesel generators in an industrial power room"
           />
-        </div>
-
-        <div className="hero-image-label">
-          <span className="status-dot"></span>
-          POWER GENERATION
         </div>
       </div>
 
-      {/* Content remains inside the centered container */}
+      {/* Hero content */}
       <div className="hero-container">
-
         <div className="hero-content">
+
+          <p className="hero-company">
+            NB ENGINEERING &amp; SERVICES
+          </p>
 
           <div className="hero-line"></div>
 
           <p className="hero-eyebrow">
-            POWER GENERATION SOLUTIONS
+            POWER GENERATION &amp; ELECTRICAL SOLUTIONS
           </p>
 
           <h1>
-            Reliable Power.
+            POWER THAT KEEPS
             <br />
-            <span>Lasting Solutions.</span>
+            <span>BUSINESS MOVING.</span>
           </h1>
 
           <p className="hero-description">
-            NB Engineering & Services provides generator sales,
-            rental, repair, maintenance, ATS panels, spare parts
-            and complete power solutions.
+            Reliable generators, electrical systems and technical
+            support engineered for commercial and industrial needs.
           </p>
 
-          <div className="hero-buttons">
-            <a href="#generators" className="primary-button">
-              Explore Generators
-            </a>
-
-            <a href="#services" className="secondary-button">
-              Our Services
-            </a>
-          </div>
-
-          <div className="hero-brands">
-            <span>Specialized in</span>
-            <strong>FG WILSON</strong>
-            <strong>CUMMINS</strong>
-            <strong>CAT</strong>
-            <strong>PERKINS</strong>
-          </div>
-
         </div>
-
       </div>
-
     </section>
   );
 }

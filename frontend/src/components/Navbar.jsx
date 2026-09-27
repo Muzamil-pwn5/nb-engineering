@@ -2,6 +2,15 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 5 5" />
+    </svg>
+  );
+}
+
 function HomeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -43,15 +52,6 @@ function ContactIcon() {
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <rect x="3" y="5" width="18" height="14" rx="2" />
       <path d="m4.5 7 7.5 6 7.5-6" />
-    </svg>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M5 12h13" />
-      <path d="m13 6 6 6-6 6" />
     </svg>
   );
 }
@@ -106,123 +106,11 @@ const navItems = [
 function Navbar() {
   const location = useLocation();
 
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isScrolledHidden, setIsScrolledHidden] =
-    React.useState(false);
-  const [isTopZoneActive, setIsTopZoneActive] =
+  const [isMenuOpen, setIsMenuOpen] =
     React.useState(false);
 
-  /*
-   * ---------------------------------------------------------
-   * SCROLL BEHAVIOR
-   *
-   * At top:
-   *   navbar visible
-   *
-   * Scroll down:
-   *   navbar fades away
-   *
-   * Scroll up:
-   *   navbar comes back
-   * ---------------------------------------------------------
-   */
+  const navbarRef = React.useRef(null);
 
-  React.useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      /*
-       * Always visible at the very top.
-       */
-      if (currentScrollY <= 20) {
-        setIsScrolledHidden(false);
-        lastScrollY = currentScrollY;
-        return;
-      }
-
-      /*
-       * Small movement is ignored so the navbar does not
-       * flicker while scrolling.
-       */
-      const difference = currentScrollY - lastScrollY;
-
-      if (Math.abs(difference) < 3) {
-        return;
-      }
-
-      /*
-       * Scrolling DOWN.
-       */
-      if (difference > 0) {
-        setIsScrolledHidden(true);
-      }
-
-      /*
-       * Scrolling UP.
-       */
-      if (difference < 0) {
-        setIsScrolledHidden(false);
-      }
-
-      lastScrollY = currentScrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  /*
-   * Close mobile menu whenever the route changes.
-   */
-  React.useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
-
-  /*
-   * ---------------------------------------------------------
-   * TOP REVEAL ZONE
-   *
-   * When the navbar has disappeared, moving the cursor into
-   * the top area makes it visible again.
-   * ---------------------------------------------------------
-   */
-
-  const handleTopZoneEnter = () => {
-    setIsTopZoneActive(true);
-    setIsScrolledHidden(false);
-  };
-
-  const handleTopZoneLeave = () => {
-    setIsTopZoneActive(false);
-  };
-
-  /*
-   * ---------------------------------------------------------
-   * NAVBAR HOVER
-   *
-   * Keep it visible while the cursor is actually over it.
-   * ---------------------------------------------------------
-   */
-
-  const handleNavbarEnter = () => {
-    setIsTopZoneActive(true);
-    setIsScrolledHidden(false);
-  };
-
-  const handleNavbarLeave = () => {
-    setIsTopZoneActive(false);
-  };
-
-  /*
-   * Active route.
-   */
   const isActive = (path) => {
     if (path === "/") {
       return location.pathname === "/";
@@ -234,214 +122,285 @@ function Navbar() {
     );
   };
 
-  const navbarClassName = [
-    "navbar",
-    isScrolledHidden && !isTopZoneActive
-      ? "navbar-hidden"
-      : "",
-    isTopZoneActive
-      ? "navbar-top-active"
-      : "",
-    isMenuOpen
-      ? "navbar-menu-open"
-      : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  /*
+   * ---------------------------------------------------------
+   * SCROLL-LINKED NAVBAR COLLAPSE
+   *
+   * 0px scroll:
+   *   Fully expanded.
+   *
+   * 70px+ scroll:
+   *   Fully collapsed.
+   *
+   * Between 0px and 70px:
+   *   Smoothly interpolates with the actual scroll position.
+   *
+   * requestAnimationFrame keeps this lightweight and avoids
+   * React re-rendering on every scroll event.
+   * ---------------------------------------------------------
+   */
+
+  React.useEffect(() => {
+    let animationFrame = null;
+
+    const updateNavbar = () => {
+      animationFrame = null;
+
+      const navbar = navbarRef.current;
+
+      if (!navbar) {
+        return;
+      }
+
+      const scrollY = Math.max(
+        0,
+        window.scrollY || window.pageYOffset || 0
+      );
+
+      /*
+       * The first 70px of scrolling control the collapse.
+       */
+      const collapseDistance = 70;
+
+      const progress = Math.min(
+        scrollY / collapseDistance,
+        1
+      );
+
+      /*
+       * Smoothstep easing.
+       *
+       * This gives the navbar a softer beginning and ending
+       * instead of a linear mechanical movement.
+       */
+      const easedProgress =
+        progress * progress * (3 - 2 * progress);
+
+      navbar.style.setProperty(
+        "--navbar-collapse-progress",
+        easedProgress.toFixed(4)
+      );
+    };
+
+    const handleScroll = () => {
+      if (animationFrame !== null) {
+        return;
+      }
+
+      animationFrame =
+        window.requestAnimationFrame(updateNavbar);
+    };
+
+    updateNavbar();
+
+    window.addEventListener(
+      "scroll",
+      handleScroll,
+      {
+        passive: true,
+      }
+    );
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        handleScroll
+      );
+
+      if (animationFrame !== null) {
+        window.cancelAnimationFrame(
+          animationFrame
+        );
+      }
+    };
+  }, []);
+
+  React.useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 900) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () => {
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (!isMenuOpen) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
 
   return (
-    <>
-      {/* =====================================================
-          INVISIBLE TOP REVEAL AREA
+    <header
+      ref={navbarRef}
+      className="navbar"
+      style={{
+        "--navbar-collapse-progress": 0,
+      }}
+    >
+      <div className="navbar-inner">
 
-          IMPORTANT:
-          This stays BEHIND the actual navbar.
+        {/* =================================================
+            BRAND
+        ================================================= */}
 
-          It allows the navbar to become visible again when
-          the user moves the cursor to the top of the page.
-      ===================================================== */}
+        <Link
+          to="/"
+          className="navbar-brand"
+          aria-label="NB Engineering and Services home"
+        >
+          <span className="navbar-logo">
+            <img
+              src="/logo.jpeg"
+              alt="NB Engineering & Services"
+            />
+          </span>
+
+          <span className="navbar-brand-text">
+            <strong>NB ENGINEERING</strong>
+            <small>&amp; SERVICES</small>
+          </span>
+        </Link>
+
+
+        {/* =================================================
+            DESKTOP NAVIGATION
+        ================================================= */}
+
+        <nav
+          className="navbar-links"
+          aria-label="Main navigation"
+        >
+          {navItems.map(
+            ({ label, path, icon: Icon }) => {
+              const active = isActive(path);
+
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`navbar-link ${
+                    active ? "active" : ""
+                  }`}
+                  aria-current={
+                    active ? "page" : undefined
+                  }
+                >
+                  <span className="navbar-link-icon">
+                    <Icon />
+                  </span>
+
+                  <span>{label}</span>
+                </Link>
+              );
+            }
+          )}
+        </nav>
+
+
+        {/* =================================================
+            RIGHT SIDE
+        ================================================= */}
+
+        <div className="navbar-actions">
+
+          <button
+            type="button"
+            className="navbar-search"
+            aria-label="Search"
+            title="Search"
+          >
+            <SearchIcon />
+          </button>
+
+          <button
+            type="button"
+            className="navbar-menu-button"
+            onClick={() =>
+              setIsMenuOpen((open) => !open)
+            }
+            aria-label={
+              isMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+            aria-expanded={isMenuOpen}
+          >
+            <span>
+              {isMenuOpen ? (
+                <CloseIcon />
+              ) : (
+                <MenuIcon />
+              )}
+            </span>
+          </button>
+
+        </div>
+      </div>
+
+
+      {/* ===================================================
+          MOBILE NAVIGATION
+      =================================================== */}
 
       <div
-        className="navbar-hover-zone"
-        onMouseEnter={handleTopZoneEnter}
-        onMouseLeave={handleTopZoneLeave}
-        aria-hidden="true"
-      />
-
-      {/* =====================================================
-          NAVBAR
-      ===================================================== */}
-
-      <header
-        className={navbarClassName}
-        onMouseEnter={handleNavbarEnter}
-        onMouseLeave={handleNavbarLeave}
+        className={`mobile-navbar ${
+          isMenuOpen ? "open" : ""
+        }`}
       >
-        <div className="navbar-shell">
+        <nav
+          className="mobile-navbar-links"
+          aria-label="Mobile navigation"
+        >
+          {navItems.map(
+            ({ label, path, icon: Icon }) => {
+              const active = isActive(path);
 
-          {/* =================================================
-              NAVBAR INNER
-          ================================================= */}
+              return (
+                <Link
+                  key={path}
+                  to={path}
+                  className={`mobile-navbar-link ${
+                    active ? "active" : ""
+                  }`}
+                  aria-current={
+                    active ? "page" : undefined
+                  }
+                >
+                  <span className="mobile-navbar-icon">
+                    <Icon />
+                  </span>
 
-          <div className="navbar-inner">
-
-            {/* BRAND */}
-
-            <Link
-              to="/"
-              className="brand"
-              aria-label="NB Engineering and Services home"
-              title="NB Engineering & Services"
-            >
-              <span className="brand-mark">
-                <img
-                  src="/logo.jpeg"
-                  alt="NB Engineering & Services"
-                />
-              </span>
-
-              <span className="brand-copy">
-                <strong>NB ENGINEERING</strong>
-                <small>&amp; SERVICES</small>
-              </span>
-            </Link>
-
-            <div className="nav-divider" />
-
-            {/* MAIN NAVIGATION */}
-
-            <nav
-              className="nav-links"
-              aria-label="Main navigation"
-            >
-              {navItems.map(
-                ({ label, path, icon: Icon }) => {
-                  const active = isActive(path);
-
-                  return (
-                    <Link
-                      key={path}
-                      to={path}
-                      className={`nav-link ${
-                        active ? "active" : ""
-                      }`}
-                      aria-current={
-                        active ? "page" : undefined
-                      }
-                      title={label}
-                    >
-                      <span className="nav-icon">
-                        <Icon />
-                      </span>
-
-                      <span className="nav-label">
-                        {label}
-                      </span>
-
-                      <span className="nav-active-line" />
-                    </Link>
-                  );
-                }
-              )}
-            </nav>
-
-            <div className="nav-spacer" />
-
-            {/* GET IN TOUCH */}
-
-            <Link
-              to="/contact"
-              className="nav-button"
-              title="Get In Touch"
-            >
-              <span className="nav-button-icon">
-                <ArrowIcon />
-              </span>
-
-              <span className="nav-button-text">
-                Get In Touch
-              </span>
-            </Link>
-
-            {/* MOBILE MENU */}
-
-            <button
-              type="button"
-              className="mobile-menu-button"
-              onClick={() =>
-                setIsMenuOpen((open) => !open)
-              }
-              aria-label={
-                isMenuOpen
-                  ? "Close navigation menu"
-                  : "Open navigation menu"
-              }
-              aria-expanded={isMenuOpen}
-            >
-              <span className="menu-icon">
-                {isMenuOpen ? (
-                  <CloseIcon />
-                ) : (
-                  <MenuIcon />
-                )}
-              </span>
-            </button>
-          </div>
-
-          {/* =================================================
-              MOBILE PANEL
-          ================================================= */}
-
-          <div
-            className={`mobile-nav-panel ${
-              isMenuOpen ? "open" : ""
-            }`}
-          >
-            <nav
-              className="mobile-nav-links"
-              aria-label="Mobile navigation"
-            >
-              {navItems.map(
-                ({ label, path, icon: Icon }) => {
-                  const active = isActive(path);
-
-                  return (
-                    <Link
-                      key={path}
-                      to={path}
-                      className={`mobile-nav-link ${
-                        active ? "active" : ""
-                      }`}
-                      aria-current={
-                        active ? "page" : undefined
-                      }
-                    >
-                      <span className="mobile-nav-icon">
-                        <Icon />
-                      </span>
-
-                      <span>{label}</span>
-
-                      <span className="mobile-nav-arrow">
-                        <ArrowIcon />
-                      </span>
-                    </Link>
-                  );
-                }
-              )}
-
-              <Link
-                to="/contact"
-                className="mobile-contact-button"
-              >
-                <span>Get In Touch</span>
-                <ArrowIcon />
-              </Link>
-            </nav>
-          </div>
-        </div>
-      </header>
-    </>
+                  <span>{label}</span>
+                </Link>
+              );
+            }
+          )}
+        </nav>
+      </div>
+    </header>
   );
 }
 
