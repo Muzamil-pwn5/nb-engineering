@@ -1,0 +1,976 @@
+:root {
+  --nb-yellow: #f5c400;
+  --nb-yellow-dark: #d8a900;
+  --nb-yellow-soft: rgba(245, 196, 0, 0.12);
+
+  --nb-black: #111111;
+  --nb-text: #171717;
+  --nb-muted: #666666;
+  --nb-white: #ffffff;
+
+  --nb-border: rgba(17, 17, 17, 0.1);
+
+  /*
+   * COLLAPSED WIDTH
+   *
+   * Shows ALL icons:
+   *
+   * [NB] [HOME] [SERVICES] [GENERATORS] [BRANDS] [CONTACT] [→]
+   */
+  --nb-collapsed: 360px;
+
+  /*
+   * EXPANDED WIDTH
+   */
+  --nb-expanded: 790px;
+
+  --nb-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+
+/* =========================================================
+   TOP REVEAL ZONE
+========================================================= */
+
+/*
+ * IMPORTANT:
+ *
+ * This MUST be BELOW the navbar.
+ *
+ * The previous version had this above the navbar, which
+ * prevented the navbar from receiving hover events.
+ */
+
+.navbar-hover-zone {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 95px;
+
+  z-index: 999;
+
+  background: transparent;
+
+  pointer-events: auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  position: fixed;
+
+  top: 16px;
+  left: 50%;
+
+  width: auto;
+  height: auto;
+
+  z-index: 1000;
+
+  transform: translateX(-50%);
+
+  pointer-events: none;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.45s var(--nb-ease);
+}
+
+
+/*
+ * HIDDEN AFTER SCROLLING DOWN
+ */
+
+.navbar.navbar-hidden {
+  opacity: 0;
+
+  transform:
+    translateX(-50%)
+    translateY(-20px);
+
+  pointer-events: none;
+}
+
+
+/*
+ * REVEALED BY TOP HOVER
+ */
+
+.navbar.navbar-top-active {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+
+  pointer-events: none;
+}
+
+
+/*
+ * MOBILE MENU MUST STAY VISIBLE.
+ */
+
+.navbar.navbar-menu-open {
+  opacity: 1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =========================================================
+   NAVBAR SHELL
+========================================================= */
+
+.navbar-shell {
+  pointer-events: auto;
+
+  width: var(--nb-collapsed);
+  height: 58px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border: 1px solid var(--nb-border);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 8px 30px rgba(17, 17, 17, 0.08),
+    0 2px 8px rgba(17, 17, 17, 0.04);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    width 0.42s var(--nb-ease),
+    box-shadow 0.32s ease;
+}
+
+
+/*
+ * THIS IS THE EXPANSION.
+ *
+ * Hovering the actual navbar shell expands it.
+ */
+
+.navbar-shell:hover,
+.navbar-shell:focus-within {
+  width: var(--nb-expanded);
+
+  box-shadow:
+    0 16px 42px rgba(17, 17, 17, 0.12),
+    0 4px 12px rgba(17, 17, 17, 0.05);
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.navbar-inner {
+  width: 100%;
+  height: 58px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  padding: 8px 9px;
+
+  gap: 7px;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+  width: 40px;
+  min-width: 40px;
+
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  color: var(--nb-text);
+
+  text-decoration: none;
+
+  overflow: hidden;
+}
+
+
+.brand-mark {
+  position: relative;
+
+  width: 40px;
+  min-width: 40px;
+
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 11px;
+
+  background: var(--nb-yellow);
+
+  color: var(--nb-black);
+
+  font-size: 12px;
+
+  font-weight: 950;
+
+  letter-spacing: 0.04em;
+
+  box-shadow:
+    0 5px 15px rgba(245, 196, 0, 0.22);
+}
+
+
+.brand-mark-dot {
+  position: absolute;
+
+  top: 5px;
+  right: 5px;
+
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: var(--nb-black);
+}
+
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  transform: translateX(-8px);
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.28s var(--nb-ease);
+}
+
+
+/*
+ * Expand labels when the SHELL itself is hovered.
+ */
+
+.navbar-shell:hover .brand-copy,
+.navbar-shell:focus-within .brand-copy {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+.brand-copy strong {
+  color: var(--nb-black);
+
+  font-size: 11px;
+
+  line-height: 1.1;
+
+  font-weight: 900;
+
+  letter-spacing: 0.04em;
+}
+
+
+.brand-copy small {
+  margin-top: 3px;
+
+  color: var(--nb-muted);
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  font-weight: 800;
+
+  letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.nav-divider {
+  width: 1px;
+  min-width: 1px;
+
+  height: 28px;
+
+  background: var(--nb-border);
+
+  opacity: 0;
+
+  transition: opacity 0.2s ease;
+}
+
+
+.navbar-shell:hover .nav-divider,
+.navbar-shell:focus-within .nav-divider {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+  display: flex;
+
+  align-items: center;
+
+  gap: 3px;
+
+  flex-shrink: 0;
+}
+
+
+.nav-link {
+  position: relative;
+
+  width: 42px;
+  min-width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 3px;
+
+  gap: 7px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  color: var(--nb-muted);
+
+  text-decoration: none;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  transition:
+    width 0.38s var(--nb-ease),
+    min-width 0.38s var(--nb-ease),
+    padding 0.38s var(--nb-ease),
+    color 0.18s ease,
+    background 0.18s ease;
+}
+
+
+/*
+ * EXPAND ALL NAV ITEMS WHEN ACTUAL NAVBAR IS HOVERED.
+ */
+
+.navbar-shell:hover .nav-link,
+.navbar-shell:focus-within .nav-link {
+  width: auto;
+
+  min-width: 92px;
+
+  padding: 0 7px;
+}
+
+
+.navbar-shell:hover .nav-link:nth-child(2),
+.navbar-shell:focus-within .nav-link:nth-child(2) {
+  min-width: 102px;
+}
+
+
+.navbar-shell:hover .nav-link:nth-child(3),
+.navbar-shell:focus-within .nav-link:nth-child(3) {
+  min-width: 118px;
+}
+
+
+.navbar-shell:hover .nav-link:nth-child(4),
+.navbar-shell:focus-within .nav-link:nth-child(4) {
+  min-width: 94px;
+}
+
+
+.navbar-shell:hover .nav-link:nth-child(5),
+.navbar-shell:focus-within .nav-link:nth-child(5) {
+  min-width: 96px;
+}
+
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.nav-link:hover {
+  color: var(--nb-black);
+
+  background: rgba(17, 17, 17, 0.045);
+}
+
+
+.nav-link.active {
+  color: var(--nb-black);
+
+  background: var(--nb-yellow-soft);
+}
+
+
+/* =========================================================
+   ICON
+========================================================= */
+
+.nav-icon {
+  width: 36px;
+  min-width: 36px;
+
+  height: 36px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 9px;
+
+  color: currentColor;
+
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+
+.nav-icon svg,
+.nav-button-icon svg,
+.mobile-nav-icon svg,
+.mobile-nav-arrow svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+
+  stroke-linejoin: round;
+}
+
+
+.nav-link:hover .nav-icon {
+  background: rgba(17, 17, 17, 0.05);
+}
+
+
+.nav-link.active .nav-icon {
+  background: var(--nb-yellow);
+
+  color: var(--nb-black);
+}
+
+
+/* =========================================================
+   LABEL
+========================================================= */
+
+.nav-label {
+  opacity: 0;
+
+  transform: translateX(-8px);
+
+  color: currentColor;
+
+  font-size: 11px;
+
+  font-weight: 750;
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.28s var(--nb-ease);
+}
+
+
+.navbar-shell:hover .nav-label,
+.navbar-shell:focus-within .nav-label {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   ACTIVE LINE
+========================================================= */
+
+.nav-active-line {
+  position: absolute;
+
+  left: 9px;
+  right: 9px;
+
+  bottom: 2px;
+
+  height: 2px;
+
+  border-radius: 3px;
+
+  background: var(--nb-yellow);
+
+  opacity: 0;
+
+  transition: opacity 0.18s ease;
+}
+
+
+.nav-link.active .nav-active-line {
+  opacity: 1;
+}
+
+
+/* =========================================================
+   SPACER
+========================================================= */
+
+.nav-spacer {
+  flex: 1;
+
+  min-width: 6px;
+}
+
+
+/* =========================================================
+   GET IN TOUCH
+========================================================= */
+
+.nav-button {
+  width: 42px;
+  min-width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 0 3px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: var(--nb-black);
+
+  color: var(--nb-white);
+
+  text-decoration: none;
+
+  transition:
+    width 0.38s var(--nb-ease),
+    min-width 0.38s var(--nb-ease),
+    padding 0.38s var(--nb-ease),
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+
+.navbar-shell:hover .nav-button,
+.navbar-shell:focus-within .nav-button {
+  width: 125px;
+
+  min-width: 125px;
+
+  padding: 0 7px;
+}
+
+
+.nav-button:hover {
+  background: var(--nb-yellow);
+
+  color: var(--nb-black);
+}
+
+
+.nav-button-icon {
+  width: 36px;
+  min-width: 36px;
+
+  height: 36px;
+
+  display: grid;
+
+  place-items: center;
+}
+
+
+.nav-button-text {
+  opacity: 0;
+
+  transform: translateX(-8px);
+
+  white-space: nowrap;
+
+  font-size: 10px;
+
+  font-weight: 850;
+
+  transition:
+    opacity 0.18s ease,
+    transform 0.28s var(--nb-ease);
+}
+
+
+.navbar-shell:hover .nav-button-text,
+.navbar-shell:focus-within .nav-button-text {
+  opacity: 1;
+
+  transform: translateX(0);
+}
+
+
+/* =========================================================
+   MOBILE BUTTON
+========================================================= */
+
+.mobile-menu-button {
+  display: none;
+}
+
+
+/* =========================================================
+   MOBILE PANEL
+========================================================= */
+
+.mobile-nav-panel {
+  display: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .navbar-hover-zone {
+    height: 80px;
+  }
+
+
+  .navbar {
+    top: 10px;
+
+    left: 10px;
+    right: 10px;
+
+    width: auto;
+
+    transform: none;
+
+    transition:
+      opacity 0.3s ease,
+      transform 0.35s var(--nb-ease);
+  }
+
+
+  .navbar.navbar-hidden {
+    opacity: 0;
+
+    transform: translateY(-16px);
+
+    pointer-events: none;
+  }
+
+
+  .navbar.navbar-top-active,
+  .navbar.navbar-menu-open {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+
+
+  .navbar-shell,
+  .navbar-shell:hover,
+  .navbar-shell:focus-within {
+    width: 100%;
+
+    height: 56px;
+
+    border-radius: 14px;
+
+    transition: none;
+  }
+
+
+  .navbar-inner {
+    height: 56px;
+
+    padding: 7px 9px;
+  }
+
+
+  .brand-copy,
+  .nav-divider,
+  .nav-links,
+  .nav-spacer,
+  .nav-button {
+    display: none;
+  }
+
+
+  .mobile-menu-button {
+    margin-left: auto;
+
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+
+    place-items: center;
+
+    border: 0;
+
+    border-radius: 10px;
+
+    background: var(--nb-black);
+
+    color: var(--nb-white);
+
+    cursor: pointer;
+  }
+
+
+  .menu-icon {
+    width: 20px;
+    height: 20px;
+
+    display: grid;
+
+    place-items: center;
+  }
+
+
+  .menu-icon svg {
+    width: 19px;
+    height: 19px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+  }
+
+
+  /* =======================================================
+     MOBILE PANEL
+  ======================================================= */
+
+  .mobile-nav-panel {
+    display: block;
+
+    max-height: 0;
+
+    overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.99);
+
+    transition:
+      max-height 0.36s var(--nb-ease);
+  }
+
+
+  .mobile-nav-panel.open {
+    max-height: 430px;
+  }
+
+
+  .mobile-nav-links {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 12px;
+  }
+
+
+  .mobile-nav-link {
+    min-height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    padding: 0 10px;
+
+    border-radius: 10px;
+
+    color: var(--nb-muted);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 700;
+  }
+
+
+  .mobile-nav-link:hover,
+  .mobile-nav-link.active {
+    background: var(--nb-yellow-soft);
+
+    color: var(--nb-black);
+  }
+
+
+  .mobile-nav-icon {
+    width: 34px;
+    height: 34px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 9px;
+  }
+
+
+  .mobile-nav-link.active .mobile-nav-icon {
+    background: var(--nb-yellow);
+
+    color: var(--nb-black);
+  }
+
+
+  .mobile-nav-arrow {
+    margin-left: auto;
+
+    width: 22px;
+    height: 22px;
+
+    display: grid;
+
+    place-items: center;
+  }
+
+
+  .mobile-nav-arrow svg {
+    width: 15px;
+    height: 15px;
+  }
+
+
+  .mobile-contact-button {
+    min-height: 44px;
+
+    margin-top: 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 13px;
+
+    border-radius: 10px;
+
+    background: var(--nb-black);
+
+    color: var(--nb-white);
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 800;
+  }
+
+
+  .mobile-contact-button:hover {
+    background: var(--nb-yellow);
+
+    color: var(--nb-black);
+  }
+
+
+  .mobile-contact-button svg {
+    width: 16px;
+    height: 16px;
+
+    fill: none;
+
+    stroke: currentColor;
+
+    stroke-width: 1.8;
+
+    stroke-linecap: round;
+
+    stroke-linejoin: round;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .navbar,
+  .navbar-shell,
+  .brand-copy,
+  .nav-link,
+  .nav-label,
+  .nav-button,
+  .nav-button-text,
+  .mobile-nav-panel {
+    transition: none;
+  }
+}

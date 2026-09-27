@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Main Pages -->
+
+  <url>
+    <loc>https://nbengineering.com/</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/brands</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/contact</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/spare-parts</loc>
+  </url>
+
+
+  <!-- Generator Detail Pages -->
+
+  <url>
+    <loc>https://nbengineering.com/generators/cat-c18-generator</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators/cummins-c110d5</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators/cummins-c33d5</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators/fg-wilson-p110-3</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators/fg-wilson-p22-5-1s</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/generators/perkins-1104a-generator</loc>
+  </url>
+
+
+  <!-- Service Detail Pages -->
+
+  <url>
+    <loc>https://nbengineering.com/services/ats-panels</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/canopy-work</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/generator-maintenance</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/generator-purchase</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/generator-rental</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/generator-repair</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/generator-sales</loc>
+  </url>
+
+  <url>
+    <loc>https://nbengineering.com/services/spare-parts</loc>
+  </url>
+
+</urlset>
