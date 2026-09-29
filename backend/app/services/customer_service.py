@@ -9,9 +9,7 @@ def create_customer(
     db: Session,
     customer_data: CustomerCreate,
 ) -> Customer:
-    customer = Customer(
-        **customer_data.model_dump(),
-    )
+    customer = Customer(**customer_data.model_dump())
 
     db.add(customer)
     db.commit()
@@ -36,9 +34,9 @@ def get_customer_by_id(
     db: Session,
     customer_id: int,
 ) -> Customer | None:
-    return db.scalar(
-        select(Customer).where(
-            Customer.id == customer_id,
-            Customer.is_active.is_(True),
-        )
+    statement = select(Customer).where(
+        Customer.id == customer_id,
+        Customer.is_active.is_(True),
     )
+
+    return db.scalar(statement)

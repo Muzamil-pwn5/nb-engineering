@@ -8,6 +8,9 @@ from app.api.routes import (
     spare_parts_router,
     inquiries_router,
     rentals_router,
+    customers_router,
+    sites_router,
+    equipment_router,
 )
 
 
@@ -16,10 +19,6 @@ app = FastAPI(
     version="1.0.0",
 )
 
-
-# =========================================================
-# CORS
-# =========================================================
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,16 +33,8 @@ app.add_middleware(
 )
 
 
-# =========================================================
-# API PREFIX
-# =========================================================
-
 API_PREFIX = "/api/v1"
 
-
-# =========================================================
-# ROUTES
-# =========================================================
 
 app.include_router(
     brands_router,
@@ -75,10 +66,21 @@ app.include_router(
     prefix=API_PREFIX,
 )
 
+app.include_router(
+    customers_router,
+    prefix=API_PREFIX,
+)
 
-# =========================================================
-# HEALTH CHECK
-# =========================================================
+app.include_router(
+    sites_router,
+    prefix=API_PREFIX,
+)
+
+app.include_router(
+    equipment_router,
+    prefix=API_PREFIX,
+)
+
 
 @app.get("/health")
 def health_check():
@@ -87,10 +89,6 @@ def health_check():
         "service": "NB Engineering & Services API",
     }
 
-
-# =========================================================
-# ROOT
-# =========================================================
 
 @app.get("/")
 def root():

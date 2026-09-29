@@ -1,15 +1,24 @@
 from datetime import datetime
 
-from sqlalchemy import Boolean, DateTime, String, Text
+from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.database import Base
 
 
-class Customer(Base):
-    __tablename__ = "customers"
+class Site(Base):
+    __tablename__ = "sites"
 
-    id: Mapped[int] = mapped_column(primary_key=True, index=True)
+    id: Mapped[int] = mapped_column(
+        primary_key=True,
+        index=True,
+    )
+
+    customer_id: Mapped[int] = mapped_column(
+        ForeignKey("customers.id"),
+        nullable=False,
+        index=True,
+    )
 
     name: Mapped[str] = mapped_column(
         String(150),
@@ -17,52 +26,26 @@ class Customer(Base):
         index=True,
     )
 
-    customer_type: Mapped[str] = mapped_column(
-        String(30),
-        nullable=False,
-        default="individual",
-        index=True,
-    )
-
-    organization_type: Mapped[str | None] = mapped_column(
+    site_type: Mapped[str | None] = mapped_column(
         String(50),
         nullable=True,
         index=True,
-    )
-
-    relationship_status: Mapped[str] = mapped_column(
-        String(30),
-        nullable=False,
-        default="unknown",
-        index=True,
-    )
-
-    phone: Mapped[str | None] = mapped_column(
-        String(50),
-        nullable=True,
-        index=True,
-    )
-
-    email: Mapped[str | None] = mapped_column(
-        String(255),
-        nullable=True,
-        index=True,
-    )
-
-    company: Mapped[str | None] = mapped_column(
-        String(200),
-        nullable=True,
-    )
-
-    address: Mapped[str | None] = mapped_column(
-        Text,
-        nullable=True,
     )
 
     city: Mapped[str | None] = mapped_column(
         String(100),
         nullable=True,
         index=True,
+    )
+
+    area: Mapped[str | None] = mapped_column(
+        String(150),
+        nullable=True,
+    )
+
+    address: Mapped[str | None] = mapped_column(
+        Text,
+        nullable=True,
     )
 
     notes: Mapped[str | None] = mapped_column(
@@ -89,8 +72,13 @@ class Customer(Base):
         nullable=False,
     )
 
-    sites = relationship(
-        "Site",
-        back_populates="customer",
+    customer = relationship(
+        "Customer",
+        back_populates="sites",
+    )
+
+    equipment = relationship(
+        "Equipment",
+        back_populates="site",
         cascade="all, delete-orphan",
     )
