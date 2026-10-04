@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+﻿import { useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
+import apiRequest from "../api/client.js";
 import "./Contact.css";
 
 const OFFICE_ADDRESS =
@@ -9,7 +10,7 @@ const OFFICE_ADDRESS =
 const MAP_URL =
   "https://www.google.com/maps/dir//NB+Engineering+%26+Services,+Malik+market,+main+GT+Rd,+Tarnol,+Islamabad,+44000,+Pakistan/@33.6468497,72.9155687,18.31z/data=!4m8!4m7!1m0!1m5!1m1!1s0x38df970fb7218763:0xd46fb2048324944!2m2!1d72.9160736!2d33.6465619?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D";
 
-const CONTACT_EMAIL = "nbengineeringservices@gmail.com";
+const CONTACT_EMAIL = "nbengineerings@gmail.com";
 
 const TEAM = [
   {
@@ -25,13 +26,6 @@ const TEAM = [
     phone: "+92 305 540 7970",
     phoneHref: "tel:+923055407970",
     initials: "AA",
-  },
-  {
-    role: "Manager",
-    name: "Shahman Mubarak",
-    phone: "+92 322 586 4498",
-    phoneHref: "tel:+923225864498",
-    initials: "SM",
   },
 ];
 
@@ -57,24 +51,8 @@ function Contact() {
   });
 
   const [submitted, setSubmitted] = useState(false);
-
-  const mailtoUrl = useMemo(() => {
-    const subject = `Website Inquiry - ${form.service || "General Inquiry"}`;
-
-    const body = [
-      `Name: ${form.name}`,
-      `Phone: ${form.phone}`,
-      `Email: ${form.email}`,
-      `Service: ${form.service}`,
-      "",
-      "Message:",
-      form.message,
-    ].join("\n");
-
-    return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(body)}`;
-  }, [form]);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -87,17 +65,57 @@ function Contact() {
     if (submitted) {
       setSubmitted(false);
     }
+
+    if (submitError) {
+      setSubmitError("");
+    }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    if (!form.name.trim() || !form.phone.trim() || !form.message.trim()) {
+    if (
+      !form.name.trim() ||
+      !form.phone.trim() ||
+      !form.message.trim()
+    ) {
       return;
     }
 
-    setSubmitted(true);
-    window.location.href = mailtoUrl;
+    setSubmitting(true);
+    setSubmitted(false);
+    setSubmitError("");
+
+    try {
+      await apiRequest("/inquiries", {
+        method: "POST",
+        body: JSON.stringify({
+          name: form.name.trim(),
+          phone: form.phone.trim(),
+          email: form.email.trim() || null,
+          service: form.service,
+          message: form.message.trim(),
+        }),
+      });
+
+      setSubmitted(true);
+
+      setForm({
+        name: "",
+        phone: "",
+        email: "",
+        service: "General Inquiry",
+        message: "",
+      });
+    } catch (error) {
+      console.error("Inquiry submission failed:", error);
+
+      setSubmitError(
+        "We could not submit your inquiry right now. Please try again or contact us directly."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -109,7 +127,9 @@ function Contact() {
           <div className="contact-hero-overlay" />
 
           <div className="contact-hero-content">
-            <span className="contact-eyebrow">NB ENGINEERING & SERVICES</span>
+            <span className="contact-eyebrow">
+              NB ENGINEERING & SERVICES
+            </span>
 
             <h1>
               Let&apos;s power your
@@ -280,7 +300,10 @@ function Contact() {
           </div>
         </section>
 
-        <section className="inquiry-section section-shell" id="contact-form">
+        <section
+          className="inquiry-section section-shell"
+          id="contact-form"
+        >
           <div className="inquiry-grid">
             <div className="inquiry-copy">
               <div className="section-kicker">SEND AN INQUIRY</div>
@@ -299,21 +322,17 @@ function Contact() {
               <div className="quick-contact-list">
                 <a href={`mailto:${CONTACT_EMAIL}`}>
                   <span>EMAIL</span>
-                  {CONTACT_EMAIL}
+                  <span>{CONTACT_EMAIL}</span>
                 </a>
 
                 <a href="tel:+923205636673">
                   <span>CEO</span>
-                  +92 320 563 6673
+                  <span>+92 320 563 6673</span>
                 </a>
 
-                <a
-                  href={MAP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a href={MAP_URL} target="_blank" rel="noreferrer">
                   <span>LOCATION</span>
-                  Tarnol, Islamabad
+                  <span>Tarnol, Islamabad</span>
                 </a>
               </div>
             </div>
@@ -393,19 +412,30 @@ function Contact() {
               <div className="form-footer">
                 <div>
                   <small>
-                    Your email application will open with the inquiry prepared
-                    for our team.
+                    Your inquiry will be sent directly to our system for
+                    processing by the NB Engineering & Services team.
                   </small>
 
                   {submitted && (
                     <strong className="form-success">
-                      Inquiry prepared successfully.
+                      Inquiry submitted successfully. Our team will review it.
+                    </strong>
+                  )}
+
+                  {submitError && (
+                    <strong className="form-error">
+                      {submitError}
                     </strong>
                   )}
                 </div>
 
-                <button type="submit" className="submit-button">
-                  Prepare Inquiry <span>↗</span>
+                <button
+                  type="submit"
+                  className="submit-button"
+                  disabled={submitting}
+                >
+                  {submitting ? "Submitting..." : "Send Inquiry"}{" "}
+                  <span>↗</span>
                 </button>
               </div>
             </form>

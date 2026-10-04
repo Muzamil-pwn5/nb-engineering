@@ -13,3 +13,4 @@ pydantic-settings
 alembic
 
 python-dotenv
+pyjwt

@@ -37,16 +37,6 @@ function GeneratorIcon() {
   );
 }
 
-function BrandsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="m12 3 2.1 4.3 4.7.7-3.4 3.3.8 4.7-4.2-2.2-4.2 2.2.8-4.7-3.4-3.3 4.7-.7L12 3Z" />
-      <path d="M7 18.5h10" />
-      <path d="M9 21h6" />
-    </svg>
-  );
-}
-
 function ContactIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -92,12 +82,7 @@ const navItems = [
     icon: GeneratorIcon,
   },
   {
-    label: "Brands",
-    path: "/brands",
-    icon: BrandsIcon,
-  },
-  {
-    label: "Contact",
+    label: "Contact Us",
     path: "/contact",
     icon: ContactIcon,
   },
@@ -122,24 +107,6 @@ function Navbar() {
     );
   };
 
-  /*
-   * ---------------------------------------------------------
-   * SCROLL-LINKED NAVBAR COLLAPSE
-   *
-   * 0px scroll:
-   *   Fully expanded.
-   *
-   * 70px+ scroll:
-   *   Fully collapsed.
-   *
-   * Between 0px and 70px:
-   *   Smoothly interpolates with the actual scroll position.
-   *
-   * requestAnimationFrame keeps this lightweight and avoids
-   * React re-rendering on every scroll event.
-   * ---------------------------------------------------------
-   */
-
   React.useEffect(() => {
     let animationFrame = null;
 
@@ -157,9 +124,6 @@ function Navbar() {
         window.scrollY || window.pageYOffset || 0
       );
 
-      /*
-       * The first 70px of scrolling control the collapse.
-       */
       const collapseDistance = 70;
 
       const progress = Math.min(
@@ -167,12 +131,6 @@ function Navbar() {
         1
       );
 
-      /*
-       * Smoothstep easing.
-       *
-       * This gives the navbar a softer beginning and ending
-       * instead of a linear mechanical movement.
-       */
       const easedProgress =
         progress * progress * (3 - 2 * progress);
 
@@ -262,10 +220,6 @@ function Navbar() {
     >
       <div className="navbar-inner">
 
-        {/* =================================================
-            BRAND
-        ================================================= */}
-
         <Link
           to="/"
           className="navbar-brand"
@@ -283,11 +237,6 @@ function Navbar() {
             <small>&amp; SERVICES</small>
           </span>
         </Link>
-
-
-        {/* =================================================
-            DESKTOP NAVIGATION
-        ================================================= */}
 
         <nav
           className="navbar-links"
@@ -318,11 +267,6 @@ function Navbar() {
             }
           )}
         </nav>
-
-
-        {/* =================================================
-            RIGHT SIDE
-        ================================================= */}
 
         <div className="navbar-actions">
 
@@ -359,11 +303,6 @@ function Navbar() {
 
         </div>
       </div>
-
-
-      {/* ===================================================
-          MOBILE NAVIGATION
-      =================================================== */}
 
       <div
         className={`mobile-navbar ${

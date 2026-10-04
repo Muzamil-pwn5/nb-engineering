@@ -20,6 +20,13 @@ BRANDS = [
         "logo_url": None,
         "is_active": True,
     },
+    {
+        "name": "IVECO AIFO",
+        "slug": "iveco-aifo",
+        "description": "IVECO AIFO diesel generator and power generation solutions.",
+        "logo_url": None,
+        "is_active": True,
+    },
 ]
 
 
@@ -307,6 +314,89 @@ GENERATORS = [
         "is_available": True,
         "is_featured": True,
     },
+
+    # =========================================================
+    # FG WILSON P180P2 - REAL MACHINE
+    # =========================================================
+    {
+        "brand_slug": "fg-wilson",
+        "name": "FG Wilson P180P2 Diesel Generator – 180 kVA",
+        "slug": "fg-wilson-p180p2-180kva",
+        "model": "P180P2",
+        "description": (
+            "FG Wilson P180P2 diesel generator manufactured in the "
+            "United Kingdom. Rated prime power of 180 kVA / 144 kW, "
+            "manufactured in 2008. Rated at 400/230V, 3 Phase, 50Hz "
+            "with a rated current of 260A, rated speed of 1500 RPM "
+            "and power factor of 0.80. Alternator enclosure IP23, "
+            "insulation class H and AVR R250. Suitable for commercial, "
+            "industrial and backup power requirements. Contact NB "
+            "Engineering & Services for price, availability and further details."
+        ),
+        "kva": 180,
+        "kw": 144,
+        "fuel_type": "Diesel",
+        "condition": "Used",
+        "year": 2008,
+        "engine_model": None,
+        "alternator_model": None,
+        "image_url": "/images/generators/fg-wilson-p180p2-180kva.jpeg",
+        "is_available": True,
+        "is_featured": True,
+    },
+    # =========================================================
+    # CUMMINS 180 KVA - REAL MACHINE
+    # =========================================================
+    {
+        "brand_slug": "cummins",
+        "name": "Cummins 180 kVA Diesel Generator",
+        "slug": "cummins-180kva",
+        "model": None,
+        "description": (
+            "Cummins 180 kVA diesel generator, made in the USA and "
+            "manufactured in 2011. Equipped with a super soundproof "
+            "canopy for low-noise operation. Suitable for commercial, "
+            "industrial and backup power applications, including "
+            "offices, factories and construction sites. Contact NB "
+            "Engineering & Services for price, availability and "
+            "further details."
+        ),
+        "kva": 180,
+        "kw": 144,
+        "fuel_type": "Diesel",
+        "condition": "Used",
+        "year": 2011,
+        "engine_model": None,
+        "alternator_model": None,
+        "image_url": "/images/generators/cummins-180kva.jpeg",
+        "is_available": True,
+        "is_featured": True,
+    },
+    # =========================================================
+    # IVECO AIFO
+    # =========================================================
+    {
+        "brand_slug": "iveco-aifo",
+        "name": "IVECO AIFO Diesel Generator – 100 kVA",
+        "slug": "iveco-aifo-100kva",
+        "model": "IVECO AIFO",
+        "description": (
+            "IVECO AIFO diesel generator set rated at 100 kVA / 80 kW, "
+            "manufactured in 2008. Rated at 400V and 50Hz with a rated "
+            "current of 145A. Suitable for commercial, industrial and "
+            "backup power applications."
+        ),
+        "kva": 100,
+        "kw": 80,
+        "fuel_type": "Diesel",
+        "condition": "Used",
+        "year": 2008,
+        "engine_model": None,
+        "alternator_model": None,
+        "image_url": "/images/generators/iveco-aifo-100kva.jpeg",
+        "is_available": True,
+        "is_featured": True,
+    },
 ]
 
 
@@ -380,3 +470,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+

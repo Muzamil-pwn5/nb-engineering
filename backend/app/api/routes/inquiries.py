@@ -1,30 +1,32 @@
-from fastapi import APIRouter, Depends, status
+﻿from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
-from app.schemas.inquiry import InquiryCreate, InquiryResponse
+from app.schemas.inquiry import (
+    InquiryCreate,
+    InquiryResponse,
+    PublicInquiryCreate,
+    PublicInquiryResponse,
+)
 from app.services.inquiry_service import (
     create_inquiry,
+    create_public_inquiry,
     get_all_inquiries,
 )
 
-
-router = APIRouter(
-    prefix="/inquiries",
-    tags=["Inquiries"],
-)
+router = APIRouter(prefix="/inquiries", tags=["Inquiries"])
 
 
 @router.post(
     "",
-    response_model=InquiryResponse,
+    response_model=PublicInquiryResponse,
     status_code=status.HTTP_201_CREATED,
 )
-def submit_inquiry(
-    inquiry_data: InquiryCreate,
+def submit_public_inquiry(
+    inquiry_data: PublicInquiryCreate,
     db: Session = Depends(get_db),
 ):
-    return create_inquiry(db, inquiry_data)
+    return create_public_inquiry(db, inquiry_data)
 
 
 @router.get(

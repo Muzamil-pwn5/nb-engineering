@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+﻿import { useEffect } from "react";
 
 import {
   BrowserRouter,
@@ -64,7 +64,7 @@ function RouteSEO() {
       title:
         "Generator Brands | NB Engineering & Services | Pakistan",
       description:
-        "Explore generator brands and power generation equipment available through NB Engineering & Services for commercial, industrial, and residential applications.",
+        "Explore generator brands and power generation equipment available through NB Engineering & Services.",
     },
 
     "/spare-parts": {
@@ -77,31 +77,32 @@ function RouteSEO() {
 
   let seo = seoData[location.pathname];
 
-  if (!seo && location.pathname.startsWith("/generators/")) {
+  if (
+    !seo &&
+    location.pathname.startsWith("/generators/")
+  ) {
     seo = {
       title:
         "Generator Details | NB Engineering & Services | Pakistan",
       description:
-        "View generator specifications, features, applications, and inquiry information from NB Engineering & Services.",
+        "View generator specifications, features, applications, and inquiry information.",
     };
   }
 
-  if (!seo && location.pathname.startsWith("/services/")) {
+  if (
+    !seo &&
+    location.pathname.startsWith("/services/")
+  ) {
     seo = {
       title:
         "Generator Service | NB Engineering & Services | Pakistan",
       description:
-        "Explore generator service solutions from NB Engineering & Services, including technical support, installation, repair, maintenance, and related power services.",
+        "Explore generator service solutions from NB Engineering & Services.",
     };
   }
 
   if (!seo) {
-    seo = {
-      title:
-        "NB Engineering & Services | Generator Solutions in Pakistan",
-      description:
-        "NB Engineering & Services provides generators, power generation solutions, installation, maintenance, and after-sales support in Pakistan.",
-    };
+    seo = seoData["/"];
   }
 
   return (

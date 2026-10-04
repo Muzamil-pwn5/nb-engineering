@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+﻿import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import ServiceCard from "../components/ServiceCard";
+import ExperienceSection from "../components/ExperienceSection";
 
 import { getBrands } from "../api/brands";
 import { getServices } from "../api/services";
@@ -126,21 +127,28 @@ function Home() {
 
   const serviceImages = {
     "generator-sales":
-      "https://images.unsplash.com/photo-1705051278299-7e64ba21437a?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/generator-sales.jpeg",
+
     "generator-purchase":
-      "https://images.unsplash.com/photo-1705051278299-7e64ba21437a?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/generator-purchase.jpeg",
+
     "generator-rental":
       "https://st.mascus.com/image/product/large/7ce40bd2/fg-wilson-p2250-1-2250-kva-gen%2C9bc94e35.jpg",
+
     "generator-repair":
-      "https://images.unsplash.com/photo-1653878729171-efea1af9e7a8?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/generator-repair.jpeg",
+
     "generator-maintenance":
-      "https://images.unsplash.com/photo-1653878729171-efea1af9e7a8?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/generator-maintenance.jpeg",
+
     "ats-panels":
       "https://images.unsplash.com/photo-1759692071712-adc78a8516c8?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+
     "spare-parts":
-      "https://images.unsplash.com/photo-1653878729171-efea1af9e7a8?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/spare-parts.jpg",
+
     "canopy-work":
-      "https://images.unsplash.com/photo-1705051278299-7e64ba21437a?auto=format&fit=crop&fm=jpg&q=80&w=1200",
+      "/images/home/services/canopy-work.jpeg",
   };
 
   const [services, setServices] = useState(fallbackServices);
@@ -191,14 +199,21 @@ function Home() {
       ) {
         setGenerators(generatorsResult.value);
       } else {
-        console.error("Generators API failed:", generatorsResult.reason);
+        console.error(
+          "Generators API failed:",
+          generatorsResult.reason
+        );
       }
 
       const allSucceeded = results.every(
         (result) => result.status === "fulfilled"
       );
 
-      setApiStatus(allSucceeded ? "connected" : "fallback");
+      setApiStatus(
+        allSucceeded
+          ? "connected"
+          : "fallback"
+      );
     }
 
     loadBackendData();
@@ -210,6 +225,7 @@ function Home() {
 
   useLayoutEffect(() => {
     const root = pageRef.current;
+
     if (!root) return;
 
     const ctx = gsap.context(() => {
@@ -225,6 +241,7 @@ function Home() {
       /*
        * PAGE PROGRESS
        */
+
       gsap.to(".page-scroll-progress-bar", {
         scaleX: 1,
         ease: "none",
@@ -239,6 +256,7 @@ function Home() {
       /*
        * HERO
        */
+
       gsap.to(".hero-image-frame img", {
         scale: 1.045,
         yPercent: 4,
@@ -254,6 +272,7 @@ function Home() {
       /*
        * SERVICES CHAPTER
        */
+
       gsap.from(".services-chapter-number", {
         x: -40,
         opacity: 0,
@@ -295,6 +314,7 @@ function Home() {
       /*
        * GENERATOR SOLUTIONS CHAPTER
        */
+
       gsap.to(".generators-hero-image img", {
         scale: 1.055,
         xPercent: 2,
@@ -333,63 +353,158 @@ function Home() {
       });
 
       /*
-       * GENERATOR RANGE
+       * GENERATOR RANGE — CHAPTER 03
        */
-      gsap.from(".range-heading > *", {
-        y: 30,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.1,
-        ease: "power3.out",
+
+      const range03Timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: ".generator-range-chapter",
+          trigger: ".range03-section",
           start: "top 72%",
           once: true,
         },
       });
 
-      gsap.from(".capacity-track-line", {
-        scaleX: 0,
-        transformOrigin: "left center",
-        duration: 1.3,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: ".generator-range-chapter",
-          start: "top 62%",
-          once: true,
-        },
-      });
+      range03Timeline
+        .from(".range03-top", {
+          y: 20,
+          opacity: 0,
+          duration: 0.55,
+          ease: "power3.out",
+        })
+        .from(
+          ".range03-intro-meta > *",
+          {
+            y: 16,
+            opacity: 0,
+            duration: 0.45,
+            stagger: 0.08,
+            ease: "power3.out",
+          },
+          "-=0.25"
+        )
+        .from(
+          ".range03-intro-main h2",
+          {
+            y: 42,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power4.out",
+          },
+          "-=0.2"
+        )
+        .from(
+          ".range03-intro-main p",
+          {
+            y: 22,
+            opacity: 0,
+            duration: 0.55,
+            ease: "power3.out",
+          },
+          "-=0.48"
+        )
+        .to(
+          ".range03-track-line",
+          {
+            scale: 1,
+            duration: 1.05,
+            ease: "power3.inOut",
+          },
+          "-=0.05"
+        )
+        .from(
+          ".range03-marker",
+          {
+            scale: 0,
+            opacity: 0,
+            duration: 0.42,
+            stagger: 0.12,
+            ease: "back.out(1.7)",
+          },
+          "-=0.58"
+        )
+        .from(
+          ".range03-value",
+          {
+            y: 14,
+            opacity: 0,
+            duration: 0.38,
+            stagger: 0.09,
+            ease: "power3.out",
+          },
+          "-=0.48"
+        )
+        .from(
+          ".range03-point em",
+          {
+            y: 8,
+            opacity: 0,
+            duration: 0.3,
+            stagger: 0.07,
+            ease: "power2.out",
+          },
+          "-=0.36"
+        )
+        .from(
+          ".range03-foot",
+          {
+            y: 16,
+            opacity: 0,
+            duration: 0.45,
+            ease: "power3.out",
+          },
+          "-=0.2"
+        );
 
-      gsap.from(".capacity-point", {
-        scale: 0,
-        opacity: 0,
-        duration: 0.5,
-        stagger: 0.12,
-        ease: "back.out(1.5)",
-        scrollTrigger: {
-          trigger: ".capacity-track",
-          start: "top 72%",
-          once: true,
-        },
-      });
+      gsap.utils.toArray(".range03-point").forEach((point) => {
+        const marker = point.querySelector(".range03-marker");
 
-      gsap.to(".generator-range-image img", {
-        scale: 1.04,
-        xPercent: -2,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".generator-range-chapter",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5,
-        },
+        const onEnter = () => {
+          gsap.to(point, {
+            y: -7,
+            duration: 0.25,
+            ease: "power2.out",
+            overwrite: true,
+          });
+
+          gsap.to(marker, {
+            scale: 1.12,
+            duration: 0.25,
+            ease: "power2.out",
+            overwrite: true,
+          });
+        };
+
+        const onLeave = () => {
+          gsap.to(point, {
+            y: 0,
+            duration: 0.35,
+            ease: "power3.out",
+            overwrite: true,
+          });
+
+          gsap.to(marker, {
+            scale: 1,
+            duration: 0.35,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        };
+
+        point.addEventListener("mouseenter", onEnter);
+        point.addEventListener("mouseleave", onLeave);
+
+        ctx.add(() => {
+          point.removeEventListener("mouseenter", onEnter);
+          point.removeEventListener("mouseleave", onLeave);
+        });
       });
 
       /*
-       * ELECTRICAL PANELS
+       * ELECTRICAL POWER SYSTEMS
        */
-      gsap.from(".panel-visual", {
-        x: -55,
+
+      gsap.from(".panel-visual-image", {
+        x: -70,
         opacity: 0,
         duration: 1,
         ease: "power3.out",
@@ -408,7 +523,7 @@ function Home() {
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".panel-chapter",
-          start: "top 70%",
+          start: "top 68%",
           once: true,
         },
       });
@@ -416,15 +531,16 @@ function Home() {
       /*
        * CONTACT
        */
+
       gsap.from(".contact-container > *", {
         y: 35,
         opacity: 0,
         duration: 0.8,
-        stagger: 0.12,
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: ".contact-section",
-          start: "top 75%",
+          start: "top 72%",
           once: true,
         },
       });
@@ -432,14 +548,16 @@ function Home() {
       /*
        * FOOTER
        */
-      gsap.from(".footer", {
+
+      gsap.from(".footer-column", {
+        y: 25,
         opacity: 0,
-        y: 20,
         duration: 0.7,
-        ease: "power2.out",
+        stagger: 0.08,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ".footer",
-          start: "top 92%",
+          start: "top 85%",
           once: true,
         },
       });
@@ -451,9 +569,15 @@ function Home() {
   }, [services, brands, generators]);
 
   return (
-    <div className="site" ref={pageRef}>
-      <div className="page-scroll-progress" aria-hidden="true">
-        <div className="page-scroll-progress-bar" />
+    <div
+      className="site"
+      ref={pageRef}
+    >
+      <div
+        className="page-scroll-progress"
+        aria-hidden="true"
+      >
+        <span className="page-scroll-progress-bar"></span>
       </div>
 
       <Navbar />
@@ -461,281 +585,431 @@ function Home() {
       <main>
         <Hero />
 
-        {/* =========================================================
-            CHAPTER 01 — SERVICES
-            ========================================================= */}
-        <section className="services-section" id="services">
-          <div className="chapter-watermark services-chapter-number">
+        {/* =====================================================
+            SERVICES — CHAPTER 01
+        ====================================================== */}
+
+        <section
+          className="services-section"
+          id="services"
+        >
+          <div
+            className="chapter-watermark services-chapter-number"
+            aria-hidden="true"
+          >
             <span>01</span>
-            <small>SERVICES</small>
+            <small>WHAT WE DO</small>
           </div>
 
           <div className="section-container">
-            <div className="chapter-intro">
-              <div className="chapter-index">
-                <span>01</span>
-                <i />
-                <span>WHAT WE DO</span>
-              </div>
-
-              <div className="section-heading">
-                <div>
-                  <p className="section-eyebrow">ENGINEERED SUPPORT</p>
-
-                  <h2>
-                    Complete Power
-                    <br />
-                    <span>Solutions.</span>
-                  </h2>
+            <div className="section-heading">
+              <div>
+                <div className="chapter-index">
+                  <span>01</span>
+                  <i></i>
+                  <em>SERVICES</em>
                 </div>
 
-                <p className="section-description">
-                  From generator supply and rental to maintenance,
-                  control systems and technical support, we cover the
-                  essential requirements of reliable power generation.
+                <p className="section-eyebrow">
+                  WHAT WE DO
                 </p>
+
+                <h2>
+                  Complete Power
+                  <br />
+                  <span>Solutions</span>
+                </h2>
               </div>
+
+              <p className="section-description">
+                From generator supply and rental to
+                maintenance, control systems and
+                technical support, we cover the
+                essential requirements of reliable
+                power generation.
+              </p>
             </div>
 
             <div className="services-grid">
-              {services.slice(0, 8).map((service, index) => {
-                const image =
-                  service.image_url ||
-                  serviceImages[service.slug] ||
-                  serviceImages["generator-sales"];
+              {services
+                .slice(0, 8)
+                .map((service, index) => {
+                  const image =
+                    service.image_url ||
+                    serviceImages[
+                      service.slug
+                    ] ||
+                    serviceImages[
+                      "generator-sales"
+                    ];
 
-                return (
-                  <ServiceCard
-                    key={service.id || service.slug || index}
-                    title={service.name}
-                    description={service.description}
-                    image={image}
-                    slug={service.slug}
-                  />
-                );
-              })}
+                  return (
+                    <ServiceCard
+                      key={
+                        service.id ||
+                        service.slug ||
+                        index
+                      }
+                      title={service.name}
+                      description={
+                        service.description
+                      }
+                      image={image}
+                      slug={service.slug}
+                    />
+                  );
+                })}
             </div>
-          </div>
 
-          <div className="chapter-transition services-transition">
-            <span />
+            <div className="chapter-transition">
+              <span></span>
+            </div>
           </div>
         </section>
 
-        {/* =========================================================
-            CHAPTER 02 — GENERATOR SOLUTIONS
-            ========================================================= */}
-        <section className="generators-section" id="generators">
+        {/* =====================================================
+            GENERATOR SOLUTIONS — CHAPTER 02
+        ====================================================== */}
+
+        <section
+          className="generators-section"
+          id="generators"
+        >
           <div className="generators-chapter-label">
             <span>02</span>
-            <span>GENERATOR SOLUTIONS</span>
+            <i></i>
+            <em>GENERATOR SOLUTIONS</em>
           </div>
 
           <div className="generators-frame">
+            <div className="generators-chapter-marker"></div>
+
             <div className="generators-hero-image">
               <img
                 src={
-                  generators[0]?.image_url || fallbackGeneratorImage
+                  generators[0]?.image_url ||
+                  fallbackGeneratorImage
                 }
-                alt={generators[0]?.name || "Diesel generator"}
+                alt={
+                  generators[0]?.name ||
+                  "Diesel generator"
+                }
               />
             </div>
 
-            <div className="generators-hero-overlay" />
-
-            <div className="generators-chapter-marker" />
+            <div className="generators-hero-overlay"></div>
 
             <div className="generators-hero-content">
-              <p className="section-eyebrow">GENERATOR SOLUTIONS</p>
+              <p className="section-eyebrow">
+                GENERATOR SOLUTIONS
+              </p>
 
               <h2>
                 Power That Keeps
                 <br />
-                <span>Your Business Running.</span>
+                <span>Your Business Running</span>
               </h2>
 
               <p>
-                We provide reliable diesel generators for commercial,
-                industrial, and backup power needs, backed by
-                installation, maintenance, repair, and technical
-                support.
+                We provide diesel generator
+                solutions across a broad range of
+                applications, with systems
+                generally covering approximately
+                20–200 KVA and multiple leading
+                generator brands.
               </p>
 
-              <div className="generator-brands">
-                {brands.slice(0, 6).map((brand) => (
-                  <span key={brand.id || brand.slug || brand.name}>
-                    {brand.name}
+              <div className="generator-capabilities">
+                <div className="generator-capability">
+                  <strong>20–200 KVA</strong>
+
+                  <span>
+                    Power range
                   </span>
-                ))}
+                </div>
+
+                <div className="generator-capability">
+                  <strong>Diesel</strong>
+
+                  <span>
+                    Generator systems
+                  </span>
+                </div>
+
+                <div className="generator-capability">
+                  <strong>
+                    Multiple Brands
+                  </strong>
+
+                  <span>
+                    Equipment options
+                  </span>
+                </div>
+
+                <div className="generator-capability">
+                  <strong>
+                    Commercial
+                  </strong>
+
+                  <span>
+                    Industrial &amp; backup
+                  </span>
+                </div>
               </div>
 
-              <Link to="/generators" className="primary-button">
-                Explore Our Range
-                <span aria-hidden="true"> →</span>
+              <div className="generator-brands">
+                {brands
+                  .slice(0, 6)
+                  .map((brand) => (
+                    <span
+                      key={
+                        brand.id ||
+                        brand.slug
+                      }
+                    >
+                      {brand.name}
+                    </span>
+                  ))}
+              </div>
+
+              <Link
+                to="/generators"
+                className="primary-button"
+              >
+                Explore Generator Solutions
+                <span aria-hidden="true">
+                  {" "}
+                  →
+                </span>
               </Link>
             </div>
 
             <div className="generators-corner-label">
-              <span>POWER GENERATION</span>
-              <span>NB / 02</span>
+              NB / POWER SYSTEMS
             </div>
           </div>
         </section>
 
-        {/* =========================================================
-            CHAPTER 03 — GENERATOR RANGE
-            ========================================================= */}
+        {/* =====================================================
+            GENERATOR RANGE — CHAPTER 03
+        ====================================================== */}
+
         <section
-          className="generator-range-chapter"
+          className="generator-range-chapter range03-section"
           id="generator-range"
         >
-          <div className="range-chapter-top">
+          <div className="range03-top">
             <div className="chapter-index">
               <span>03</span>
-              <i />
-              <span>GENERATOR RANGE</span>
+              <i></i>
+              <em>GENERATOR RANGE</em>
             </div>
 
-            <p>
-              Capacity matched to the scale and demands of your
-              operation.
-            </p>
+            <p>SPECIFIED AROUND THE LOAD.</p>
           </div>
 
-          <div className="range-heading">
-            <p className="section-eyebrow">POWER SCALE</p>
-
-            <h2>
-              Power for
-              <br />
-              <span>Every Requirement.</span>
-            </h2>
-          </div>
-
-          <div className="capacity-track">
-            <div className="capacity-track-line" />
-
-            <div className="capacity-points">
-              <div className="capacity-point">
-                <span className="capacity-dot" />
-                <strong>10</strong>
-                <small>KVA</small>
-              </div>
-
-              <div className="capacity-point">
-                <span className="capacity-dot" />
-                <strong>50</strong>
-                <small>KVA</small>
-              </div>
-
-              <div className="capacity-point">
-                <span className="capacity-dot" />
-                <strong>100</strong>
-                <small>KVA</small>
-              </div>
-
-              <div className="capacity-point">
-                <span className="capacity-dot" />
-                <strong>250</strong>
-                <small>KVA</small>
-              </div>
-
-              <div className="capacity-point">
-                <span className="capacity-dot" />
-                <strong>500+</strong>
-                <small>KVA</small>
-              </div>
+          <div className="range03-intro">
+            <div className="range03-intro-meta">
+              <span className="section-eyebrow">CAPACITY</span>
+              <strong>20 KVA — 1000+ KVA</strong>
             </div>
-          </div>
 
-          <div className="range-lower">
-            <div className="range-description">
+            <div className="range03-intro-main">
+              <h2>
+                From standby
+                <br />
+                <span>to industrial.</span>
+              </h2>
+
               <p>
-                From compact backup systems to high-capacity
-                industrial power, we provide generator solutions
-                for a wide range of commercial and industrial
-                requirements.
+                A working range that moves from compact standby power
+                through commercial requirements and into larger
+                industrial applications.
               </p>
+            </div>
+          </div>
 
-              <Link to="/generators" className="text-link">
-                View Generator Range
-                <span aria-hidden="true"> ↗</span>
-              </Link>
+          <div className="range03-track">
+            <div className="range03-track-labels">
+              <span>SMALLER LOADS</span>
+              <span>LARGER LOADS</span>
             </div>
 
-            <div className="generator-range-image">
-              <img
-                src={generatorRangeImage}
-                alt="Open-frame 500 kVA diesel generator"
-              />
+            <div className="range03-track-line"></div>
 
-              <div className="image-caption">
-                <span>HIGH CAPACITY POWER</span>
-                <span>500+ KVA</span>
+            <div className="range03-points">
+              <div className="range03-point range03-point-1">
+                <span className="range03-marker"></span>
+                <div className="range03-value">
+                  <strong>20</strong>
+                  <small>KVA</small>
+                </div>
+                <em>STANDBY</em>
+              </div>
+
+              <div className="range03-point range03-point-2">
+                <span className="range03-marker"></span>
+                <div className="range03-value">
+                  <strong>100</strong>
+                  <small>KVA</small>
+                </div>
+                <em>COMMERCIAL</em>
+              </div>
+
+              <div className="range03-point range03-point-3">
+                <span className="range03-marker"></span>
+                <div className="range03-value">
+                  <strong>250</strong>
+                  <small>KVA</small>
+                </div>
+                <em>MID-SCALE</em>
+              </div>
+
+              <div className="range03-point range03-point-4">
+                <span className="range03-marker"></span>
+                <div className="range03-value">
+                  <strong>500</strong>
+                  <small>KVA</small>
+                </div>
+                <em>INDUSTRIAL</em>
+              </div>
+
+              <div className="range03-point range03-point-5">
+                <span className="range03-marker"></span>
+                <div className="range03-value">
+                  <strong>1000+</strong>
+                  <small>KVA</small>
+                </div>
+                <em>LARGE-SCALE</em>
               </div>
             </div>
+          </div>
+
+          <div className="range03-foot">
+            <span>CAPACITY RANGE</span>
+            <p>
+              Generator systems across standby, commercial and industrial duty —
+              with the range extending beyond 1000 KVA for larger power requirements.
+            </p>
           </div>
         </section>
 
-        {/* =========================================================
-            CHAPTER 04 — ELECTRICAL POWER SYSTEMS
-            ========================================================= */}
-        <section className="panel-chapter" id="panels">
-          <div className="panel-chapter-number">04</div>
+        {/* =====================================================
+            ELECTRICAL POWER SYSTEMS — CHAPTER 04
+        ====================================================== */}
+
+        <section
+          className="panel-chapter"
+          id="electrical-systems"
+        >
+          <div
+            className="panel-chapter-number"
+            aria-hidden="true"
+          >
+            04
+          </div>
 
           <div className="panel-visual">
             <div className="panel-visual-image">
               <img
                 src={panelHeroImage}
-                alt="Industrial electrical switchgear and power distribution panels"
+                alt="Electrical switchgear and control panel"
               />
-            </div>
 
-            <div className="panel-visual-tag">
-              ELECTRICAL SYSTEMS
+              <span className="panel-visual-tag">
+                ELECTRICAL SYSTEMS / 04
+              </span>
             </div>
           </div>
 
           <div className="panel-hero-content">
             <div className="chapter-index">
               <span>04</span>
-              <i />
-              <span>ELECTRICAL POWER SYSTEMS</span>
+              <i></i>
+              <em>ELECTRICAL POWER SYSTEMS</em>
             </div>
 
             <p className="section-eyebrow">
-              CONTROL & DISTRIBUTION
+              CONTROL &amp; DISTRIBUTION
             </p>
 
             <h2>
-              Power Control
+              Power is more
               <br />
-              <span>Beyond the Generator.</span>
+              than the
+              <br />
+              <span>generator.</span>
             </h2>
 
             <p>
-              Engineered electrical panels for power distribution,
-              switching, protection, and control across commercial
-              and industrial facilities.
+              We support the electrical systems
+              around your generator — from
+              automatic transfer switching and
+              control to practical site-level
+              distribution requirements.
             </p>
 
-            <Link to="/contact" className="primary-button dark-button">
-              Discuss Your Panel Requirements
-              <span aria-hidden="true"> →</span>
+            <div className="panel-points">
+              <div>
+                <span>01</span>
+                <strong>ATS / AMF</strong>
+              </div>
+
+              <div>
+                <span>02</span>
+                <strong>
+                  Electrical Distribution
+                </strong>
+              </div>
+
+              <div>
+                <span>03</span>
+                <strong>
+                  Control Systems
+                </strong>
+              </div>
+            </div>
+
+            <Link
+              to="/services"
+              className="text-link"
+            >
+              Explore Electrical Services
+              <span aria-hidden="true">
+                {" "}
+                →
+              </span>
             </Link>
           </div>
         </section>
 
-        {/* =========================================================
-            CHAPTER 05 — CONTACT
-            ========================================================= */}
-        <section className="contact-section" id="contact">
+        {/* =====================================================
+            EXPERIENCE — CHAPTER 05
+        ====================================================== */}
+
+        <ExperienceSection />
+
+        {/* =====================================================
+            CONTACT — CHAPTER 04
+        ====================================================== */}
+
+        <section
+          className="contact-section"
+          id="contact"
+        >
+          <div
+            className="contact-watermark"
+            aria-hidden="true"
+          >
+            04
+          </div>
+
           <div className="contact-container">
             <div>
               <div className="chapter-index">
-                <span>05</span>
-                <i />
-                <span>LET'S TALK POWER</span>
+                <span>04</span>
+                <i></i>
+                <em>LET'S TALK POWER</em>
               </div>
 
               <p className="section-eyebrow">
@@ -743,115 +1017,132 @@ function Home() {
               </p>
 
               <h2>
-                Need a Generator
+                Need a Power
                 <br />
                 <span>Solution?</span>
               </h2>
 
               <p>
-                Tell us what power solution you are looking for
-                and our team can help you determine the right
-                direction.
+                Tell us what you need to power,
+                and we will help define the right
+                generator, electrical system,
+                and support for your site.
               </p>
             </div>
 
-            <Link to="/contact" className="contact-button">
-              Contact NB Engineering
-              <span aria-hidden="true"> →</span>
+            <Link
+              to="/contact"
+              className="contact-button"
+            >
+              Talk to Our Power Team
+              <span aria-hidden="true">
+                {" "}
+                →
+              </span>
             </Link>
           </div>
         </section>
       </main>
 
-      {/* =========================================================
+      {/* =======================================================
           FOOTER
-          ========================================================= */}
+      ======================================================== */}
+
       <footer className="footer">
         <div className="footer-container">
-          <div className="footer-column">
-            <h3>Products</h3>
+          <div className="footer-brand">
+            <strong>
+              NB ENGINEERING &amp; SERVICES
+            </strong>
 
-            <Link to="/generators">Diesel Generators</Link>
-            <Link to="/generators">Generator Range</Link>
-            <Link to="/services/generator-rental">
-              Generator Rental
-            </Link>
-            <Link to="/spare-parts">Spare Parts</Link>
-            <Link to="/services/ats-panels">ATS Panels</Link>
-            <Link to="/services/canopy-work">
-              Canopy Solutions
-            </Link>
+            <span>
+              Reliable Power. Lasting Solutions.
+            </span>
           </div>
 
           <div className="footer-column">
             <h3>Services</h3>
 
-            <Link to="/services/generator-sales">
+            <Link to="/services">
               Generator Sales
             </Link>
-            <Link to="/services/generator-purchase">
+
+            <Link to="/services">
               Generator Purchase
             </Link>
-            <Link to="/services/generator-repair">
+
+            <Link to="/services">
+              Generator Rental
+            </Link>
+
+            <Link to="/services">
               Generator Repair
             </Link>
-            <Link to="/services/generator-maintenance">
-              Maintenance
-            </Link>
-            <Link to="/services/ats-panels">
-              Electrical Systems
-            </Link>
-            <Link to="/contact">Technical Support</Link>
           </div>
 
           <div className="footer-column">
-            <h3>Resources</h3>
+            <h3>Solutions</h3>
 
-            <Link to="/generators">Generator Solutions</Link>
-            <Link to="/generators">Power Requirements</Link>
-            <Link to="/brands">Generator Brands</Link>
-            <Link to="/services">Service Support</Link>
-            <Link to="/contact">FAQs</Link>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/generators">
+              Generator Range
+            </Link>
+
+            <Link to="/services">
+              Electrical Systems
+            </Link>
+
+            <Link to="/services">
+              ATS Panels
+            </Link>
+
+            <Link to="/services">
+              Maintenance
+            </Link>
           </div>
 
           <div className="footer-column">
             <h3>Company</h3>
 
-            <Link to="/contact">About Us</Link>
-            <Link to="/services">Our Services</Link>
-            <Link to="/brands">Our Brands</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/contact">Request a Quote</Link>
-            <Link to="/spare-parts">Spare Parts</Link>
-          </div>
-
-          <div className="footer-column">
-            <h3>Popular topics</h3>
-
-            <Link to="/generators">Diesel Generators</Link>
-            <Link to="/generators">500 KVA Generators</Link>
-            <Link to="/services/generator-rental">
-              Generator Rental
+            <Link to="/contact">
+              Contact
             </Link>
-            <Link to="/services/generator-maintenance">
-              Maintenance
+
+            <Link to="/brands">
+              Brands
             </Link>
-            <Link to="/services/ats-panels">ATS Panels</Link>
-            <Link to="/services">Industrial Power</Link>
+
+            <Link to="/services">
+              Spare Parts
+            </Link>
+
+            <Link to="/services">
+              Canopy Work
+            </Link>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <div className="footer-bottom-brand">
-            <strong>NB ENGINEERING & SERVICES</strong>
-            <span>Reliable Power. Lasting Solutions.</span>
-          </div>
-
-          <p>
-            © {new Date().getFullYear()} NB Engineering & Services.
-            All rights reserved.
+          <p className="footer-copyright">
+            © {new Date().getFullYear()} NB Engineering &amp; Services. All rights reserved.
           </p>
+
+          <div className="footer-meta">
+            <Link to="/privacy">
+              Privacy
+            </Link>
+
+            <span aria-hidden="true">·</span>
+
+            <Link to="/terms">
+              Terms
+            </Link>
+
+            <span aria-hidden="true">·</span>
+
+            <span>
+              Site by <strong>Muzamil</strong>
+            </span>
+          </div>
         </div>
       </footer>
 
@@ -869,287 +1160,277 @@ function Home() {
             fontSize: "12px",
           }}
         >
-          Backend connection issue — showing website data
+          Backend connection issue — showing
+          website data
         </div>
       )}
 
       <style>{`
         /* =========================================================
-           BASE / PAGE STRUCTURE
+           PAGE PROGRESS
            ========================================================= */
-
-        .site {
-          position: relative;
-          overflow-x: clip;
-          background: #ffffff;
-          color: #11110f;
-        }
 
         .page-scroll-progress {
           position: fixed;
           top: 0;
           left: 0;
           width: 100%;
-          height: 2px;
-          z-index: 10000;
+          height: 3px;
+          z-index: 9999;
           pointer-events: none;
-          background: rgba(17, 17, 15, 0.08);
+          background: transparent;
         }
 
         .page-scroll-progress-bar {
+          display: block;
           width: 100%;
           height: 100%;
           background: #f5c400;
           transform: scaleX(0);
           transform-origin: left center;
-          will-change: transform;
         }
+
+        /* =========================================================
+           CHAPTER SYSTEM
+           ========================================================= */
 
         .chapter-index {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-bottom: 24px;
-          color: #777770;
-          font-size: 11px;
-          line-height: 1;
+          gap: 13px;
+          margin-bottom: 30px;
+          color: #111;
+          font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.16em;
-          text-transform: uppercase;
         }
 
-        .chapter-index span:first-child {
-          color: #11110f;
+        .chapter-index span {
+          color: #111;
           font-variant-numeric: tabular-nums;
         }
 
         .chapter-index i {
-          width: 34px;
-          height: 1px;
           display: block;
+          width: 36px;
+          height: 1px;
           background: #f5c400;
         }
 
-        .text-link {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          color: #11110f;
-          font-size: 13px;
+        .chapter-index em {
+          color: #777;
+          font-style: normal;
+        }
+
+        .section-eyebrow {
+          margin: 0 0 20px;
+          color: #777;
+          font-size: 10px;
+          line-height: 1.4;
           font-weight: 700;
-          letter-spacing: 0.02em;
-          text-decoration: none;
-          border-bottom: 1px solid #11110f;
-          padding-bottom: 6px;
-          transition:
-            color 180ms ease,
-            border-color 180ms ease,
-            gap 180ms ease;
-        }
-
-        .text-link:hover {
-          color: #c5a000;
-          border-color: #c5a000;
-          gap: 12px;
-        }
-
-        /* =========================================================
-           CHAPTER 01 — SERVICES
-           ========================================================= */
-
-        .services-section {
-          position: relative;
-          padding: 150px 0 170px;
-          overflow: hidden;
-          background: #ffffff;
-        }
-
-        .section-container {
-          position: relative;
-          z-index: 2;
+          letter-spacing: 0.18em;
         }
 
         .chapter-watermark {
           position: absolute;
           top: 105px;
-          right: -20px;
+          right: 4vw;
           z-index: 0;
+          pointer-events: none;
           display: flex;
           flex-direction: column;
           align-items: flex-end;
-          pointer-events: none;
-          user-select: none;
         }
 
         .chapter-watermark span {
-          color: rgba(17, 17, 15, 0.035);
-          font-size: clamp(180px, 25vw, 390px);
-          line-height: 0.7;
+          color: rgba(17, 17, 17, 0.045);
+          font-size: 250px;
+          line-height: 0.75;
           font-weight: 800;
           letter-spacing: -0.08em;
         }
 
         .chapter-watermark small {
           margin-top: 20px;
-          margin-right: 42px;
-          color: rgba(17, 17, 15, 0.1);
-          font-size: 11px;
+          margin-right: 15px;
+          color: rgba(17, 17, 17, 0.28);
+          font-size: 9px;
           font-weight: 700;
-          letter-spacing: 0.3em;
+          letter-spacing: 0.18em;
         }
 
-        .chapter-intro {
+        /* =========================================================
+           SERVICES
+           ========================================================= */
+
+        .services-section {
+          position: relative;
+          overflow: hidden;
+          padding: 150px 0 170px;
+          background: #ffffff;
+        }
+
+        .services-section .section-container {
           position: relative;
           z-index: 2;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 0 auto;
         }
 
         .services-section .section-heading {
+          position: relative;
+          z-index: 2;
           display: grid;
-          grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-          gap: 90px;
+          grid-template-columns: minmax(0, 1fr) minmax(320px, 470px);
           align-items: end;
-          margin-bottom: 78px;
+          gap: 80px;
+          margin-bottom: 95px;
         }
 
         .services-section .section-heading h2 {
           margin: 0;
-          color: #11110f;
-          font-size: clamp(48px, 6vw, 86px);
-          line-height: 0.94;
-          letter-spacing: -0.055em;
+          color: #101010;
+          font-size: clamp(58px, 6.4vw, 104px);
+          line-height: 0.9;
           font-weight: 700;
+          letter-spacing: -0.065em;
         }
 
         .services-section .section-heading h2 span {
-          color: #d0aa00;
-        }
-
-        .services-section .section-eyebrow {
-          margin: 0 0 18px;
+          color: #111;
         }
 
         .services-section .section-description {
-          max-width: 500px;
-          margin: 0;
-          color: #64645f;
+          max-width: 450px;
+          margin: 0 0 6px auto;
+          color: #686868;
           font-size: 15px;
-          line-height: 1.8;
+          line-height: 1.75;
         }
 
         .services-grid {
           position: relative;
           z-index: 2;
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          gap: 18px;
         }
 
         .chapter-transition {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 1px;
           display: flex;
           justify-content: center;
+          margin-top: 130px;
         }
 
         .chapter-transition span {
-          width: min(1240px, calc(100% - 80px));
+          display: block;
+          width: min(100% - 120px, 1400px);
           height: 1px;
-          background: #deded8;
+          background: #e7e7e7;
         }
 
         /* =========================================================
-           CHAPTER 02 — GENERATOR SOLUTIONS
+           GENERATOR SOLUTIONS
            ========================================================= */
 
         .generators-section {
           position: relative;
-          padding: 80px 0 120px;
-          background: #ffffff;
+          overflow: hidden;
+          padding: 90px 0 120px;
+          background: #f5f5f2;
         }
 
         .generators-chapter-label {
-          width: min(1240px, calc(100% - 80px));
-          margin: 0 auto 28px;
+          position: relative;
+          z-index: 3;
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          color: #777770;
+          gap: 13px;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 0 auto 28px;
+          color: #777;
           font-size: 10px;
-          line-height: 1;
           font-weight: 700;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.16em;
         }
 
-        .generators-chapter-label span:first-child {
-          color: #11110f;
+        .generators-chapter-label span {
+          color: #111;
+        }
+
+        .generators-chapter-label i {
+          width: 36px;
+          height: 1px;
+          background: #f5c400;
+        }
+
+        .generators-chapter-label em {
+          font-style: normal;
         }
 
         .generators-frame {
           position: relative;
-          width: min(1460px, calc(100% - 80px));
-          min-height: min(720px, 78vh);
+          width: min(calc(100% - 140px), 1660px);
+          min-height: 760px;
           margin: 0 auto;
           overflow: hidden;
-          background: #171815;
-          isolation: isolate;
+          background: #101010;
+        }
+
+        .generators-hero-image,
+        .generators-hero-overlay,
+        .generators-hero-content {
+          position: absolute;
+          inset: 0;
         }
 
         .generators-hero-image {
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
+          z-index: 0;
         }
 
         .generators-hero-image img {
           width: 100%;
           height: 100%;
-          display: block;
           object-fit: cover;
-          object-position: center center;
-          transform-origin: center center;
-          will-change: transform;
+          object-position: center;
+          transform: scale(1.01);
         }
 
         .generators-hero-overlay {
-          position: absolute;
-          inset: 0;
           z-index: 1;
           background:
             linear-gradient(
               90deg,
-              rgba(8, 9, 8, 0.92) 0%,
-              rgba(8, 9, 8, 0.72) 33%,
-              rgba(8, 9, 8, 0.25) 68%,
-              rgba(8, 9, 8, 0.05) 100%
+              rgba(8, 9, 8, 0.94) 0%,
+              rgba(8, 9, 8, 0.78) 34%,
+              rgba(8, 9, 8, 0.44) 68%,
+              rgba(8, 9, 8, 0.18) 100%
             );
         }
 
         .generators-hero-content {
-          position: relative;
           z-index: 3;
-          width: min(1240px, calc(100% - 120px));
-          min-height: min(720px, 78vh);
-          margin: 0 auto;
-          padding: 100px 0;
+          width: min(100% - 150px, 820px);
+          min-height: 760px;
+          margin: 0 auto 0 0;
+          padding: 125px 0 105px 90px;
           display: flex;
           flex-direction: column;
-          align-items: flex-start;
           justify-content: center;
         }
 
         .generators-hero-content .section-eyebrow {
-          margin: 0 0 20px;
-          color: #f5c400;
+          color: rgba(255, 255, 255, 0.6);
         }
 
         .generators-hero-content h2 {
-          max-width: 900px;
+          max-width: 820px;
           margin: 0;
           color: #ffffff;
-          font-size: clamp(48px, 6.5vw, 92px);
-          line-height: 0.94;
-          letter-spacing: -0.055em;
+          font-size: clamp(58px, 6.6vw, 108px);
+          line-height: 0.88;
           font-weight: 700;
+          letter-spacing: -0.07em;
         }
 
         .generators-hero-content h2 span {
@@ -1157,288 +1438,314 @@ function Home() {
         }
 
         .generators-hero-content > p:not(.section-eyebrow) {
-          max-width: 600px;
-          margin: 28px 0 0;
-          color: rgba(255, 255, 255, 0.78);
-          font-size: 16px;
+          max-width: 560px;
+          margin: 32px 0 0;
+          color: rgba(255, 255, 255, 0.74);
+          font-size: 15px;
           line-height: 1.75;
+        }
+
+        .generator-capabilities {
+          display: grid;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          max-width: 650px;
+          margin-top: 50px;
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .generator-capability {
+          min-height: 100px;
+          padding: 22px 20px 22px 0;
+          border-right: 1px solid rgba(255, 255, 255, 0.14);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 7px;
+        }
+
+        .generator-capability:last-child {
+          border-right: 0;
+        }
+
+        .generator-capability strong {
+          color: #ffffff;
+          font-size: 15px;
+          line-height: 1.1;
+          font-weight: 700;
+        }
+
+        .generator-capability span {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 9px;
+          line-height: 1.4;
+          font-weight: 600;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
         }
 
         .generator-brands {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px 22px;
-          margin-top: 28px;
-          color: rgba(255, 255, 255, 0.62);
-          font-size: 11px;
+          gap: 10px 25px;
+          margin-top: 32px;
+          color: rgba(255, 255, 255, 0.72);
+          font-size: 10px;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          letter-spacing: 0.11em;
           text-transform: uppercase;
         }
 
-        .generator-brands span {
-          position: relative;
-        }
-
-        .generator-brands span:not(:last-child)::after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          right: -13px;
-          width: 3px;
-          height: 3px;
-          border-radius: 50%;
-          background: #f5c400;
-          transform: translateY(-50%);
-        }
-
-        .primary-button {
+        .primary-button,
+        .contact-button {
           display: inline-flex;
           align-items: center;
-          gap: 10px;
-          margin-top: 34px;
-          padding: 14px 21px;
-          color: #11110f;
+          justify-content: center;
+          width: fit-content;
+          min-height: 50px;
+          margin-top: 38px;
+          padding: 0 23px;
+          border: 1px solid #f5c400;
           background: #f5c400;
-          font-size: 13px;
-          font-weight: 700;
-          line-height: 1;
+          color: #111;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
           text-decoration: none;
+          text-transform: uppercase;
           transition:
             background 180ms ease,
-            transform 180ms ease,
-            gap 180ms ease;
+            border-color 180ms ease,
+            color 180ms ease,
+            transform 180ms ease;
         }
 
-        .primary-button:hover {
-          background: #ffd51f;
+        .primary-button:hover,
+        .contact-button:hover {
+          border-color: #ffffff;
+          background: #ffffff;
+          color: #111;
           transform: translateY(-2px);
-          gap: 14px;
         }
 
         .generators-chapter-marker {
           position: absolute;
-          top: 42px;
-          left: 42px;
+          top: 45px;
+          left: 45px;
           z-index: 4;
-          width: 74px;
-          height: 3px;
+          width: 75px;
+          height: 2px;
           background: #f5c400;
           transform-origin: left center;
         }
 
         .generators-corner-label {
           position: absolute;
-          right: 34px;
-          bottom: 28px;
+          right: 35px;
+          bottom: 30px;
           z-index: 4;
-          display: flex;
-          gap: 20px;
-          color: rgba(255, 255, 255, 0.52);
-          font-size: 9px;
+          color: rgba(255, 255, 255, 0.46);
+          font-size: 8px;
           font-weight: 700;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.18em;
         }
 
         /* =========================================================
-           CHAPTER 03 — GENERATOR RANGE
+           GENERATOR RANGE
            ========================================================= */
 
         .generator-range-chapter {
           position: relative;
-          padding: 155px 0 150px;
-          background: #f4f4f0;
           overflow: hidden;
+          padding: 150px 0 160px;
+          background: #f0f0ed;
         }
 
         .range-chapter-top {
-          width: min(1240px, calc(100% - 80px));
-          margin: 0 auto;
           display: flex;
-          align-items: flex-end;
+          align-items: center;
           justify-content: space-between;
-          gap: 50px;
-        }
-
-        .range-chapter-top .chapter-index {
-          margin-bottom: 0;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 0 auto;
         }
 
         .range-chapter-top > p {
-          max-width: 330px;
           margin: 0;
-          color: #777770;
-          font-size: 13px;
-          line-height: 1.6;
-          text-align: right;
+          color: #777;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.16em;
         }
 
         .range-heading {
-          width: min(1240px, calc(100% - 80px));
+          width: min(calc(100% - 140px), 1660px);
           margin: 85px auto 0;
-        }
-
-        .range-heading .section-eyebrow {
-          margin: 0 0 18px;
         }
 
         .range-heading h2 {
           margin: 0;
-          color: #11110f;
-          font-size: clamp(52px, 7vw, 100px);
-          line-height: 0.9;
-          letter-spacing: -0.065em;
+          color: #111;
+          font-size: clamp(62px, 7vw, 116px);
+          line-height: 0.86;
           font-weight: 700;
+          letter-spacing: -0.075em;
         }
 
         .range-heading h2 span {
-          color: #c4a000;
+          color: #9a9a96;
         }
 
         .capacity-track {
           position: relative;
-          width: min(1240px, calc(100% - 80px));
+          width: min(calc(100% - 140px), 1660px);
           margin: 100px auto 0;
         }
 
         .capacity-track-line {
+          display: none !important;
+        }
+
+        .capacity-points {
+          position: relative;
+        }
+
+        .capacity-points::before {
+          content: "";
           position: absolute;
-          top: 14px;
+          top: 12px;
           left: 0;
           right: 0;
-          height: 2px;
-          background: #11110f;
-          transform-origin: left center;
+          height: 1px;
+          background: #c7c7c3;
+          z-index: 0;
+        }
+
+        .capacity-point {
+          position: relative;
+          z-index: 1;
+        }
+
+        .capacity-point > span {
+          position: relative;
+          z-index: 2;
+          background: #f0f0ed;
         }
 
         .capacity-points {
           position: relative;
           z-index: 2;
           display: grid;
-          grid-template-columns: repeat(5, 1fr);
+          grid-template-columns: repeat(5, minmax(0, 1fr));
         }
 
         .capacity-point {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
+          gap: 8px;
         }
 
-        .capacity-point:not(:first-child) {
-          align-items: center;
-        }
-
-        .capacity-point:last-child {
-          align-items: flex-end;
-        }
-
-        .capacity-dot {
-          width: 9px;
-          height: 9px;
-          margin-bottom: 20px;
+        .capacity-point span {
+          width: 25px;
+          height: 25px;
+          border: 1px solid #111;
           border-radius: 50%;
-          background: #f5c400;
-          border: 3px solid #f4f4f0;
-          box-sizing: content-box;
-          box-shadow: 0 0 0 1px #11110f;
+          background: #f0f0ed;
         }
 
         .capacity-point strong {
-          color: #11110f;
-          font-size: clamp(22px, 3vw, 36px);
+          color: #111;
+          font-size: 27px;
           line-height: 1;
-          letter-spacing: -0.04em;
           font-weight: 700;
+          letter-spacing: -0.04em;
         }
 
         .capacity-point small {
-          margin-top: 7px;
-          color: #777770;
-          font-size: 10px;
+          color: #888;
+          font-size: 9px;
           font-weight: 700;
-          letter-spacing: 0.12em;
+          letter-spacing: 0.14em;
         }
 
         .range-lower {
-          width: min(1240px, calc(100% - 80px));
-          margin: 100px auto 0;
           display: grid;
-          grid-template-columns: minmax(240px, 0.7fr) minmax(0, 1.3fr);
-          gap: 70px;
-          align-items: center;
+          grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+          gap: 90px;
+          align-items: end;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 105px auto 0;
         }
 
         .range-description p {
-          max-width: 400px;
+          max-width: 490px;
           margin: 0;
-          color: #5e5e59;
+          color: #626262;
           font-size: 15px;
           line-height: 1.8;
         }
 
-        .range-description .text-link {
-          margin-top: 30px;
+        .text-link {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+          margin-top: 28px;
+          color: #111;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.13em;
+          text-decoration: none;
+          text-transform: uppercase;
+          transition:
+            color 180ms ease,
+            transform 180ms ease;
+        }
+
+        .text-link:hover {
+          color: #b58a12;
+          transform: translateX(3px);
         }
 
         .generator-range-image {
           position: relative;
-          height: 430px;
+          height: 440px;
           overflow: hidden;
-          background: #deded8;
+          background: #ddd;
         }
 
         .generator-range-image img {
           width: 100%;
           height: 100%;
-          display: block;
           object-fit: cover;
           object-position: center;
-          transform-origin: center;
-          will-change: transform;
-        }
-
-        .image-caption {
-          position: absolute;
-          left: 22px;
-          right: 22px;
-          bottom: 18px;
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          color: #ffffff;
-          font-size: 9px;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
         }
 
         /* =========================================================
-           CHAPTER 04 — PANELS
+           ELECTRICAL POWER SYSTEMS
            ========================================================= */
 
         .panel-chapter {
           position: relative;
-          min-height: 760px;
-          padding: 150px max(40px, calc((100% - 1240px) / 2)) 150px;
+          min-height: 900px;
+          overflow: hidden;
           display: grid;
-          grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+          grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
           gap: 100px;
           align-items: center;
+          padding: 150px 7vw;
           background: #ffffff;
-          overflow: hidden;
         }
 
         .panel-chapter-number {
           position: absolute;
-          top: 85px;
-          right: 7%;
-          color: rgba(17, 17, 15, 0.045);
-          font-size: 260px;
-          line-height: 0.7;
+          top: 65px;
+          right: 2vw;
+          color: rgba(17, 17, 17, 0.035);
+          font-size: 270px;
+          line-height: 0.8;
           font-weight: 800;
           letter-spacing: -0.08em;
           pointer-events: none;
-          user-select: none;
         }
 
         .panel-visual {
@@ -1448,105 +1755,129 @@ function Home() {
 
         .panel-visual-image {
           position: relative;
-          height: 560px;
+          height: 620px;
           overflow: hidden;
-          background: #e7e7e2;
+          background: #e9e9e6;
         }
 
         .panel-visual-image::after {
           content: "";
           position: absolute;
           inset: 0;
-          border: 1px solid rgba(17, 17, 15, 0.12);
+          background:
+            linear-gradient(
+              135deg,
+              rgba(0, 0, 0, 0.04),
+              rgba(0, 0, 0, 0)
+            );
           pointer-events: none;
         }
 
         .panel-visual-image img {
           width: 100%;
           height: 100%;
-          display: block;
           object-fit: cover;
-          object-position: center;
         }
 
         .panel-visual-tag {
           position: absolute;
-          right: -1px;
-          bottom: 30px;
-          padding: 13px 18px;
-          color: #11110f;
-          background: #f5c400;
-          font-size: 9px;
-          line-height: 1;
-          font-weight: 800;
-          letter-spacing: 0.14em;
+          right: 22px;
+          bottom: 22px;
+          z-index: 2;
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 8px;
+          font-weight: 700;
+          letter-spacing: 0.15em;
         }
 
         .panel-hero-content {
           position: relative;
-          z-index: 3;
-          max-width: 590px;
+          z-index: 2;
+          max-width: 650px;
         }
 
         .panel-hero-content .chapter-index {
-          margin-bottom: 55px;
-        }
-
-        .panel-hero-content .section-eyebrow {
-          margin: 0 0 18px;
-          color: #777770;
+          margin-bottom: 45px;
         }
 
         .panel-hero-content h2 {
           margin: 0;
-          color: #11110f;
-          font-size: clamp(48px, 5.5vw, 78px);
-          line-height: 0.94;
-          letter-spacing: -0.055em;
+          color: #111;
+          font-size: clamp(58px, 6.2vw, 104px);
+          line-height: 0.87;
           font-weight: 700;
+          letter-spacing: -0.07em;
         }
 
         .panel-hero-content h2 span {
-          color: #c4a000;
+          color: #b78b17;
         }
 
         .panel-hero-content > p:not(.section-eyebrow) {
-          max-width: 500px;
-          margin: 30px 0 0;
-          color: #64645f;
+          max-width: 520px;
+          margin: 35px 0 0;
+          color: #666;
           font-size: 15px;
           line-height: 1.8;
         }
 
-        .dark-button {
-          color: #ffffff;
-          background: #11110f;
+        .panel-points {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: 45px;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
         }
 
-        .dark-button:hover {
-          color: #11110f;
-          background: #f5c400;
+        .panel-points > div {
+          min-height: 90px;
+          padding: 18px 18px 18px 0;
+          border-right: 1px solid #ddd;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 9px;
+        }
+
+        .panel-points > div:last-child {
+          border-right: 0;
+        }
+
+        .panel-points span {
+          color: #aaa;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+        }
+
+        .panel-points strong {
+          color: #111;
+          font-size: 11px;
+          line-height: 1.35;
+          font-weight: 700;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
         }
 
         /* =========================================================
-           CHAPTER 05 — CONTACT
+           CONTACT
            ========================================================= */
 
         .contact-section {
           position: relative;
-          padding: 155px 0 170px;
-          background: #f4f4f0;
           overflow: hidden;
+          padding: 145px 0 160px;
+          background: #101010;
         }
 
         .contact-section::before {
-          content: "05";
+          content: "04";
           position: absolute;
-          right: -20px;
-          bottom: -45px;
-          color: rgba(17, 17, 15, 0.035);
-          font-size: clamp(220px, 32vw, 500px);
-          line-height: 0.7;
+          right: 3vw;
+          bottom: -55px;
+          color: rgba(255, 255, 255, 0.035);
+          font-size: 330px;
+          line-height: 0.8;
           font-weight: 800;
           letter-spacing: -0.08em;
           pointer-events: none;
@@ -1555,70 +1886,54 @@ function Home() {
         .contact-container {
           position: relative;
           z-index: 2;
-          width: min(1240px, calc(100% - 80px));
-          margin: 0 auto;
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
           gap: 80px;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 0 auto;
         }
 
         .contact-container .chapter-index {
-          margin-bottom: 35px;
+          color: #fff;
+        }
+
+        .contact-container .chapter-index span {
+          color: #fff;
+        }
+
+        .contact-container .chapter-index em {
+          color: rgba(255, 255, 255, 0.48);
         }
 
         .contact-container .section-eyebrow {
-          margin: 0 0 18px;
-          color: #777770;
+          color: rgba(255, 255, 255, 0.45);
         }
 
         .contact-container h2 {
           margin: 0;
-          color: #11110f;
-          font-size: clamp(52px, 7vw, 100px);
-          line-height: 0.9;
-          letter-spacing: -0.065em;
+          color: #fff;
+          font-size: clamp(58px, 6.5vw, 108px);
+          line-height: 0.87;
           font-weight: 700;
+          letter-spacing: -0.07em;
         }
 
         .contact-container h2 span {
-          color: #c4a000;
+          color: #f5c400;
         }
 
         .contact-container p:not(.section-eyebrow) {
-          max-width: 520px;
-          margin: 30px 0 0;
-          color: #64645f;
+          max-width: 560px;
+          margin: 32px 0 0;
+          color: rgba(255, 255, 255, 0.62);
           font-size: 15px;
           line-height: 1.8;
         }
 
         .contact-button {
-          flex: 0 0 auto;
-          display: inline-flex;
-          align-items: center;
-          gap: 14px;
-          min-width: 220px;
-          justify-content: center;
-          padding: 18px 24px;
-          color: #ffffff;
-          background: #11110f;
-          font-size: 13px;
-          font-weight: 700;
-          line-height: 1;
-          text-decoration: none;
-          transition:
-            background 180ms ease,
-            color 180ms ease,
-            transform 180ms ease,
-            gap 180ms ease;
-        }
-
-        .contact-button:hover {
-          color: #11110f;
-          background: #f5c400;
-          transform: translateY(-3px);
-          gap: 18px;
+          flex-shrink: 0;
+          margin-top: 0;
         }
 
         /* =========================================================
@@ -1626,43 +1941,61 @@ function Home() {
            ========================================================= */
 
         .footer {
-          background: #11110f;
-          color: #f4f4f1;
-          padding: 92px 0 0;
+          padding: 105px 0 0;
+          background: #0a0a0a;
+          color: #fff;
         }
 
         .footer-container {
+          display: grid;
+          grid-template-columns:
+            minmax(280px, 1.6fr)
+            repeat(3, minmax(160px, 0.7fr));
+          gap: 80px;
           width: min(calc(100% - 140px), 1660px);
           margin: 0 auto;
-          display: grid;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          column-gap: 58px;
-          align-items: start;
+        }
+
+        .footer-brand {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+          max-width: 320px;
+        }
+
+        .footer-brand strong {
+          color: #fff;
+          font-size: 18px;
+          font-weight: 800;
+          letter-spacing: 0.04em;
+        }
+
+        .footer-brand span {
+          color: rgba(255, 255, 255, 0.48);
+          font-size: 13px;
+          line-height: 1.7;
         }
 
         .footer-column {
-          min-width: 0;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
         }
 
         .footer-column h3 {
-          margin: 0 0 34px;
-          color: #ffffff;
-          font-size: 20px;
-          line-height: 1.2;
-          font-weight: 700;
-          letter-spacing: -0.025em;
+          margin: 0 0 28px;
+          color: #fff;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
         }
 
         .footer-column a {
-          display: block;
-          width: 100%;
-          margin: 0 0 25px;
-          color: rgba(255, 255, 255, 0.88);
-          font-size: 15px;
-          line-height: 1.45;
+          margin-bottom: 16px;
+          color: rgba(255, 255, 255, 0.78);
+          font-size: 14px;
+          line-height: 1.5;
           font-weight: 500;
           text-decoration: none;
           transition:
@@ -1677,8 +2010,8 @@ function Home() {
 
         .footer-bottom {
           width: min(calc(100% - 140px), 1660px);
-          margin: 58px auto 0;
-          padding: 28px 0 34px;
+          margin: 75px auto 0;
+          padding: 25px 0 30px;
           border-top: 1px solid rgba(255, 255, 255, 0.14);
           display: flex;
           align-items: center;
@@ -1686,30 +2019,36 @@ function Home() {
           gap: 30px;
         }
 
-        .footer-bottom-brand {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-        }
-
-        .footer-bottom-brand strong {
-          color: #ffffff;
-          font-size: 14px;
-          font-weight: 700;
-          letter-spacing: 0.03em;
-        }
-
-        .footer-bottom-brand span {
-          color: rgba(255, 255, 255, 0.5);
-          font-size: 12px;
-        }
-
-        .footer-bottom p {
+        .footer-copyright {
           margin: 0;
+          color: rgba(255, 255, 255, 0.42);
+          font-size: 12px;
+          line-height: 1.5;
+        }
+
+        .footer-meta {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 9px;
           color: rgba(255, 255, 255, 0.48);
           font-size: 12px;
           line-height: 1.5;
-          text-align: right;
+        }
+
+        .footer-meta a {
+          color: rgba(255, 255, 255, 0.62);
+          text-decoration: none;
+          transition: color 180ms ease;
+        }
+
+        .footer-meta a:hover {
+          color: #f5c400;
+        }
+
+        .footer-meta strong {
+          color: rgba(255, 255, 255, 0.78);
+          font-weight: 600;
         }
 
         /* =========================================================
@@ -1950,7 +2289,33 @@ function Home() {
           }
 
           .capacity-track-line {
-            top: 11px;
+            display: none !important;
+          }
+
+          .capacity-points {
+            position: relative;
+          }
+
+          .capacity-points::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #c7c7c3;
+            z-index: 0;
+          }
+
+          .capacity-point {
+            position: relative;
+            z-index: 1;
+          }
+
+          .capacity-point > span {
+            position: relative;
+            z-index: 2;
+            background: #f0f0ed;
           }
 
           .capacity-points {
@@ -2091,6 +2456,411 @@ function Home() {
 
           .generator-range-image {
             height: 280px;
+          }
+        }
+
+        /* =========================================================
+           CHAPTER 03 — GENERATOR RANGE
+           ========================================================= */
+
+        .range03-section {
+          position: relative;
+          overflow: hidden;
+          min-height: 720px;
+          padding: 78px 0 72px;
+          background: #f0f0ed;
+          box-sizing: border-box;
+        }
+
+        .range03-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 0 auto;
+        }
+
+        .range03-top > p {
+          margin: 0;
+          color: #777;
+          font-size: 9px;
+          font-weight: 800;
+          letter-spacing: 0.16em;
+        }
+
+        .range03-intro {
+          display: grid;
+          grid-template-columns: 150px minmax(0, 1fr);
+          gap: 52px;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 72px auto 0;
+        }
+
+        .range03-intro-meta {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          padding-top: 7px;
+        }
+
+        .range03-intro-meta .section-eyebrow {
+          margin: 0 0 12px;
+        }
+
+        .range03-intro-meta strong {
+          color: #888;
+          font-size: 9px;
+          line-height: 1.4;
+          font-weight: 800;
+          letter-spacing: 0.13em;
+        }
+
+        .range03-intro-main {
+          display: grid;
+          grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.7fr);
+          gap: 76px;
+          align-items: end;
+        }
+
+        .range03-intro-main h2 {
+          margin: 0;
+          color: #111;
+          font-size: clamp(58px, 6vw, 94px);
+          line-height: 0.86;
+          font-weight: 700;
+          letter-spacing: -0.075em;
+        }
+
+        .range03-intro-main h2 span {
+          color: #9a9a96;
+        }
+
+        .range03-intro-main p {
+          max-width: 480px;
+          margin: 0 0 4px;
+          color: #626262;
+          font-size: 14px;
+          line-height: 1.8;
+        }
+
+        .range03-track {
+          position: relative;
+          width: min(calc(100% - 140px), 1660px);
+          height: 185px;
+          margin: 76px auto 0;
+        }
+
+        .range03-track-labels {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          display: flex;
+          justify-content: space-between;
+          color: #999;
+          font-size: 8px;
+          font-weight: 800;
+          letter-spacing: 0.17em;
+        }
+
+        .range03-track-line {
+          position: absolute;
+          top: 62px;
+          left: 15px;
+          right: 15px;
+          width: auto;
+          height: 1px;
+          background: #bfc0bc;
+          transform: scaleX(0);
+          transform-origin: left center;
+          z-index: 0;
+        }
+
+        .range03-points {
+          position: absolute;
+          inset: 0;
+        }
+
+        .range03-point {
+          position: absolute;
+          top: 47px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 160px;
+          margin: 0;
+          padding: 0;
+          transform: translateX(-50%);
+          cursor: default;
+        }
+
+        .range03-point-1 {
+          left: 0;
+          transform: none;
+        }
+
+        .range03-point-2 {
+          left: 25%;
+        }
+
+        .range03-point-3 {
+          left: 50%;
+        }
+
+        .range03-point-4 {
+          left: 75%;
+        }
+
+        .range03-point-5 {
+          left: 100%;
+          align-items: flex-end;
+          text-align: right;
+          transform: translateX(-100%);
+        }
+
+        .range03-marker {
+          width: 31px;
+          height: 31px;
+          margin-bottom: 13px;
+          flex: 0 0 31px;
+          border: 1.5px solid #111827;
+          border-radius: 50%;
+          background: #f0f0ed;
+          box-sizing: border-box;
+          transform-origin: center;
+          position: relative;
+          z-index: 2;
+        }
+
+        .range03-point-5 .range03-marker {
+          border-color: #b58a12;
+          background: #b58a12;
+        }
+
+        .range03-value {
+          display: flex;
+          align-items: baseline;
+          gap: 5px;
+          white-space: nowrap;
+        }
+
+        .range03-value strong {
+          color: #111;
+          font-size: 30px;
+          line-height: 1;
+          font-weight: 700;
+          letter-spacing: -0.05em;
+        }
+
+        .range03-point-5 .range03-value strong {
+          color: #b58a12;
+        }
+
+        .range03-value small {
+          color: #888;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.13em;
+        }
+
+        .range03-point em {
+          margin-top: 9px;
+          color: #888;
+          font-size: 8px;
+          font-style: normal;
+          font-weight: 800;
+          letter-spacing: 0.14em;
+        }
+
+        .range03-foot {
+          display: grid;
+          grid-template-columns: 150px minmax(0, 1fr);
+          gap: 52px;
+          width: min(calc(100% - 140px), 1660px);
+          margin: 4px auto 0;
+          padding-top: 22px;
+          border-top: 1px solid rgba(17, 17, 17, 0.08);
+        }
+
+        .range03-foot > span {
+          color: #999;
+          font-size: 8px;
+          font-weight: 800;
+          letter-spacing: 0.16em;
+        }
+
+        .range03-foot p {
+          max-width: 620px;
+          margin: 0;
+          color: #777;
+          font-size: 12px;
+          line-height: 1.7;
+        }
+
+        @media (max-width: 1100px) {
+          .range03-intro-main {
+            gap: 45px;
+          }
+
+          .range03-intro-main h2 {
+            font-size: clamp(54px, 6vw, 78px);
+          }
+
+          .range03-point {
+            width: 135px;
+          }
+
+          .range03-value strong {
+            font-size: 26px;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .range03-section {
+            min-height: auto;
+            padding: 70px 0 72px;
+          }
+
+          .range03-top,
+          .range03-intro,
+          .range03-track,
+          .range03-foot {
+            width: calc(100% - 48px);
+          }
+
+          .range03-intro {
+            grid-template-columns: 120px minmax(0, 1fr);
+            gap: 30px;
+            margin-top: 58px;
+          }
+
+          .range03-intro-main {
+            grid-template-columns: 1fr;
+            gap: 26px;
+          }
+
+          .range03-intro-main h2 {
+            font-size: clamp(52px, 8vw, 76px);
+          }
+
+          .range03-track {
+            margin-top: 65px;
+          }
+        }
+
+        @media (max-width: 700px) {
+          .range03-section {
+            padding: 64px 0 68px;
+          }
+
+          .range03-top {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 18px;
+          }
+
+          .range03-top > p {
+            font-size: 8px;
+          }
+
+          .range03-intro {
+            display: block;
+            margin-top: 52px;
+          }
+
+          .range03-intro-meta {
+            margin-bottom: 28px;
+          }
+
+          .range03-intro-main {
+            display: block;
+          }
+
+          .range03-intro-main h2 {
+            font-size: clamp(46px, 13vw, 66px);
+          }
+
+          .range03-intro-main p {
+            max-width: 520px;
+            margin-top: 28px;
+            font-size: 13px;
+          }
+
+          .range03-track {
+            height: 510px;
+            margin-top: 60px;
+          }
+
+          .range03-track-labels {
+            display: none;
+          }
+
+          .range03-track-line {
+            top: 15px;
+            left: 15px;
+            right: auto;
+            width: 1px;
+            height: 352px;
+            transform: scaleY(0);
+            transform-origin: top center;
+          }
+
+          .range03-points {
+            position: relative;
+            height: 445px;
+          }
+
+          .range03-point,
+          .range03-point-1,
+          .range03-point-2,
+          .range03-point-3,
+          .range03-point-4,
+          .range03-point-5 {
+            left: 0;
+            right: auto;
+            top: auto;
+            width: 100%;
+            height: 70px;
+            padding-left: 48px;
+            align-items: flex-start;
+            text-align: left;
+            transform: none;
+          }
+
+          .range03-point-1 {
+            top: 0;
+          }
+
+          .range03-point-2 {
+            top: 88px;
+          }
+
+          .range03-point-3 {
+            top: 176px;
+          }
+
+          .range03-point-4 {
+            top: 264px;
+          }
+
+          .range03-point-5 {
+            top: 352px;
+          }
+
+          .range03-marker {
+            position: absolute;
+            top: 0;
+            left: 0;
+          }
+
+          .range03-foot {
+            display: block;
+            margin-top: 8px;
+            padding-top: 18px;
+          }
+
+          .range03-foot p {
+            margin-top: 12px;
           }
         }
 

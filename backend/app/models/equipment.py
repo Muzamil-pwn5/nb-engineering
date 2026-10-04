@@ -98,3 +98,9 @@ class Equipment(Base):
         "Site",
         back_populates="equipment",
     )
+
+    service_history = relationship(
+        "ServiceHistory",
+        back_populates="equipment",
+        cascade="all, delete-orphan",
+    )
