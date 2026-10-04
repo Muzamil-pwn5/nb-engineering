@@ -4,7 +4,6 @@ from sqlalchemy.orm import Session
 from app.models.customer import Customer
 from app.models.inquiry import Inquiry
 from app.schemas.inquiry import InquiryCreate, PublicInquiryCreate
-from app.services.email_service import send_inquiry_notification
 
 
 def create_public_inquiry(
@@ -68,17 +67,6 @@ def create_public_inquiry(
     db.add(inquiry)
     db.commit()
     db.refresh(inquiry)
-
-    try:
-        send_inquiry_notification(
-            name=name,
-            phone=phone,
-            email=email,
-            service=service,
-            message=message,
-        )
-    except Exception:
-        pass
 
     return inquiry
 

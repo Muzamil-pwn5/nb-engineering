@@ -13,11 +13,6 @@ class Settings(BaseSettings):
     jwt_secret: str
     jwt_expire_minutes: int = 480
 
-    smtp_host: str = "smtp.gmail.com"
-    smtp_port: int = 587
-    smtp_username: str
-    smtp_password: str
-
     inquiry_notification_email: str = "nbengineerings@gmail.com"
 
     model_config = SettingsConfigDict(
