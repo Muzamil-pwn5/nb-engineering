@@ -19,6 +19,7 @@ import SpareParts from "./pages/SpareParts.jsx";
 
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
+import GsapAnimations from "./ui/GsapAnimations.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -143,6 +144,7 @@ function App() {
       <RouteSEO />
       <ScrollToTop />
       <SiteMotion />
+      <GsapAnimations />
 
       <Routes>
         <Route path="/" element={<Home />} />
