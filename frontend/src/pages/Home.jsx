@@ -122,9 +122,6 @@ function Home() {
   const panelHeroImage =
     "https://upload.wikimedia.org/wikipedia/commons/7/71/Electrical_switchgear.JPG";
 
-  const generatorRangeImage =
-    "https://arabic.dieselpowergeneratorset.com/photo/ps160705231-500kva_400kw_electric_diesel_generators_open_type_genset_cummins_generator.jpg";
-
   const serviceImages = {
     "generator-sales":
       "/images/home/services/generator-sales.jpeg",

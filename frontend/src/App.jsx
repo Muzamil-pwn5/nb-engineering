@@ -14,6 +14,7 @@ import Services from "./pages/Services.jsx";
 import ServiceDetail from "./pages/ServiceDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import Brand from "./pages/Brand.jsx";
+import SpareParts from "./pages/SpareParts.jsx";
 
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
@@ -67,9 +68,9 @@ function RouteSEO() {
         "Explore generator brands and power generation equipment available through NB Engineering & Services.",
     },
 
-    "/spare-parts": {
-      title:
-        "Generator Spare Parts | NB Engineering & Services | Pakistan",
+        "/spare-parts": {
+          title:
+            "Generator Spare Parts | NB Engineering & Services | Pakistan",
       description:
         "Generator spare parts and related power generation components from NB Engineering & Services.",
     },
@@ -155,7 +156,7 @@ function App() {
 
         <Route
           path="/spare-parts"
-          element={<div>Spare Parts Page</div>}
+          element={<SpareParts />}
         />
       </Routes>
     </BrowserRouter>

@@ -225,10 +225,13 @@ const SERVICE_META = {
 
 function ImageWithFallback({ image, className = "", loading = "lazy" }) {
   const [sourceIndex, setSourceIndex] = useState(0);
+  const imageSourcesKey = image?.sources?.join("|");
 
   useEffect(() => {
+    // Reset the fallback cursor whenever a new image set is supplied.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSourceIndex(0);
-  }, [image?.sources?.join("|")]);
+  }, [imageSourcesKey]);
 
   if (!image?.sources?.length) {
     return null;

@@ -2,15 +2,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="11" cy="11" r="6.5" />
-      <path d="m16 16 5 5" />
-    </svg>
-  );
-}
-
 function HomeIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -174,6 +165,8 @@ function Navbar() {
   }, []);
 
   React.useEffect(() => {
+    // Route changes close the persistent mobile panel.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false);
   }, [location.pathname]);
 
@@ -270,14 +263,9 @@ function Navbar() {
 
         <div className="navbar-actions">
 
-          <button
-            type="button"
-            className="navbar-search"
-            aria-label="Search"
-            title="Search"
-          >
-            <SearchIcon />
-          </button>
+          <Link to="/contact" className="navbar-quote-link">
+            Get a quote <span aria-hidden="true">↗</span>
+          </Link>
 
           <button
             type="button"

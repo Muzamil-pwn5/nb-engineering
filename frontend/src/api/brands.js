@@ -6,5 +6,5 @@ export async function getBrands() {
 }
 
 export async function getBrand(slug) {
-  return apiRequest(/brands/);
+  return apiRequest(`/brands/${slug}`);
 }

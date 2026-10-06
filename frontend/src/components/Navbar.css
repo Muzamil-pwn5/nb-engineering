@@ -327,6 +327,24 @@
   flex-shrink: 0;
 }
 
+.navbar-quote-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 34px;
+  padding: 0 13px;
+  background: var(--nb-yellow);
+  color: #111820;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.navbar-quote-link:hover { background: #111820; color: #fff; transform: translateY(-1px); }
+
 
 /* =========================================================
    SEARCH
@@ -520,6 +538,8 @@
 
     gap: 10px;
   }
+
+  .navbar-quote-link { display: none; }
 
 
   .navbar-menu-button {

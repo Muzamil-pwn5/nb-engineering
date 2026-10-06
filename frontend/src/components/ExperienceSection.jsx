@@ -64,7 +64,6 @@ export default function ExperienceSection() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeSector, setActiveSector] = useState(0);
-  const [selectedSector, setSelectedSector] = useState(null);
 
   const sectors = useMemo(
     () => data?.sectors || [],
@@ -77,8 +76,6 @@ export default function ExperienceSection() {
   const currentMetrics = getSectorMetrics(
     currentSector
   );
-
-  const capabilityList = data?.capabilities || [];
 
   useEffect(() => {
     let cancelled = false;
@@ -496,9 +493,7 @@ export default function ExperienceSection() {
     });
   }
 
-  function openSectorDetail(name) {
-    setSelectedSector(name);
-
+  function openSectorDetail() {
     requestAnimationFrame(() => {
       const detail =
         document.querySelector(
@@ -906,5 +901,3 @@ export default function ExperienceSection() {
     </section>
   );
 }
-
-

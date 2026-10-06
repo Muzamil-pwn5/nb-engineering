@@ -30,6 +30,25 @@ body {
   color: var(--navy);
 }
 
+:focus-visible {
+  outline: 3px solid #f5c400;
+  outline-offset: 4px;
+}
+
+::selection {
+  background: #f5c400;
+  color: #111820;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
 img {
   max-width: 100%;
 }
