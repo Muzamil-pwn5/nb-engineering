@@ -1,4 +1,8 @@
-export const HERO_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/b/bb/Dieselgenerator.jpg";
-export const PANEL_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/7/71/Electrical_switchgear.JPG";
-export const RENTAL_IMAGE = "https://upload.wikimedia.org/wikipedia/commons/d/d3/Mobile_electric_generator.jpg";
-export const PARTS_IMAGE = HERO_IMAGE;
+export const HERO_IMAGE = "/images/site/generator-100kva-canopy.png";
+export const GENERATOR_IMAGE = "/images/site/generator-cat-100kva.png";
+export const CANOPY_GENERATOR_IMAGE = "/images/site/generator-100kva.jpg";
+export const PANEL_IMAGE = "/images/site/ats-panel.jpg";
+export const ATS_TRANSFER_IMAGE = "/images/site/ats-transfer.jpg";
+export const RENTAL_IMAGE = "/images/site/generator-100kva-canopy.png";
+export const PARTS_IMAGE = "/images/site/generator-parts.jpg";
+export const PARTS_STOCK_IMAGE = "/images/site/parts-stock.jpg";
