@@ -1,80 +1,9 @@
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
-import "./SpareParts.css";
-
-const parts = [
-  {
-    number: "01",
-    title: "Filters & service kits",
-    text: "Oil, fuel and air filtration components for scheduled servicing and cleaner engine operation.",
-  },
-  {
-    number: "02",
-    title: "Belts, hoses & cooling",
-    text: "Practical replacement components for cooling systems, drive assemblies and everyday wear points.",
-  },
-  {
-    number: "03",
-    title: "Electrical components",
-    text: "Batteries, sensors, relays and control components for reliable starts and stable operation.",
-  },
-  {
-    number: "04",
-    title: "Engine & generator parts",
-    text: "Support for engine-side and alternator-side replacement requirements across common generator brands.",
-  },
-];
-
-function SpareParts() {
-  return (
-    <div className="parts-page">
-      <Navbar />
-      <main>
-        <section className="parts-hero">
-          <div className="parts-hero-grid" aria-hidden="true" />
-          <div className="parts-shell parts-hero-content">
-            <span className="parts-kicker">GENERATOR SUPPORT / 04</span>
-            <h1>Keep every<br /><span>system ready.</span></h1>
-            <p>
-              Source the replacement parts and service essentials that help your
-              generator stay dependable between scheduled maintenance visits.
-            </p>
-            <div className="parts-actions">
-              <Link to="/contact" className="parts-button parts-button-primary">Request a part <span>↗</span></Link>
-              <Link to="/services/generator-maintenance" className="parts-button parts-button-ghost">Explore maintenance</Link>
-            </div>
-          </div>
-          <div className="parts-hero-meta parts-shell"><span>ISLAMABAD / PAKISTAN</span><span>PARTS · SUPPORT · SERVICE</span></div>
-        </section>
-
-        <section className="parts-intro parts-shell">
-          <div className="parts-index"><span>01</span><i /><em>WHAT WE SUPPLY</em></div>
-          <div className="parts-intro-grid">
-            <h2>Parts that match<br /><span>the work.</span></h2>
-            <p>Tell us the generator make, model, capacity and required component. Our team will help identify the practical replacement for your system.</p>
-          </div>
-        </section>
-
-        <section className="parts-catalog parts-shell">
-          <div className="parts-catalog-head"><span className="parts-kicker">CATEGORIES</span><span>Built around uptime</span></div>
-          <div className="parts-grid">
-            {parts.map((part) => (
-              <article className="parts-card" key={part.number}>
-                <span className="parts-card-number">{part.number}</span>
-                <div><h3>{part.title}</h3><p>{part.text}</p></div>
-                <Link to="/contact" aria-label={`Request ${part.title}`}>Request a quote <span>↗</span></Link>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="parts-cta parts-shell">
-          <div><span className="parts-kicker">NEED HELP IDENTIFYING A PART?</span><h2>Send us the details.<br /><span>We’ll take it from there.</span></h2></div>
-          <Link to="/contact" className="parts-button parts-button-primary">Talk to the power team <span>↗</span></Link>
-        </section>
-      </main>
-    </div>
-  );
-}
-
-export default SpareParts;
+import Footer from "../components/Footer.jsx";
+import { BlurIn, Reveal, SpotlightCard, Stagger, staggerItem } from "../ui/MotionPrimitives.jsx";
+import { PARTS_IMAGE } from "../ui/media.js";
+import { motion } from "motion/react";
+import "../ui/site.css";
+const parts=[{title:"Filters & service kits",text:"Oil, fuel and air filtration components for scheduled servicing and cleaner engine operation."},{title:"Belts, hoses & cooling",text:"Replacement components for cooling systems, drive assemblies and everyday wear points."},{title:"Electrical components",text:"Batteries, sensors, relays and control components for reliable starts and stable operation."},{title:"Engine & generator parts",text:"Support for engine-side and alternator-side replacement requirements across common brands."}];
+export default function SpareParts(){return <div className="site-page"><Navbar/><main><section className="page-hero"><div className="page-hero-media"><img src={PARTS_IMAGE} alt="Generator spare parts"/></div><div className="site-shell page-hero-content"><Reveal><span className="eyebrow">06 / Generator support</span></Reveal><BlurIn><h1 className="display">Keep every<br/><em>system ready.</em></h1></BlurIn><Reveal delay={.15}><p className="lead">Source the replacement parts and service essentials that help your generator stay dependable between scheduled maintenance visits.</p></Reveal><Reveal delay={.22}><div className="button-row"><Link className="button button-primary" to="/contact">Request a part <span>↗</span></Link><Link className="button button-outline" to="/services/generator-maintenance">Explore maintenance <span>↗</span></Link></div></Reveal></div></section><section className="section"><div className="site-shell"><div className="section-heading"><Reveal><div><span className="eyebrow">What we supply</span><h2>Parts that match<br/><span>the work.</span></h2></div></Reveal><Reveal delay={.1}><p className="lead">Tell us the generator make, model, capacity and required component. Our team will help identify the practical replacement for your system.</p></Reveal></div><Stagger className="card-grid"><>{parts.map((part,index)=><motion.div key={part.title} variants={staggerItem}><SpotlightCard className="service-card-modern"><span className="card-no">0{index+1}</span><div><h3>{part.title}</h3><p>{part.text}</p></div><Link className="card-link" to="/contact">Request a quote <span>↗</span></Link></SpotlightCard></motion.div>)}</></Stagger></div></section><section className="dark-section section"><div className="site-shell"><Reveal><span className="eyebrow">Need help identifying a part?</span><h2 className="display">Send us the<br/><em>details.</em></h2><p className="lead">A photo, part number or generator model is enough to start the conversation.</p><Link className="button button-primary" to="/contact">Talk to the power team <span>↗</span></Link></Reveal></div></section></main><Footer/></div>;}
