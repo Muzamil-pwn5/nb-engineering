@@ -11,6 +11,7 @@ export default function GsapAnimations() {
   useLayoutEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) return undefined;
+    const touchDevice = window.matchMedia("(hover: none), (pointer: coarse)").matches;
 
     let context;
     try {
@@ -43,15 +44,17 @@ export default function GsapAnimations() {
         });
       });
 
-      gsap.utils.toArray(".home-solution-image img, .category-card img, .journey-feature-image img, .journey-panel-image img, .page-hero-media img").forEach((image) => {
-        gsap.to(image, {
-          yPercent: -7,
-          ease: "none",
-          scrollTrigger: { trigger: image, start: "top bottom", end: "bottom top", scrub: 1 },
+      if (!touchDevice) {
+        gsap.utils.toArray(".home-solution-image img, .category-card img, .journey-feature-image img, .journey-panel-image img, .page-hero-media img").forEach((image) => {
+          gsap.to(image, {
+            yPercent: -7,
+            ease: "none",
+            scrollTrigger: { trigger: image, start: "top bottom", end: "bottom top", scrub: 1 },
+          });
         });
-      });
+      }
 
-      document.querySelectorAll(".button, .nav-quote, .card-link").forEach((button) => {
+      if (!touchDevice) document.querySelectorAll(".button, .nav-quote, .card-link").forEach((button) => {
         const xTo = gsap.quickTo(button, "x", { duration: 0.35, ease: "power3.out" });
         const yTo = gsap.quickTo(button, "y", { duration: 0.35, ease: "power3.out" });
         const move = (event) => {

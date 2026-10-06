@@ -7,23 +7,14 @@ import { getGenerator } from "../api/generators.js";
 import "./GeneratorDetail.css";
 
 const generatorImages = {
-  "cat-c18-generator":
-    "https://s7d2.scene7.com/is/image/Caterpillar/CM20200320-9abe0-8dc3c?hei=1200&op_sharpen=1&qlt=100&wid=1200",
-
-  "cummins-c110d5":
-    "https://www.manelservice.com/49862-large_default/cummins-c110d5q-generator-110kva-singlethree-phase-silenced.jpg",
-
-  "cummins-c33d5":
-    "https://www.gfepowerproducts.com/cdn/shop/products/Cummins-Diesel-Generator-Canopy-30-110_7.png?v=1654684832&width=1400",
-
-  "fg-wilson-p110-3":
-    "https://rentenergo.ru/Files/Products/Large/5a40ead7c7d20.png",
-
-  "fg-wilson-p22-5-1s":
-    "https://st.mascus.com/image/product/large/1599af68/fg-wilson-p22-1-22-kva-open-ge%2C19d36562.jpg",
-
-  "perkins-1104a-generator":
-    "https://st.mascus.com/image/product/large/6167d2f3/perkins-1104c-44tag2-110-kva-g%2C7429dad9.jpg",
+  "cat-c18-generator": "/images/generators/cat-c18-generator.jpg",
+  "cummins-c110d5": "/images/generators/cummins-c110d5.jpg",
+  "cummins-c33d5": "/images/generators/cummins-c33d5.jpg",
+  "fg-wilson-p110-3": "/images/generators/fg-wilson-p110-3.jpg",
+  "fg-wilson-p180p2-180kva": "/images/generators/fg-wilson-p180p2-180kva.jpeg",
+  "fg-wilson-p22-5-1s": "/images/generators/fg-wilson-p22-1.jpg",
+  "perkins-1104a-generator": "/images/generators/perkins-1104a-generator.jpg",
+  "jcb-g200rs-v": "/images/generators/jcb-g200rs-v.jpg",
 };
 
 function GeneratorDetail() {
@@ -103,7 +94,7 @@ function GeneratorDetail() {
     );
   }
 
-  const image = generator.image_url || generatorImages[generator.slug];
+  const image = generatorImages[generator.slug] || generator.image_url;
 
   const generatorName =
     generator.name || "Generator";
@@ -143,8 +134,9 @@ function GeneratorDetail() {
               <div className="generator-detail-image">
                 {image ? (
                   <img
-                    src={image}
+                    src={image || "/images/generators/cat-c18-generator.jpg"}
                     alt={generator.name}
+                    onError={(event) => { event.currentTarget.src = "/images/generators/cat-c18-generator.jpg"; }}
                   />
                 ) : (
                   <div className="generator-detail-no-image">

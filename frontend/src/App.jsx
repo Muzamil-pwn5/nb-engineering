@@ -49,7 +49,7 @@ function SiteMotion() {
     };
   }, []);
 
-  return <><motion.div className="site-scroll-progress" style={{ scaleX: progress }} /><AnimatePresence>{loading && <motion.div className="site-loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45 }}><motion.img src="/logo-mark.png" alt="NB Engineering" initial={{ scale: .8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: .45 }} /><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .55, ease: "easeInOut" }} /></motion.div>}</AnimatePresence></>;
+  return <><motion.div className="site-scroll-progress" style={{ scaleX: progress }} /><AnimatePresence>{loading && <motion.div className="site-loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45 }}><motion.img src="/logo.jpeg" alt="NB Engineering" initial={{ scale: .8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: .45 }} /><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .55, ease: "easeInOut" }} /></motion.div>}</AnimatePresence></>;
 }
 
 function RouteSEO() {
