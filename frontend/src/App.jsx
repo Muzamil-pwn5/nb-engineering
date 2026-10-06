@@ -1,4 +1,4 @@
-﻿import { useEffect } from "react";
+﻿import { useEffect, useState } from "react";
 
 import {
   BrowserRouter,
@@ -6,6 +6,7 @@ import {
   Route,
   useLocation,
 } from "react-router-dom";
+import { motion, AnimatePresence } from "motion/react";
 
 import Home from "./pages/Home.jsx";
 import Generators from "./pages/generators.jsx";
@@ -27,6 +28,27 @@ function ScrollToTop() {
   }, [pathname]);
 
   return null;
+}
+
+function SiteMotion() {
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const done = window.setTimeout(() => setLoading(false), 650);
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? window.scrollY / max : 0);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.clearTimeout(done);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
+  return <><motion.div className="site-scroll-progress" style={{ scaleX: progress }} /><AnimatePresence>{loading && <motion.div className="site-loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45 }}><motion.img src="/logo-mark.png" alt="NB Engineering" initial={{ scale: .8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: .45 }} /><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .55, ease: "easeInOut" }} /></motion.div>}</AnimatePresence></>;
 }
 
 function RouteSEO() {
@@ -120,6 +142,7 @@ function App() {
       <BusinessSchema />
       <RouteSEO />
       <ScrollToTop />
+      <SiteMotion />
 
       <Routes>
         <Route path="/" element={<Home />} />
