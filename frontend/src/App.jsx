@@ -32,7 +32,9 @@ function ScrollToTop() {
 }
 
 function SiteMotion() {
-  const [loading, setLoading] = useState(true);
+  // Show the homepage immediately; the reference experience does not block
+  // the first view behind a full-screen loading splash.
+  const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {

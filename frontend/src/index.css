@@ -105,3 +105,80 @@ img { display: block; }
 .generator-detail-hero::after {
   background: linear-gradient(90deg, rgba(0, 0, 0, .94) 0%, rgba(0, 0, 0, .72) 48%, rgba(0, 0, 0, .18) 100%) !important;
 }
+
+/* Reference-inspired light NB Engineering interface. Keep the existing content
+   and routes, but make the first view simple, bright and easy to scan. */
+:root {
+  --nb-red: #b42318;
+  --nb-red-light: #d94b4b;
+  --nb-red-pale: #fff3f2;
+  --nb-ink-light: #1f2933;
+  --nb-white-clean: #ffffff;
+}
+html, body, .site-page, main { background: var(--nb-white-clean) !important; color: var(--nb-ink-light) !important; }
+.modern-nav { min-height: 80px !important; background: rgba(255,255,255,.97) !important; color: var(--nb-ink-light) !important; border-bottom: 1px solid #f0d9d7 !important; box-shadow: 0 2px 12px rgba(31,41,51,.05); }
+.modern-nav-inner { min-height: 80px !important; }
+.modern-logo, .modern-logo strong { color: var(--nb-ink-light) !important; }
+.modern-logo small, .modern-nav-links a, .mobile-nav a { color: #58636e !important; }
+.modern-nav-links a:hover, .modern-nav-links a.active { color: var(--nb-red) !important; }
+.modern-nav-links a.active::after { background: var(--nb-red) !important; }
+.logo-mark { border-color: var(--nb-red) !important; color: var(--nb-red) !important; }
+.nav-quote, .button-primary { background: var(--nb-red) !important; color: #fff !important; border-radius: 5px; }
+.nav-quote:hover, .button-primary:hover { background: #8f1d15 !important; color: #fff !important; }
+.nav-menu { color: var(--nb-red) !important; }
+.mobile-nav { background: #fff !important; border-top-color: #f0d9d7 !important; }
+.button, .button-primary, .button-outline, .button-ink { min-height: 48px; padding: 0 20px; font-size: 13px; letter-spacing: .01em; text-transform: none; }
+
+.home-hero { min-height: 620px !important; background: #fff !important; color: var(--nb-ink-light) !important; }
+.home-hero-media img { opacity: 1 !important; }
+.home-hero-overlay { background: linear-gradient(90deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.96) 42%, rgba(255,255,255,.18) 78%, rgba(255,255,255,0) 100%) !important; }
+.home-hero-content { max-width: 1240px; padding-top: 40px; }
+.home-hero .eyebrow, .home-hero .lead { color: #58636e !important; }
+.home-hero .eyebrow::before { background: var(--nb-red) !important; }
+.home-hero .display { max-width: 670px; color: var(--nb-ink-light) !important; font-size: clamp(46px, 6vw, 82px); line-height: .98; letter-spacing: -.055em; }
+.home-hero .display em, .display em, .section-heading h2 span { color: var(--nb-red) !important; }
+.home-hero .lead { max-width: 580px; font-size: 17px; line-height: 1.65; }
+.home-hero .button-outline { border-color: var(--nb-red) !important; color: var(--nb-red) !important; }
+.home-hero .button-outline:hover { background: var(--nb-red) !important; color: #fff !important; }
+.home-hero-corner { color: var(--nb-red) !important; }
+.marquee { background: var(--nb-red) !important; border: 0 !important; }
+.marquee span { color: #fff !important; }
+.marquee i { color: #ffd6d2 !important; }
+
+.section, .home-proof, .home-categories, .journey-section { background: #fff !important; }
+.section-heading h2, .journey-section h2, .home-categories h2 { color: var(--nb-ink-light) !important; }
+.eyebrow { color: var(--nb-red) !important; }
+.eyebrow::before { background: var(--nb-red) !important; }
+.lead { color: #58636e !important; }
+.spotlight-card, .proof-card, .category-card, .contact-card, .journey-feature-copy { background: #fff !important; border: 1px solid #efd6d4 !important; box-shadow: 0 10px 28px rgba(180,35,24,.08) !important; }
+.spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(217,75,75,.12), transparent 65%) !important; }
+.service-card-modern .card-no, .journey-step > span, .card-link, .card-link span { color: var(--nb-red) !important; }
+.service-card-modern p, .proof-card p, .journey-feature-copy p, .journey-step p { color: #58636e !important; }
+.journey-step { background: var(--nb-red-pale) !important; }
+
+.dark-section, .home-solution, .home-cta { background: var(--nb-red-pale) !important; color: var(--nb-ink-light) !important; }
+.dark-section .display, .dark-section h2, .dark-section .lead { color: var(--nb-ink-light) !important; }
+.dark-section .eyebrow { color: var(--nb-red) !important; }
+.dark-section .eyebrow::before { background: var(--nb-red) !important; }
+.dark-section .stats-row { background: #efd6d4 !important; }
+.dark-section .stat { background: #fff !important; }
+.dark-section .stat strong { color: var(--nb-red) !important; }
+.dark-section .stat span { color: #58636e !important; }
+.home-cta .button-primary { background: var(--nb-red) !important; }
+
+.page-hero, .service-detail-hero, .generator-detail-hero { background: #fff !important; color: var(--nb-ink-light) !important; }
+.page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { background: linear-gradient(90deg, rgba(255,255,255,.98), rgba(255,255,255,.88) 48%, rgba(255,255,255,.12) 100%) !important; }
+.page-hero .display, .page-hero h1, .service-detail-hero h1, .generator-detail-hero h1 { color: var(--nb-ink-light) !important; }
+.page-hero .lead, .service-detail-hero .lead, .generator-detail-hero .lead { color: #58636e !important; }
+
+.contact-form, .service-detail-content, .generator-detail-content { background: var(--nb-red-pale) !important; color: var(--nb-ink-light) !important; }
+.contact-form label, .contact-form input, .contact-form textarea, .contact-form select { color: var(--nb-ink-light) !important; }
+.contact-form input, .contact-form textarea, .contact-form select { background: #fff !important; border-color: #e8c9c6 !important; }
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: #7a858e !important; }
+.footer-modern { background: #111 !important; color: #fff !important; }
+.footer-modern h3, .footer-brand span, .footer-hours { color: #fff !important; }
+.footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: #fff !important; opacity: .8; }
+.footer-modern .button-primary { background: #fff !important; color: #111 !important; }
+
+@media (max-width: 900px) { .home-hero { min-height: 620px !important; } .home-hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.96) 72%, rgba(255,255,255,1)) !important; } .home-hero-media img { object-position: 68% center; opacity: .28 !important; } }
+@media (max-width: 580px) { .home-hero { min-height: 680px !important; } .home-hero-content { padding-top: 20px; } .home-hero .display { font-size: clamp(42px, 13vw, 62px); } .home-hero .lead { font-size: 16px; } .home-hero .button-row { max-width: 220px; } }
