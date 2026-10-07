@@ -96,3 +96,93 @@ body { accent-color: var(--nb-pink); }
 
 /* Remove accidental remote image dependencies from cards if backend data contains one. */
 img { display: block; }
+
+
+/* Scoped refinement: chill white canvas, true pink accents, and a contained photographic hero. */
+:root {
+  --nb-pink: #ff1493;
+  --nb-white: #fffdfd;
+  --nb-ink: #111111;
+  --nb-muted: #625b60;
+  --nb-line: rgba(17, 17, 17, .12);
+}
+html, body, .site-page, main, .section, .home-proof, .home-categories, .journey-section,
+.home-solution, .home-cta, .dark-section, .page-hero, .service-detail-hero, .generator-detail-hero,
+.contact-intro, .contact-form, .service-detail-content, .generator-detail-content {
+  background: var(--nb-white) !important;
+  color: var(--nb-ink) !important;
+}
+body { color: var(--nb-ink) !important; }
+.modern-nav { background: rgba(255, 253, 253, .96) !important; color: var(--nb-ink) !important; border-bottom-color: var(--nb-line) !important; }
+.modern-logo, .modern-logo strong, .modern-nav-links a, .mobile-nav a, .nav-menu { color: var(--nb-ink) !important; }
+.modern-nav-links a:hover, .modern-nav-links a.active, .eyebrow, .card-link, .card-link span,
+.display em, .section-heading h2 span, .journey-intro h2 em, .service-card-modern .card-no,
+.journey-step > span { color: var(--nb-pink) !important; }
+.modern-nav-links a.active::after, .eyebrow::before { background: var(--nb-pink) !important; }
+.logo-mark { border-color: var(--nb-pink) !important; color: var(--nb-pink) !important; }
+.nav-quote, .button-primary, .button-ink { background: var(--nb-pink) !important; color: #fff !important; }
+.nav-quote:hover, .button-primary:hover, .button-ink:hover { background: var(--nb-ink) !important; color: #fff !important; }
+.button-outline { border-color: var(--nb-pink) !important; color: var(--nb-pink) !important; }
+.button-outline:hover { background: var(--nb-pink) !important; color: #fff !important; }
+.lead, .service-card-modern p, .proof-card p, .journey-feature-copy p, .journey-step p { color: var(--nb-muted) !important; }
+
+/* Homepage hero: the photograph is intentionally contained on the right, never edge-to-edge. */
+.home-hero {
+  position: relative;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+  align-items: center;
+  gap: clamp(32px, 6vw, 96px);
+  min-height: 640px !important;
+  padding: 112px 0 72px;
+  background: var(--nb-white) !important;
+  color: var(--nb-ink) !important;
+}
+.home-hero-content { grid-column: 1; grid-row: 1; width: min(var(--max), calc(100% - 48px)); margin: 0 auto; padding-top: 0 !important; }
+.home-hero-media { position: relative !important; inset: auto !important; grid-column: 2; grid-row: 1; width: min(100%, 600px); height: clamp(360px, 47vw, 560px); border-radius: 28px; overflow: hidden; background: #f4eef1; box-shadow: 0 24px 60px rgba(17, 17, 17, .12); }
+.home-hero-media img { width: 100%; height: 100%; object-fit: cover; opacity: 1 !important; }
+.home-hero-overlay { display: none !important; }
+.home-hero .display, .home-hero h1 { color: var(--nb-ink) !important; }
+.home-hero .eyebrow, .home-hero .lead { color: var(--nb-muted) !important; }
+.home-hero .button-row { margin-top: 8px; }
+.home-hero-corner { color: var(--nb-pink) !important; }
+.marquee { background: var(--nb-pink) !important; border-color: var(--nb-pink) !important; }
+.marquee span, .marquee i { color: #fff !important; }
+
+.spotlight-card, .proof-card, .category-card, .contact-card, .journey-feature-copy { background: #fff !important; border-color: var(--nb-line) !important; box-shadow: 0 14px 36px rgba(17, 17, 17, .07) !important; }
+.spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(255, 20, 147, .12), transparent 65%) !important; }
+.journey-step { background: #fff4f9 !important; }
+.detail-layout .display, .dark-section .display, .dark-section h2, .dark-section .lead,
+.page-hero .display, .page-hero h1, .service-detail-hero h1, .generator-detail-hero h1,
+.contact-intro .display, .contact-intro .lead { color: var(--nb-ink) !important; }
+.page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { display: none !important; }
+.page-hero-media img { opacity: 1 !important; }
+.stats-row { background: var(--nb-line) !important; }
+.stat { background: #fff !important; }
+.stat strong { color: var(--nb-pink) !important; }
+.stat span { color: var(--nb-muted) !important; }
+.contact-form input, .contact-form textarea, .contact-form select { background: #fff !important; color: var(--nb-ink) !important; border-color: var(--nb-line) !important; }
+.contact-form label { color: var(--nb-ink) !important; }
+.footer-modern { background: var(--nb-white) !important; color: var(--nb-ink) !important; border-top: 1px solid var(--nb-line); }
+.footer-modern h3, .footer-brand span, .footer-hours, .footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: var(--nb-ink) !important; }
+.footer-modern .button-primary { background: var(--nb-pink) !important; color: #fff !important; }
+
+/* Each existing card CTA becomes a transparent full-tile hit area without changing card markup. */
+.spotlight-card { position: relative; }
+.spotlight-card > .card-link { position: static; z-index: 2; }
+.spotlight-card > .card-link::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+.proof-card, .service-card-modern, .category-card, .journey-step { cursor: pointer; }
+
+@media (max-width: 900px) {
+  .home-hero { grid-template-columns: 1fr; gap: 36px; padding: 108px 0 64px; }
+  .home-hero-content { grid-column: 1; grid-row: 2; }
+  .home-hero-media { grid-column: 1; grid-row: 1; width: min(100% - 32px, 620px); height: min(68vw, 440px); margin: 0 auto; }
+}
+@media (max-width: 580px) {
+  .home-hero { padding-top: 92px; }
+  .home-hero-content { width: calc(100% - 32px); }
+  .home-hero-media { width: calc(100% - 32px); height: 310px; border-radius: 22px; }
+}
+
+.tile-link { display: block; color: inherit; text-decoration: none; }
+.tile-link:hover { color: inherit; }
