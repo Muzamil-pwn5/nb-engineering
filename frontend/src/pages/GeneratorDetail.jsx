@@ -17,6 +17,15 @@ const generatorImages = {
   "jcb-g200rs-v": "/images/generators/jcb-g200rs-v.jpg",
 };
 
+const fallbackGenerators = [
+  { name: "FG Wilson P110-3 Diesel Generator", slug: "fg-wilson-p110-3", kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, image_url: generatorImages["fg-wilson-p110-3"], description: "110 kVA diesel generator for dependable commercial and standby power." },
+  { name: "Cummins C110D5 Generator", slug: "cummins-c110d5", kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, image_url: generatorImages["cummins-c110d5"], description: "Compact 110 kVA Cummins system for commercial and critical backup applications." },
+  { name: "Caterpillar C18 Generator", slug: "cat-c18-generator", kva: 500, kw: 400, fuel_type: "Diesel", is_available: true, image_url: generatorImages["cat-c18-generator"], description: "High-capacity Caterpillar power for demanding industrial operations." },
+  { name: "FG Wilson P180P2 Generator", slug: "fg-wilson-p180p2-180kva", kva: 180, kw: 144, fuel_type: "Diesel", is_available: true, image_url: generatorImages["fg-wilson-p180p2-180kva"], description: "180 kVA generator for commercial, industrial and prime-power requirements." },
+  { name: "Perkins 1104A Generator", slug: "perkins-1104a-generator", kva: 60, kw: 48, fuel_type: "Diesel", is_available: true, image_url: generatorImages["perkins-1104a-generator"], description: "Reliable 60 kVA Perkins-powered generator for standby requirements." },
+  { name: "JCB G200RS-V Generator", slug: "jcb-g200rs-v", kva: 200, kw: 160, fuel_type: "Diesel", is_available: true, image_url: generatorImages["jcb-g200rs-v"], description: "200 kVA JCB generator for commercial, construction and temporary power." },
+];
+
 function GeneratorDetail() {
   const { slug } = useParams();
 
@@ -35,10 +44,12 @@ function GeneratorDetail() {
         setGenerator(data);
       } catch (err) {
         console.error("Failed to load generator:", err);
-
-        setError(
-          err.message || "Unable to load this generator."
-        );
+        const localGenerator = fallbackGenerators.find((item) => item.slug === slug);
+        if (localGenerator) {
+          setGenerator(localGenerator);
+        } else {
+          setError("This generator is not available in the current catalogue.");
+        }
       } finally {
         setLoading(false);
       }

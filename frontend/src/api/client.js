@@ -1,34 +1,43 @@
-﻿const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  "http://127.0.0.1:8000/api/v1";
+﻿const configuredApiBase = import.meta.env.VITE_API_BASE_URL?.trim();
+
+// Production builds must never silently call a user's localhost. If the API is
+// deployed behind the same origin, /api/v1 is the correct default. A hosted
+// backend can be supplied with VITE_API_BASE_URL at build time.
+export const API_BASE_URL = (configuredApiBase || "/api/v1").replace(/\/$/, "");
 
 async function apiRequest(endpoint, options = {}) {
-  const response = await fetch(
-    `${API_BASE_URL}${endpoint}`,
-    {
+  const controller = new AbortController();
+  const timeout = window.setTimeout(() => controller.abort(), 8000);
+
+  try {
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+      ...options,
+      signal: options.signal || controller.signal,
       headers: {
-        "Content-Type": "application/json",
+        Accept: "application/json",
+        ...(options.body ? { "Content-Type": "application/json" } : {}),
         ...(options.headers || {}),
       },
-      ...options,
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}.`);
     }
-  );
-
-  if (!response.ok) {
-    const errorText = await response.text();
-
-    throw new Error(
-      `API Error ${response.status}: ${
-        errorText || response.statusText
-      }`
-    );
+    if (response.status === 204) return null;
+    return response.json();
+  } catch (error) {
+    if (error.name === "AbortError") {
+      throw new Error("The backend request timed out.", { cause: error });
+    }
+    if (error instanceof TypeError) {
+      throw new Error("The backend is unavailable from this preview.", {
+        cause: error,
+      });
+    }
+    throw error;
+  } finally {
+    window.clearTimeout(timeout);
   }
-
-  if (response.status === 204) {
-    return null;
-  }
-
-  return response.json();
 }
 
 export default apiRequest;

@@ -1,98 +1,104 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-@import "./ui/site.css";
-@import "./pages/Home.css";
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { margin:0; min-width:320px; font-family:"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#f3f5ef; color:#0a0d0f; }
-h1,h2,h3,h4,.display,.modern-logo,.footer-brand { font-family:"Space Grotesk", "DM Sans", sans-serif; }
-button,input,textarea,select { font:inherit; }
-img { max-width:100%; }
-:focus-visible { outline:3px solid #c9ff47; outline-offset:3px; }
-::selection { background:#c9ff47; color:#0a0d0f; }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+﻿
 
+/* Contrast pass: image heroes use a black reading gradient, never a pink wash. */
+.home-hero-overlay,
+.page-hero::after,
+.service-detail-hero-gradient,
+.generator-detail-hero::after {
+  background: linear-gradient(90deg, rgba(0, 0, 0, .94) 0%, rgba(0, 0, 0, .72) 48%, rgba(0, 0, 0, .18) 100%) !important;
+}
+.home-hero-media img,
+.page-hero-media img,
+.service-detail-hero-image,
+.generator-detail-hero img { filter: saturate(.82) brightness(.84); }
+.home-hero .display em,
+.page-hero .display em,
+.dark-section .display em,
+.contact-intro .display em,
+.service-detail-hero h1,
+.generator-detail-hero h1 { color: #fff !important; }
+.home-hero .eyebrow,
+.page-hero .eyebrow,
+.dark-section .eyebrow,
+.contact-intro .eyebrow { color: #fff !important; }
+.home-hero .eyebrow::before,
+.page-hero .eyebrow::before,
+.dark-section .eyebrow::before,
+.contact-intro .eyebrow::before { background: #fff !important; }
 
-/* NB Engineering brand refresh: True Pink + Chill White */
-:root {
-  --nb-pink: #FD1843;
-  --nb-white: #FFF9FA;
-  --nb-ink: #171014;
-  --nb-muted: #6f6268;
-  --nb-line: rgba(253, 24, 67, .16);
-  --ink: var(--nb-ink);
-  --ink-2: #c81438;
-  --paper: var(--nb-white);
-  --paper-2: #fff0f3;
-  --acid: var(--nb-pink);
-  --coral: var(--nb-pink);
-  --white: var(--nb-white);
-  --line: var(--nb-line);
+/* Primary CTAs use a white surface with dark text for reliable contrast. */
+.button-primary,
+.nav-quote,
+.dark-section .button-primary,
+.page-hero .button-primary,
+.home-hero .button-primary,
+.contact-form .button-primary,
+.footer-modern .button-primary,
+.detail-primary-button,
+.detail-inquiry-button,
+.service-detail-primary-button,
+.service-detail-contact-button,
+.service-detail-bottom-button,
+.contact-primary-button,
+.services-final-button,
+.parts-button-primary,
+.brand-hero-button,
+.brand-contact-button,
+.submit-button {
+  background: #fff !important;
+  border: 2px solid #fff !important;
+  color: #171014 !important;
+  text-shadow: none !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .18) !important;
+}
+.button-primary:hover,
+.nav-quote:hover,
+.dark-section .button-primary:hover,
+.page-hero .button-primary:hover,
+.home-hero .button-primary:hover,
+.contact-form .button-primary:hover,
+.footer-modern .button-primary:hover,
+.detail-primary-button:hover,
+.detail-inquiry-button:hover,
+.service-detail-primary-button:hover,
+.service-detail-contact-button:hover,
+.service-detail-bottom-button:hover,
+.contact-primary-button:hover,
+.services-final-button:hover,
+.parts-button-primary:hover,
+.brand-hero-button:hover,
+.brand-contact-button:hover,
+.submit-button:hover {
+  background: var(--nb-pink) !important;
+  border-color: var(--nb-pink) !important;
+  color: #fff !important;
+}
+.button-outline,
+.contact-secondary-button,
+.detail-secondary-button,
+.parts-button-ghost {
+  border-width: 2px !important;
+  color: #fff !important;
+  border-color: #fff !important;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+}
+.button-outline:hover,
+.contact-secondary-button:hover,
+.detail-secondary-button:hover,
+.parts-button-ghost:hover {
+  background: #fff !important;
+  color: #171014 !important;
+  text-shadow: none;
 }
 
-html, body { background: var(--nb-white); color: var(--nb-ink); }
-body { accent-color: var(--nb-pink); }
-:focus-visible { outline-color: var(--nb-pink) !important; }
-::selection { background: var(--nb-pink); color: var(--nb-white); }
-.site-page, main { background: var(--nb-white); color: var(--nb-ink); }
+/* Text links and form status remain legible on every CTA surface. */
+.contact-form .form-status,
+.service-detail-hero .service-detail-primary-button,
+.generator-detail-hero .detail-primary-button { color: #171014 !important; }
+.contact-form .button-primary:disabled { opacity: .65; cursor: wait; }
+.site-scroll-progress { background: var(--nb-pink) !important; }
 
-.modern-nav { color: var(--nb-ink) !important; background: rgba(255, 249, 250, .94) !important; border-bottom-color: rgba(253, 24, 67, .14) !important; }
-.modern-logo { color: var(--nb-ink) !important; }
-.modern-logo small, .modern-nav-links a, .mobile-nav a { color: #77666d !important; }
-.modern-nav-links a:hover, .modern-nav-links a.active { color: var(--nb-pink) !important; }
-.modern-nav-links a.active::after { background: var(--nb-pink) !important; }
-.logo-mark { border-color: var(--nb-pink) !important; color: var(--nb-pink) !important; }
-.nav-quote, .button-primary { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.nav-quote:hover, .button-primary:hover { background: var(--nb-ink) !important; color: var(--nb-white) !important; }
-.nav-menu { color: var(--nb-ink) !important; }
-.mobile-nav { background: var(--nb-white) !important; border-top-color: var(--nb-line) !important; }
-
-.eyebrow { color: var(--nb-pink) !important; }
-.eyebrow::before { background: var(--nb-pink) !important; }
-.display em, .section-heading h2 span { color: var(--nb-pink) !important; }
-.lead { color: var(--nb-muted) !important; }
-.section { background: var(--nb-white); }
-.spotlight-card, .proof-card, .category-card, .contact-card, .journey-feature-copy { background: var(--nb-white) !important; border-color: var(--nb-line) !important; }
-.spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(253, 24, 67, .16), transparent 65%) !important; }
-.service-card-modern .card-no, .journey-step > span { color: var(--nb-pink) !important; }
-.service-card-modern p, .proof-card p, .journey-feature-copy p, .journey-step p { color: var(--nb-muted) !important; }
-.card-link, .card-link span { color: var(--nb-pink) !important; }
-.pill { border-color: var(--nb-line) !important; color: var(--nb-pink) !important; background: transparent !important; }
-.pill:hover, .pill[aria-pressed="true"] { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-
-.home-hero, .page-hero, .dark-section, .contact-intro, .service-detail-hero, .generator-detail-hero { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.home-hero-overlay, .page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { background: linear-gradient(90deg, rgba(253, 24, 67, .97), rgba(253, 24, 67, .78) 48%, rgba(253, 24, 67, .25)) !important; }
-.home-hero-media img, .page-hero-media img { opacity: .72; }
-.dark-section .lead, .page-hero .lead, .home-hero .lead, .contact-intro .lead { color: rgba(255, 249, 250, .82) !important; }
-.dark-section .eyebrow { color: var(--nb-white) !important; }
-.dark-section .eyebrow::before { background: var(--nb-white) !important; }
-.dark-section .stats-row, .page-hero .stats-row { background: rgba(255, 249, 250, .28); }
-.stat { background: rgba(23, 16, 20, .16) !important; }
-.stat strong { color: var(--nb-white) !important; }
-.stat span { color: rgba(255, 249, 250, .78) !important; }
-.button-outline { border-color: rgba(255, 249, 250, .72) !important; color: var(--nb-white) !important; }
-.button-outline:hover { background: var(--nb-white) !important; color: var(--nb-pink) !important; }
-.button-ink { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-
-.home-proof, .home-categories, .journey-section { background: var(--nb-white) !important; }
-.journey-section { color: var(--nb-ink) !important; }
-.journey-intro h2 em { color: var(--nb-pink) !important; }
-.journey-kicker, .journey-live-stat span { color: var(--nb-muted) !important; }
-.journey-step { background: #fff0f3 !important; }
-.journey-feature-image, .journey-panel-image, .home-solution-image, .image-panel { background: #f6d5dc !important; }
-
-.contact-form, .service-detail-content, .generator-detail-content { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.contact-form label, .contact-form input, .contact-form textarea, .contact-form select { color: var(--nb-white) !important; }
-.contact-form input, .contact-form textarea, .contact-form select { background: rgba(23, 16, 20, .14) !important; border-color: rgba(255, 249, 250, .34) !important; }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255, 249, 250, .68) !important; }
-.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--nb-white) !important; }
-
-/* Footer intentionally remains black with white text only. */
-.footer-modern { background: #000 !important; color: #fff !important; }
-.footer-modern h3, .footer-brand span, .footer-hours { color: #fff !important; }
-.footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: #fff !important; opacity: .78; }
-.footer-modern a:hover, .footer-direct a { color: #fff !important; opacity: 1; }
-.footer-modern .button-primary { background: #fff !important; color: #000 !important; }
-.footer-modern .button-primary:hover { background: var(--nb-pink) !important; color: #fff !important; }
-
-/* Remove accidental remote image dependencies from cards if backend data contains one. */
-img { display: block; }
+/* Security/quality baseline for interactive and remote-data surfaces. */
+img { max-width: 100%; }
+button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid var(--nb-pink) !important; outline-offset: 3px; }

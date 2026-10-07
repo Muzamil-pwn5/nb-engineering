@@ -322,11 +322,15 @@ function ServiceDetail() {
         }
       } catch (err) {
         console.error("Failed to load service:", err);
-
-        if (mounted) {
-          setError(
-            err.message || "Unable to load this service from the server."
-          );
+        const localService = serviceDetails[slug];
+        if (mounted && localService) {
+          setService({
+            slug,
+            name: localService.title,
+            description: localService.intro,
+          });
+        } else if (mounted) {
+          setError("This service is not available in the current catalogue.");
         }
       } finally {
         if (mounted) {
