@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nbengineering.com/sitemap.xml
+Sitemap: https://nbengineerings.com/sitemap.xml

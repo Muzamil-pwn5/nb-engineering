@@ -451,3 +451,29 @@ body { color: var(--nb-ink) !important; }
     height: clamp(340px, 43vw, 520px);
   }
 }
+
+
+/* Mobile reset: the desktop hero lock must not create an implicit narrow second column. */
+@media (max-width: 780px) {
+  .home-hero {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 30px;
+    padding: 96px 0 56px;
+  }
+  .home-hero-media {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: calc(100% - 32px) !important;
+    height: clamp(260px, 72vw, 420px) !important;
+    margin: 0 auto !important;
+    border-radius: 22px;
+  }
+  .home-hero-content {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: calc(100% - 32px) !important;
+    margin: 0 auto !important;
+  }
+  .home-hero-media img { object-fit: cover !important; padding: 0 !important; }
+}
