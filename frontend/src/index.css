@@ -182,3 +182,13 @@ html, body, .site-page, main { background: var(--nb-white-clean) !important; col
 
 @media (max-width: 900px) { .home-hero { min-height: 620px !important; } .home-hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.96) 72%, rgba(255,255,255,1)) !important; } .home-hero-media img { object-position: 68% center; opacity: .28 !important; } }
 @media (max-width: 580px) { .home-hero { min-height: 680px !important; } .home-hero-content { padding-top: 20px; } .home-hero .display { font-size: clamp(42px, 13vw, 62px); } .home-hero .lead { font-size: 16px; } .home-hero .button-row { max-width: 220px; } }
+
+/* Mobile-first readability: do not hide the primary message while decorative
+   reveal animations are settling. */
+@media (max-width: 900px) {
+  .home-hero-content > *, .page-hero-content > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
