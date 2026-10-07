@@ -14,7 +14,7 @@ img { max-width:100%; }
 
 /* NB Engineering brand refresh: True Pink + Chill White */
 :root {
-  --nb-pink: #ef6b73;
+  --nb-pink: #d9364a;
   --nb-white: #FFF9FA;
   --nb-ink: #171014;
   --nb-muted: #6f6268;
@@ -100,7 +100,7 @@ img { display: block; }
 
 /* Scoped refinement: chill white canvas, true pink accents, and a contained photographic hero. */
 :root {
-  --nb-pink: #ef6b73;
+  --nb-pink: #d9364a;
   --nb-white: #fffdfd;
   --nb-ink: #111111;
   --nb-muted: #625b60;
@@ -187,3 +187,11 @@ body { color: var(--nb-ink) !important; }
 
 .tile-link { display: block; color: inherit; text-decoration: none; }
 .tile-link:hover { color: inherit; }
+
+/* Footer sizing correction: keep social icons and CTA arrows at normal scale. */
+.footer-modern { padding: 56px 0 22px !important; }
+.footer-grid { gap: 32px !important; padding-bottom: 36px !important; }
+.footer-socials { display: flex; align-items: center; gap: 10px; margin-top: 22px; }
+.footer-modern .footer-social { display: grid !important; place-items: center; width: 32px !important; height: 32px !important; margin: 0 !important; padding: 0 !important; }
+.footer-modern .footer-social svg { display: block; width: 16px !important; height: 16px !important; max-width: 16px !important; }
+.footer-modern .button span { font-size: 14px !important; line-height: 1 !important; }
