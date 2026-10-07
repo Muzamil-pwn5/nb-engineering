@@ -6,4 +6,4 @@ export const PANEL_IMAGE = "/images/site/ats-panel.jpg";
 export const ATS_TRANSFER_IMAGE = "/images/site/ats-transfer-clean.jpg";
 export const RENTAL_IMAGE = "/images/home/services/generator-repair.jpeg";
 export const PARTS_IMAGE = "/images/home/services/spare-parts.jpg";
-export const PARTS_STOCK_IMAGE = "/images/home/services/spare-parts.jpg";
+export const PARTS_STOCK_IMAGE = "/images/site/parts-stock.jpg";

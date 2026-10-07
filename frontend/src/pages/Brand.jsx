@@ -2,17 +2,17 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import { BlurIn, Reveal, SpotlightCard, Stagger, staggerItem } from "../ui/MotionPrimitives.jsx";
-import { CANOPY_GENERATOR_IMAGE, GENERATOR_IMAGE, HERO_IMAGE } from "../ui/media.js";
+import { GENERATOR_IMAGE } from "../ui/media.js";
 import { motion } from "motion/react";
 import "../ui/site.css";
 
 const brands = [
-  { name: "Cummins", country: "United States", image: GENERATOR_IMAGE, text: "A globally recognized power-generation brand for commercial, industrial, standby and critical-power applications." },
-  { name: "FG Wilson", country: "United Kingdom", image: HERO_IMAGE, text: "Diesel generator sets for standby, prime and industrial power applications across a wide range of capacities." },
-  { name: "Perkins", country: "United Kingdom", image: "/images/home/services/generator-maintenance.jpeg", text: "A long-established engine brand widely used in generator sets and industrial power-generation equipment." },
-  { name: "Caterpillar", country: "United States", image: "/images/home/services/generator-sales.jpeg", text: "Heavy-duty generator sets designed for standby, prime and continuous power requirements." },
-  { name: "Kubota", country: "Japan", image: CANOPY_GENERATOR_IMAGE, text: "Compact, efficient diesel engine technology suited to dependable power equipment and practical installations." },
-  { name: "John Deere", country: "United States", image: "/images/home/services/canopy-work.jpeg", text: "Recognized diesel power technology for demanding applications where durability and serviceability matter." },
+  { name: "Cummins", country: "United States", image: "/images/generators/cummins-c110d5.jpg", text: "A globally recognized power-generation brand for commercial, industrial, standby and critical-power applications." },
+  { name: "FG Wilson", country: "United Kingdom", image: "/images/generators/fg-wilson-p180p2-180kva.jpeg", text: "Diesel generator sets for standby, prime and industrial power applications across a wide range of capacities." },
+  { name: "Perkins", country: "United Kingdom", image: "/images/generators/perkins-1104a-generator.jpg", text: "A long-established engine brand widely used in generator sets and industrial power-generation equipment." },
+  { name: "Caterpillar", country: "United States", image: "/images/generators/cat-c18-generator.jpg", text: "Heavy-duty generator sets designed for standby, prime and continuous power requirements." },
+  { name: "Kubota", country: "Japan", image: "/images/generators/doosan-g80xw.jpg", text: "Compact, efficient diesel engine technology suited to dependable power equipment and practical installations." },
+  { name: "John Deere", country: "United States", image: "/images/generators/jcb-g150rs-v.jpg", text: "Recognized diesel power technology for demanding applications where durability and serviceability matter." },
 ];
 
 export default function Brand() {

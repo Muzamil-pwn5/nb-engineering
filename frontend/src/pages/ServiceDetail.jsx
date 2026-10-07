@@ -7,29 +7,14 @@ import { getService } from "../api/services.js";
 import "./ServiceDetail.css";
 
 const serviceImages = {
-  "generator-sales":
-    "https://cpimg.tistatic.com/10280065/b/4/HG-100-KVA-Diesel-Generator..jpg",
-
-  "generator-purchase":
-    "https://www.elcospowergenerators.com/wp-content/uploads/2020/10/square_wb_pro.jpg",
-
-  "generator-rental":
-    "https://static.wixstatic.com/media/59f0da_a2ef750fc893447cb7f6e8a65ce0258f~mv2.jpeg/v1/fit/w_520%2Ch_464%2Cq_90/59f0da_a2ef750fc893447cb7f6e8a65ce0258f~mv2.jpeg",
-
-  "generator-repair":
-    "https://waltpower.com/wp-content/uploads/2025/03/check-steps-of-diesel-generator.jpg",
-
-  "generator-maintenance":
-    "https://media.licdn.com/dms/image/v2/D4E22AQE-1L2qS7sFaQ/feedshare-shrink_800/feedshare-shrink_800/0/1695562566416?e=2147483647&t=I6kGyHYr6WTN6EcbRe5k_yPgilNng-FmtN-VsbuXR_E&v=beta",
-
-  "ats-panels":
-    "https://www.bimsonpower.com/cdn/shop/files/BP_19010200027_Petrol-ATS_featured-image_13cx9y_600x600_crop_center.png?v=1773815325",
-
-  "canopy-work":
-    "https://www.elcospowergenerators.com/wp-content/uploads/2020/10/square_wb_pro.jpg",
-
-  "spare-parts":
-    "https://www.tahirandsonz.com/products/generator-parts.webp",
+  "generator-sales": "/images/generators/fg-wilson-p110-3.jpg",
+  "generator-purchase": "/images/generators/cummins-c110d5.jpg",
+  "generator-rental": "/images/generators/jcb-g150rs-v.jpg",
+  "generator-repair": "/images/home/services/generator-repair.jpeg",
+  "generator-maintenance": "/images/home/services/generator-maintenance.jpeg",
+  "ats-panels": "/images/site/ats-panel.jpg",
+  "canopy-work": "/images/home/services/canopy-work.jpeg",
+  "spare-parts": "/images/site/parts-stock.jpg",
 };
 
 const serviceDetails = {
@@ -408,9 +393,7 @@ function ServiceDetail() {
 
   const details = serviceDetails[slug] || fallbackDetails;
 
-  const image =
-    service.image_url ||
-    serviceImages[slug];
+  const image = serviceImages[slug] || "/images/site/generator-100kva-canopy.png";
 
   const serviceName =
     service.name || details.title || "Generator Service";
@@ -440,6 +423,9 @@ function ServiceDetail() {
               className="service-detail-hero-image"
               src={image}
               alt={service.name}
+              onError={(event) => {
+                event.currentTarget.src = "/images/site/generator-100kva-canopy.png";
+              }}
             />
           )}
 
