@@ -46,7 +46,7 @@ export default function Footer() {
         </div>
         <div className="footer-column"><h3>Solutions</h3><Link to="/generators">Generators</Link><Link to="/services">Services</Link><Link to="/services/ats-panels">ATS / AMF automation</Link><Link to="/brands">Brands</Link></div>
         <div className="footer-column"><h3>Support</h3><Link to="/services/generator-maintenance">Maintenance</Link><Link to="/services/generator-repair">Repair</Link><Link to="/spare-parts">Spare parts</Link><Link to="/contact">Request a quote</Link></div>
-        <div className="footer-column"><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span></div>
+        <div className="footer-column"><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span><div className="footer-legal-links"><Link to="/privacy-policy">Privacy policy</Link><Link to="/terms-and-conditions">Terms &amp; conditions</Link></div></div>
       </div>
       <div className="site-shell footer-bottom"><span>© {new Date().getFullYear()} NB Engineering & Services</span><span>Power systems for the real world.</span></div>
     </footer>

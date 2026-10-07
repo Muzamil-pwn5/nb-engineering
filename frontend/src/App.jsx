@@ -1,13 +1,6 @@
-﻿import { useEffect, useState } from "react";
-
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-
 import Home from "./pages/Home.jsx";
 import Generators from "./pages/generators.jsx";
 import GeneratorDetail from "./pages/GeneratorDetail.jsx";
@@ -16,24 +9,22 @@ import ServiceDetail from "./pages/ServiceDetail.jsx";
 import Contact from "./pages/Contact.jsx";
 import Brand from "./pages/Brand.jsx";
 import SpareParts from "./pages/SpareParts.jsx";
-
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import Terms from "./pages/Terms.jsx";
+import CookieConsent from "./components/CookieConsent.jsx";
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
 import GsapAnimations from "./ui/GsapAnimations.jsx";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
-
   return null;
 }
 
 function SiteMotion() {
-  // Show the homepage immediately; the reference experience does not block
-  // the first view behind a full-screen loading splash.
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
 
@@ -51,92 +42,76 @@ function SiteMotion() {
     };
   }, []);
 
-  return <><motion.div className="site-scroll-progress" style={{ scaleX: progress }} /><AnimatePresence>{loading && <motion.div className="site-loader" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: .45 }}><motion.img src="/logo.jpeg" alt="NB Engineering" initial={{ scale: .8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: .45 }} /><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .55, ease: "easeInOut" }} /></motion.div>}</AnimatePresence></>;
+  return (
+    <>
+      <motion.div className="site-scroll-progress" aria-hidden="true" style={{ scaleX: progress }} />
+      <AnimatePresence>
+        {loading && (
+          <motion.div className="site-loader" role="status" aria-label="Loading NB Engineering website" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45 }}>
+            <motion.img src="/logo.jpeg" alt="NB Engineering" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.45 }} />
+            <motion.span aria-hidden="true" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.55, ease: "easeInOut" }} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function SkipLink() {
+  return <a className="skip-link" href="#main-content">Skip to main content</a>;
 }
 
 function RouteSEO() {
   const location = useLocation();
-
   const seoData = {
     "/": {
-      title:
-        "NB Engineering & Services | Generator Solutions in Pakistan",
-      description:
-        "NB Engineering & Services provides generators, power generation solutions, installation, maintenance, and after-sales support for commercial, industrial, and residential requirements in Pakistan.",
+      title: "NB Engineering & Services | Generator Solutions in Pakistan",
+      description: "NB Engineering & Services provides generators, power generation solutions, installation, maintenance, and after-sales support for commercial, industrial, and residential requirements in Pakistan.",
     },
-
     "/generators": {
-      title:
-        "Generators | NB Engineering & Services | Pakistan",
-      description:
-        "Explore generator solutions from NB Engineering & Services, including diesel generators and power generation equipment for commercial, industrial, and residential requirements.",
+      title: "Generators | NB Engineering & Services | Pakistan",
+      description: "Explore generator solutions from NB Engineering & Services, including diesel generators and power generation equipment for commercial, industrial, and residential requirements.",
     },
-
     "/services": {
-      title:
-        "Generator Services | NB Engineering & Services | Pakistan",
-      description:
-        "Explore generator sales, installation, repair, maintenance, rental, ATS panels, canopy work, and other power generation services from NB Engineering & Services.",
+      title: "Generator Services | NB Engineering & Services | Pakistan",
+      description: "Explore generator sales, installation, repair, maintenance, rental, ATS panels, canopy work, and other power generation services from NB Engineering & Services.",
     },
-
     "/contact": {
-      title:
-        "Contact NB Engineering & Services | Pakistan",
-      description:
-        "Contact NB Engineering & Services for generator sales, power generation solutions, installation, maintenance, repair, rental, and technical support in Pakistan.",
+      title: "Contact NB Engineering & Services | Pakistan",
+      description: "Contact NB Engineering & Services for generator sales, power generation solutions, installation, maintenance, repair, rental, and technical support in Pakistan.",
     },
-
     "/brands": {
-      title:
-        "Generator Brands | NB Engineering & Services | Pakistan",
-      description:
-        "Explore generator brands and power generation equipment available through NB Engineering & Services.",
+      title: "Generator Brands | NB Engineering & Services | Pakistan",
+      description: "Explore generator brands and power generation equipment available through NB Engineering & Services.",
     },
-
-        "/spare-parts": {
-          title:
-            "Generator Spare Parts | NB Engineering & Services | Pakistan",
-      description:
-        "Generator spare parts and related power generation components from NB Engineering & Services.",
+    "/spare-parts": {
+      title: "Generator Spare Parts | NB Engineering & Services | Pakistan",
+      description: "Generator spare parts and related power generation components from NB Engineering & Services.",
+    },
+    "/privacy-policy": {
+      title: "Privacy Policy | NB Engineering & Services",
+      description: "Privacy policy for the NB Engineering & Services website and inquiry forms.",
+    },
+    "/terms-and-conditions": {
+      title: "Terms & Conditions | NB Engineering & Services",
+      description: "Terms and conditions for using the NB Engineering & Services website.",
     },
   };
 
   let seo = seoData[location.pathname];
-
-  if (
-    !seo &&
-    location.pathname.startsWith("/generators/")
-  ) {
+  if (!seo && location.pathname.startsWith("/generators/")) {
     seo = {
-      title:
-        "Generator Details | NB Engineering & Services | Pakistan",
-      description:
-        "View generator specifications, features, applications, and inquiry information.",
+      title: "Generator Details | NB Engineering & Services | Pakistan",
+      description: "View generator specifications, features, applications, and inquiry information.",
     };
   }
-
-  if (
-    !seo &&
-    location.pathname.startsWith("/services/")
-  ) {
+  if (!seo && location.pathname.startsWith("/services/")) {
     seo = {
-      title:
-        "Generator Service | NB Engineering & Services | Pakistan",
-      description:
-        "Explore generator service solutions from NB Engineering & Services.",
+      title: "Generator Service | NB Engineering & Services | Pakistan",
+      description: "Explore generator service solutions from NB Engineering & Services.",
     };
   }
-
-  if (!seo) {
-    seo = seoData["/"];
-  }
-
-  return (
-    <SEO
-      title={seo.title}
-      description={seo.description}
-    />
-  );
+  return <SEO title={(seo || seoData["/"]).title} description={(seo || seoData["/"]).description} />;
 }
 
 function App() {
@@ -145,47 +120,24 @@ function App() {
       <BusinessSchema />
       <RouteSEO />
       <ScrollToTop />
+      <SkipLink />
       <SiteMotion />
+      <CookieConsent />
       <GsapAnimations />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        <Route
-          path="/generators"
-          element={<Generators />}
-        />
-
-        <Route
-          path="/generators/:slug"
-          element={<GeneratorDetail />}
-        />
-
-        <Route
-          path="/services"
-          element={<Services />}
-        />
-
-        <Route
-          path="/services/:slug"
-          element={<ServiceDetail />}
-        />
-
-        <Route
-          path="/contact"
-          element={<Contact />}
-        />
-
-        <Route
-          path="/brands"
-          element={<Brand />}
-        />
-
-        <Route
-          path="/spare-parts"
-          element={<SpareParts />}
-        />
-      </Routes>
+      <div id="main-content" tabIndex="-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/generators" element={<Generators />} />
+          <Route path="/generators/:slug" element={<GeneratorDetail />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/services/:slug" element={<ServiceDetail />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/brands" element={<Brand />} />
+          <Route path="/spare-parts" element={<SpareParts />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<Terms />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
