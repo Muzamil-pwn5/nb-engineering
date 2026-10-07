@@ -32,7 +32,6 @@ export default function Footer() {
         <div className="footer-intro">
           <div className="footer-brand">NB ENGINEERING<span> & SERVICES</span></div>
           <p className="footer-brand-copy">Reliable power systems, generator supply, service support and technical solutions for operations that cannot stop.</p>
-          <Link className="button button-primary" to="/contact">Start a power conversation <span>↗</span></Link>
           <div className="footer-direct">
             <a href="tel:+923205636673" aria-label="Call NB Engineering">Call NB <span>+92 320 563 6673</span></a>
             <a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry" aria-label="Email NB Engineering">Email NB <span>nbengineerings@gmail.com</span></a>
@@ -45,9 +44,9 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div><h3>Solutions</h3><Link to="/generators">Generators</Link><Link to="/services">Services</Link><Link to="/services/ats-panels">ATS / AMF automation</Link><Link to="/brands">Brands</Link></div>
-        <div><h3>Support</h3><Link to="/services/generator-maintenance">Maintenance</Link><Link to="/services/generator-repair">Repair</Link><Link to="/spare-parts">Spare parts</Link><Link to="/contact">Request a quote</Link></div>
-        <div><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span></div>
+        <div className="footer-column"><h3>Solutions</h3><Link to="/generators">Generators</Link><Link to="/services">Services</Link><Link to="/services/ats-panels">ATS / AMF automation</Link><Link to="/brands">Brands</Link></div>
+        <div className="footer-column"><h3>Support</h3><Link to="/services/generator-maintenance">Maintenance</Link><Link to="/services/generator-repair">Repair</Link><Link to="/spare-parts">Spare parts</Link><Link to="/contact">Request a quote</Link></div>
+        <div className="footer-column"><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span></div>
       </div>
       <div className="site-shell footer-bottom"><span>© {new Date().getFullYear()} NB Engineering & Services</span><span>Power systems for the real world.</span></div>
     </footer>
