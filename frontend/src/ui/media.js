@@ -1,5 +1,5 @@
 // Keep the approved hero image; use real local photographs everywhere else.
-export const HERO_IMAGE = "/images/site/generator-100kva-canopy.png";
+export const HERO_IMAGE = "/images/site/perkins-p22-uncanopied.jpg";
 export const GENERATOR_IMAGE = "/images/generators/cat-c18-generator.jpg";
 export const CANOPY_GENERATOR_IMAGE = "/images/home/services/canopy-work.jpeg";
 export const PANEL_IMAGE = "/images/site/ats-panel.jpg";
