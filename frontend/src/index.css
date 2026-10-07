@@ -1,280 +1,47 @@
-﻿@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
-@import "./ui/site.css";
-@import "./pages/Home.css";
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body { margin:0; min-width:320px; font-family:"DM Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#f3f5ef; color:#0a0d0f; }
-h1,h2,h3,h4,.display,.modern-logo,.footer-brand { font-family:"Space Grotesk", "DM Sans", sans-serif; }
-button,input,textarea,select { font:inherit; }
-img { max-width:100%; }
-:focus-visible { outline:3px solid #c9ff47; outline-offset:3px; }
-::selection { background:#c9ff47; color:#0a0d0f; }
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+﻿
 
-
-/* NB Engineering brand refresh: True Pink + Chill White */
-:root {
-  --nb-pink: #FD1843;
-  --nb-white: #FFF9FA;
-  --nb-ink: #171014;
-  --nb-muted: #6f6268;
-  --nb-line: rgba(253, 24, 67, .16);
-  --ink: var(--nb-ink);
-  --ink-2: #c81438;
-  --paper: var(--nb-white);
-  --paper-2: #fff0f3;
-  --acid: var(--nb-pink);
-  --coral: var(--nb-pink);
-  --white: var(--nb-white);
-  --line: var(--nb-line);
+/* Footer social controls and progress indicators. */
+.site-scroll-progress {
+  background: var(--nb-true-pink, #FD1843) !important;
+  box-shadow: 0 0 18px rgba(253, 24, 67, .42) !important;
 }
-
-html, body { background: var(--nb-white); color: var(--nb-ink); }
-body { accent-color: var(--nb-pink); }
-:focus-visible { outline-color: var(--nb-pink) !important; }
-::selection { background: var(--nb-pink); color: var(--nb-white); }
-.site-page, main { background: var(--nb-white); color: var(--nb-ink); }
-
-.modern-nav { color: var(--nb-ink) !important; background: rgba(255, 249, 250, .94) !important; border-bottom-color: rgba(253, 24, 67, .14) !important; }
-.modern-logo { color: var(--nb-ink) !important; }
-.modern-logo small, .modern-nav-links a, .mobile-nav a { color: #77666d !important; }
-.modern-nav-links a:hover, .modern-nav-links a.active { color: var(--nb-pink) !important; }
-.modern-nav-links a.active::after { background: var(--nb-pink) !important; }
-.logo-mark { border-color: var(--nb-pink) !important; color: var(--nb-pink) !important; }
-.nav-quote, .button-primary { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.nav-quote:hover, .button-primary:hover { background: var(--nb-ink) !important; color: var(--nb-white) !important; }
-.nav-menu { color: var(--nb-ink) !important; }
-.mobile-nav { background: var(--nb-white) !important; border-top-color: var(--nb-line) !important; }
-
-.eyebrow { color: var(--nb-pink) !important; }
-.eyebrow::before { background: var(--nb-pink) !important; }
-.display em, .section-heading h2 span { color: var(--nb-pink) !important; }
-.lead { color: var(--nb-muted) !important; }
-.section { background: var(--nb-white); }
-.spotlight-card, .proof-card, .category-card, .contact-card, .journey-feature-copy { background: var(--nb-white) !important; border-color: var(--nb-line) !important; }
-.spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(253, 24, 67, .16), transparent 65%) !important; }
-.service-card-modern .card-no, .journey-step > span { color: var(--nb-pink) !important; }
-.service-card-modern p, .proof-card p, .journey-feature-copy p, .journey-step p { color: var(--nb-muted) !important; }
-.card-link, .card-link span { color: var(--nb-pink) !important; }
-.pill { border-color: var(--nb-line) !important; color: var(--nb-pink) !important; background: transparent !important; }
-.pill:hover, .pill[aria-pressed="true"] { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-
-.home-hero, .page-hero, .dark-section, .contact-intro, .service-detail-hero, .generator-detail-hero { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.home-hero-overlay, .page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { background: linear-gradient(90deg, rgba(253, 24, 67, .97), rgba(253, 24, 67, .78) 48%, rgba(253, 24, 67, .25)) !important; }
-.home-hero-media img, .page-hero-media img { opacity: .72; }
-.dark-section .lead, .page-hero .lead, .home-hero .lead, .contact-intro .lead { color: rgba(255, 249, 250, .82) !important; }
-.dark-section .eyebrow { color: var(--nb-white) !important; }
-.dark-section .eyebrow::before { background: var(--nb-white) !important; }
-.dark-section .stats-row, .page-hero .stats-row { background: rgba(255, 249, 250, .28); }
-.stat { background: rgba(23, 16, 20, .16) !important; }
-.stat strong { color: var(--nb-white) !important; }
-.stat span { color: rgba(255, 249, 250, .78) !important; }
-.button-outline { border-color: rgba(255, 249, 250, .72) !important; color: var(--nb-white) !important; }
-.button-outline:hover { background: var(--nb-white) !important; color: var(--nb-pink) !important; }
-.button-ink { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-
-.home-proof, .home-categories, .journey-section { background: var(--nb-white) !important; }
-.journey-section { color: var(--nb-ink) !important; }
-.journey-intro h2 em { color: var(--nb-pink) !important; }
-.journey-kicker, .journey-live-stat span { color: var(--nb-muted) !important; }
-.journey-step { background: #fff0f3 !important; }
-.journey-feature-image, .journey-panel-image, .home-solution-image, .image-panel { background: #f6d5dc !important; }
-
-.contact-form, .service-detail-content, .generator-detail-content { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.contact-form label, .contact-form input, .contact-form textarea, .contact-form select { color: var(--nb-white) !important; }
-.contact-form input, .contact-form textarea, .contact-form select { background: rgba(23, 16, 20, .14) !important; border-color: rgba(255, 249, 250, .34) !important; }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255, 249, 250, .68) !important; }
-.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--nb-white) !important; }
-
-/* Footer intentionally remains black with white text only. */
-.footer-modern { background: #000 !important; color: #fff !important; }
-.footer-modern h3, .footer-brand span, .footer-hours { color: #fff !important; }
-.footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: #fff !important; opacity: .78; }
-.footer-modern a:hover, .footer-direct a { color: #fff !important; opacity: 1; }
-.footer-modern .button-primary { background: #fff !important; color: #000 !important; }
-.footer-modern .button-primary:hover { background: var(--nb-pink) !important; color: #fff !important; }
-
-/* Remove accidental remote image dependencies from cards if backend data contains one. */
-img { display: block; }
-
-/* Targeted hero readability improvement: preserve the existing size and pink UI,
-   but place a black reading gradient over image-based hero sections. */
-.home-hero-overlay,
-.page-hero::after,
-.service-detail-hero-gradient,
-.generator-detail-hero::after {
-  background: linear-gradient(90deg, rgba(0, 0, 0, .94) 0%, rgba(0, 0, 0, .72) 48%, rgba(0, 0, 0, .18) 100%) !important;
+.site-loader span {
+  background: var(--nb-true-pink, #FD1843) !important;
 }
-
-/* Reference-inspired light NB Engineering interface. Keep the existing content
-   and routes, but make the first view simple, bright and easy to scan. */
-:root {
-  --nb-red: #b42318;
-  --nb-red-light: #d94b4b;
-  --nb-red-pale: #fff3f2;
-  --nb-ink-light: #1f2933;
-  --nb-white-clean: #ffffff;
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 26px;
 }
-html, body, .site-page, main { background: var(--nb-white-clean) !important; color: var(--nb-ink-light) !important; }
-.modern-nav { min-height: 80px !important; background: rgba(255,255,255,.97) !important; color: var(--nb-ink-light) !important; border-bottom: 1px solid #f0d9d7 !important; box-shadow: 0 2px 12px rgba(31,41,51,.05); }
-.modern-nav-inner { min-height: 80px !important; }
-.modern-logo, .modern-logo strong { color: var(--nb-ink-light) !important; }
-.modern-logo small, .modern-nav-links a, .mobile-nav a { color: #58636e !important; }
-.modern-nav-links a:hover, .modern-nav-links a.active { color: var(--nb-red) !important; }
-.modern-nav-links a.active::after { background: var(--nb-red) !important; }
-.logo-mark { border-color: var(--nb-red) !important; color: var(--nb-red) !important; }
-.nav-quote, .button-primary { background: var(--nb-red) !important; color: #fff !important; border-radius: 5px; }
-.nav-quote:hover, .button-primary:hover { background: #8f1d15 !important; color: #fff !important; }
-.nav-menu { color: var(--nb-red) !important; }
-.mobile-nav { background: #fff !important; border-top-color: #f0d9d7 !important; }
-.button, .button-primary, .button-outline, .button-ink { min-height: 48px; padding: 0 20px; font-size: 13px; letter-spacing: .01em; text-transform: none; }
-
-.home-hero { min-height: 620px !important; background: #fff !important; color: var(--nb-ink-light) !important; }
-.home-hero-media img { opacity: 1 !important; }
-.home-hero-overlay { background: linear-gradient(90deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.96) 42%, rgba(255,255,255,.18) 78%, rgba(255,255,255,0) 100%) !important; }
-.home-hero-content { max-width: 1240px; padding-top: 40px; }
-.home-hero .eyebrow, .home-hero .lead { color: #58636e !important; }
-.home-hero .eyebrow::before { background: var(--nb-red) !important; }
-.home-hero .display { max-width: 670px; color: var(--nb-ink-light) !important; font-size: clamp(46px, 6vw, 82px); line-height: .98; letter-spacing: -.055em; }
-.home-hero .display em, .display em, .section-heading h2 span { color: var(--nb-red) !important; }
-.home-hero .lead { max-width: 580px; font-size: 17px; line-height: 1.65; }
-.home-hero .button-outline { border-color: var(--nb-red) !important; color: var(--nb-red) !important; }
-.home-hero .button-outline:hover { background: var(--nb-red) !important; color: #fff !important; }
-.home-hero-corner { color: var(--nb-red) !important; }
-.marquee { background: var(--nb-red) !important; border: 0 !important; }
-.marquee span { color: #fff !important; }
-.marquee i { color: #ffd6d2 !important; }
-
-.section, .home-proof, .home-categories, .journey-section { background: #fff !important; }
-.section-heading h2, .journey-section h2, .home-categories h2 { color: var(--nb-ink-light) !important; }
-.eyebrow { color: var(--nb-red) !important; }
-.eyebrow::before { background: var(--nb-red) !important; }
-.lead { color: #58636e !important; }
-.spotlight-card, .proof-card, .category-card, .contact-card, .journey-feature-copy { background: #fff !important; border: 1px solid #efd6d4 !important; box-shadow: 0 10px 28px rgba(180,35,24,.08) !important; }
-.spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(217,75,75,.12), transparent 65%) !important; }
-.service-card-modern .card-no, .journey-step > span, .card-link, .card-link span { color: var(--nb-red) !important; }
-.service-card-modern p, .proof-card p, .journey-feature-copy p, .journey-step p { color: #58636e !important; }
-.journey-step { background: var(--nb-red-pale) !important; }
-
-.dark-section, .home-solution, .home-cta { background: var(--nb-red-pale) !important; color: var(--nb-ink-light) !important; }
-.dark-section .display, .dark-section h2, .dark-section .lead { color: var(--nb-ink-light) !important; }
-.dark-section .eyebrow { color: var(--nb-red) !important; }
-.dark-section .eyebrow::before { background: var(--nb-red) !important; }
-.dark-section .stats-row { background: #efd6d4 !important; }
-.dark-section .stat { background: #fff !important; }
-.dark-section .stat strong { color: var(--nb-red) !important; }
-.dark-section .stat span { color: #58636e !important; }
-.home-cta .button-primary { background: var(--nb-red) !important; }
-
-.page-hero, .service-detail-hero, .generator-detail-hero { background: #fff !important; color: var(--nb-ink-light) !important; }
-.page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { background: linear-gradient(90deg, rgba(255,255,255,.98), rgba(255,255,255,.88) 48%, rgba(255,255,255,.12) 100%) !important; }
-.page-hero .display, .page-hero h1, .service-detail-hero h1, .generator-detail-hero h1 { color: var(--nb-ink-light) !important; }
-.page-hero .lead, .service-detail-hero .lead, .generator-detail-hero .lead { color: #58636e !important; }
-
-.contact-form, .service-detail-content, .generator-detail-content { background: var(--nb-red-pale) !important; color: var(--nb-ink-light) !important; }
-.contact-form label, .contact-form input, .contact-form textarea, .contact-form select { color: var(--nb-ink-light) !important; }
-.contact-form input, .contact-form textarea, .contact-form select { background: #fff !important; border-color: #e8c9c6 !important; }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color: #7a858e !important; }
-.footer-modern { background: #111 !important; color: #fff !important; }
-.footer-modern h3, .footer-brand span, .footer-hours { color: #fff !important; }
-.footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: #fff !important; opacity: .8; }
-.footer-modern .button-primary { background: #fff !important; color: #111 !important; }
-
-@media (max-width: 900px) { .home-hero { min-height: 620px !important; } .home-hero-overlay { background: linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,255,255,.96) 72%, rgba(255,255,255,1)) !important; } .home-hero-media img { object-position: 68% center; opacity: .28 !important; } }
-@media (max-width: 580px) { .home-hero { min-height: 680px !important; } .home-hero-content { padding-top: 20px; } .home-hero .display { font-size: clamp(42px, 13vw, 62px); } .home-hero .lead { font-size: 16px; } .home-hero .button-row { max-width: 220px; } }
-
-/* Mobile-first readability: do not hide the primary message while decorative
-   reveal animations are settling. */
-@media (max-width: 900px) {
-  .home-hero-content > *, .page-hero-content > * {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-}
-
-/* Final palette pass: Chill White surfaces, light-red controls, True Pink type. */
-:root {
-  --nb-true-pink: #FD1843;
-  --nb-button-red: #d94b4b;
-  --nb-chill-white: #FFF9FA;
-  --nb-black-text: #171014;
-}
-html, body, .site-page, main,
-.section, .home-proof, .home-categories, .journey-section,
-.spotlight-card, .proof-card, .category-card, .contact-card,
-.journey-feature-copy, .dark-section, .home-solution, .home-cta,
-.contact-form, .service-detail-content, .generator-detail-content,
-.page-hero, .service-detail-hero, .generator-detail-hero {
-  background: var(--nb-chill-white) !important;
-  color: var(--nb-black-text) !important;
-}
-.eyebrow, .display em, .section-heading h2 span,
-.service-card-modern .card-no, .journey-step > span,
-.card-link, .card-link span, .home-hero-corner,
-.footer-hours { color: var(--nb-true-pink) !important; }
-.eyebrow::before { background: var(--nb-true-pink) !important; }
-.lead, .service-card-modern p, .proof-card p, .journey-feature-copy p,
-.journey-step p, .page-hero .lead, .service-detail-hero .lead,
-.generator-detail-hero .lead { color: #51464b !important; }
-.spotlight-card, .proof-card, .category-card, .contact-card,
-.journey-feature-copy { border-color: rgba(253,24,67,.14) !important; box-shadow: 0 8px 24px rgba(23,16,20,.05) !important; }
-.journey-step { background: var(--nb-chill-white) !important; }
-.dark-section .stats-row { background: rgba(253,24,67,.12) !important; }
-.dark-section .stat { background: var(--nb-chill-white) !important; }
-.dark-section .stat strong { color: var(--nb-true-pink) !important; }
-.dark-section .stat span { color: #51464b !important; }
-
-.button-primary, .nav-quote, .home-cta .button-primary,
-.footer-modern .button-primary {
-  background: var(--nb-button-red) !important;
-  border-color: var(--nb-button-red) !important;
+.footer-social {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  margin: 0 !important;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 50%;
   color: #fff !important;
+  background: transparent;
+  opacity: 1 !important;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
-.button-primary:hover, .nav-quote:hover, .home-cta .button-primary:hover {
-  background: var(--nb-true-pink) !important;
-  border-color: var(--nb-true-pink) !important;
+.footer-social svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.footer-social:hover,
+.footer-social:focus-visible {
+  background: var(--nb-true-pink, #FD1843);
+  border-color: var(--nb-true-pink, #FD1843);
   color: #fff !important;
+  transform: translateY(-2px);
 }
-.button-outline, .home-hero .button-outline {
-  border-color: var(--nb-button-red) !important;
-  color: var(--nb-button-red) !important;
-}
-.button-outline:hover, .home-hero .button-outline:hover {
-  background: var(--nb-button-red) !important;
-  border-color: var(--nb-button-red) !important;
-  color: #fff !important;
-}
-
-/* Image heroes: never wash photographs with white. Use a dark reading shadow
-   behind the copy while retaining the actual image and its natural color. */
-.home-hero, .page-hero, .service-detail-hero, .generator-detail-hero {
-  color: #fff !important;
-}
-.home-hero-overlay, .page-hero::after, .service-detail-hero-gradient,
-.generator-detail-hero::after {
-  background: linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.52) 42%, rgba(0,0,0,.10) 78%, rgba(0,0,0,0) 100%) !important;
-}
-.home-hero .display, .page-hero .display, .page-hero h1,
-.service-detail-hero h1, .generator-detail-hero h1,
-.home-hero .lead, .page-hero .lead, .service-detail-hero .lead,
-.generator-detail-hero .lead { color: #fff !important; text-shadow: 0 3px 18px rgba(0,0,0,.8); }
-.home-hero .display em, .page-hero .display em { color: var(--nb-true-pink) !important; }
-.home-hero .eyebrow, .page-hero .eyebrow,
-.service-detail-hero .eyebrow, .generator-detail-hero .eyebrow { color: #fff !important; text-shadow: 0 2px 10px rgba(0,0,0,.8); }
-.home-hero .eyebrow::before, .page-hero .eyebrow::before { background: var(--nb-true-pink) !important; }
-.home-hero-media img, .page-hero-media img,
-.service-detail-hero-image, .generator-detail-hero img { opacity: 1 !important; }
-
-.footer-modern { background: #111 !important; color: #fff !important; }
-.footer-modern h3, .footer-brand span { color: #fff !important; }
-.footer-modern a, .footer-brand-copy, .footer-location,
-.footer-bottom, .footer-direct a span { color: #fff !important; opacity: .82; }
-.footer-modern .button-primary { background: var(--nb-button-red) !important; color: #fff !important; }
-
-@media (max-width: 900px) {
-  .home-hero-overlay, .page-hero::after, .service-detail-hero-gradient,
-  .generator-detail-hero::after {
-    background: linear-gradient(180deg, rgba(0,0,0,.30) 0%, rgba(0,0,0,.68) 65%, rgba(0,0,0,.82) 100%) !important;
-  }
+.footer-modern .footer-location { margin-top: 13px; }
+.footer-modern .footer-hours { display: none !important; }
+@media (max-width: 580px) {
+  .footer-socials { margin-top: 22px; }
 }
