@@ -1,9 +1,7 @@
 ﻿const configuredApiBase = import.meta.env.VITE_API_BASE_URL?.trim();
 
-// Production builds must never silently call a user's localhost. If the API is
-// deployed behind the same origin, /api/v1 is the correct default. A hosted
-// backend can be supplied with VITE_API_BASE_URL at build time.
-export const API_BASE_URL = (configuredApiBase || "/api/v1").replace(/\/$/, "");
+// Production builds use the public Railway API unless a deployment overrides it.
+export const API_BASE_URL = (configuredApiBase || "https://api.nbengineerings.com/api/v1").replace(/\/$/, "");
 
 async function apiRequest(endpoint, options = {}) {
   const controller = new AbortController();
