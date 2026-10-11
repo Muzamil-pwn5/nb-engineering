@@ -2,6 +2,7 @@
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
+from app.core.security import require_admin
 from app.schemas.inquiry import (
     InquiryCreate,
     InquiryResponse,
@@ -47,5 +48,6 @@ def submit_public_inquiry(
 )
 def list_inquiries(
     db: Session = Depends(get_db),
+    _admin: str = Depends(require_admin),
 ):
     return get_all_inquiries(db)
