@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     jwt_expire_minutes: int = 480
 
     inquiry_notification_email: str = "nbengineerings@gmail.com"
+    cors_origins: str = "https://nbengineerings.com,https://www.nbengineerings.com"
 
     model_config = SettingsConfigDict(
         env_file=".env",
