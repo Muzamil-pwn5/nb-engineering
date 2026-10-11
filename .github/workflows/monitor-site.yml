@@ -21,10 +21,11 @@ jobs:
           cert_file="$(mktemp)"
           trap 'rm -f "$cert_file"' EXIT
 
+          tls_output="$(timeout 30 openssl s_client -connect "${host}:443" -servername "$host" -verify_return_error -brief </dev/null 2>&1)"
+          grep -q 'Verification: OK' <<< "$tls_output"
           timeout 30 openssl s_client -connect "${host}:443" -servername "$host" -showcerts </dev/null 2>/tmp/openssl.log \
             | awk '/BEGIN CERTIFICATE/{capture=1} capture{print} /END CERTIFICATE/{exit}' > "$cert_file"
           test -s "$cert_file"
-          openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt "$cert_file"
           openssl x509 -in "$cert_file" -checkend $((30 * 24 * 60 * 60)) -noout
           openssl x509 -in "$cert_file" -noout -ext subjectAltName | grep -q 'DNS:nbengineerings.com'
 
