@@ -1,0 +1,48 @@
+name: Monitor site security and deployment
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check HTTPS, certificate chain, and security headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="nbengineerings.com"
+          cert_file="$(mktemp)"
+          trap 'rm -f "$cert_file"' EXIT
+
+          timeout 30 openssl s_client -connect "${host}:443" -servername "$host" -showcerts </dev/null 2>/tmp/openssl.log \
+            | awk '/BEGIN CERTIFICATE/{capture=1} capture{print} /END CERTIFICATE/{exit}' > "$cert_file"
+          test -s "$cert_file"
+          openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt "$cert_file"
+          openssl x509 -in "$cert_file" -checkend $((30 * 24 * 60 * 60)) -noout
+          openssl x509 -in "$cert_file" -noout -ext subjectAltName | grep -q 'DNS:nbengineerings.com'
+
+          headers="$(curl --fail --silent --show-error --location --max-time 30 -D - -o /dev/null "https://${host}/")"
+          grep -qi '^strict-transport-security:' <<< "$headers"
+          grep -qi '^location:' <<< "$(curl --silent --show-error --max-time 30 -D - -o /dev/null http://${host}/)"
+          curl --fail --silent --show-error --max-time 30 "https://${host}/" >/dev/null
+
+      - name: Check latest Pages deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run="$(gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-frontend.yml/runs?per_page=1" --jq '.workflow_runs[0]')"
+          status="$(jq -r '.status' <<< "$run")"
+          conclusion="$(jq -r '.conclusion' <<< "$run")"
+          if [[ "$status" != "completed" || "$conclusion" != "success" ]]; then
+            echo "Latest frontend deployment is not healthy: status=$status conclusion=$conclusion"
+            exit 1
+          fi

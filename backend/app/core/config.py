@@ -15,6 +15,12 @@ class Settings(BaseSettings):
 
     inquiry_notification_email: str = "nbengineerings@gmail.com"
     cors_origins: str = "https://nbengineerings.com,https://www.nbengineerings.com"
+    smtp_host: str = ""
+    smtp_port: int = 587
+    smtp_username: str = ""
+    smtp_password: str = ""
+    smtp_from_email: str = ""
+    smtp_use_tls: bool = True
 
     model_config = SettingsConfigDict(
         env_file=".env",

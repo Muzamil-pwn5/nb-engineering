@@ -1,4 +1,4 @@
-﻿from fastapi import APIRouter, Depends, status
+﻿from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -13,6 +13,10 @@ from app.services.inquiry_service import (
     create_public_inquiry,
     get_all_inquiries,
 )
+from app.services.email_service import (
+    InquiryNotificationError,
+    send_inquiry_notification,
+)
 
 router = APIRouter(prefix="/inquiries", tags=["Inquiries"])
 
@@ -26,7 +30,15 @@ def submit_public_inquiry(
     inquiry_data: PublicInquiryCreate,
     db: Session = Depends(get_db),
 ):
-    return create_public_inquiry(db, inquiry_data)
+    inquiry = create_public_inquiry(db, inquiry_data)
+    try:
+        send_inquiry_notification(inquiry)
+    except InquiryNotificationError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Your inquiry was saved, but email delivery is temporarily unavailable. Please call or email us directly.",
+        ) from exc
+    return inquiry
 
 
 @router.get(
