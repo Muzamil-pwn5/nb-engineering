@@ -19,7 +19,14 @@ async function apiRequest(endpoint, options = {}) {
     });
 
     if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}.`);
+      let detail = "";
+      try {
+        const errorBody = await response.json();
+        detail = typeof errorBody.detail === "string" ? errorBody.detail : "";
+      } catch {
+        // Keep the status-based fallback when the API has no JSON error body.
+      }
+      throw new Error(detail || `API request failed with status ${response.status}.`);
     }
     if (response.status === 204) return null;
     return response.json();
