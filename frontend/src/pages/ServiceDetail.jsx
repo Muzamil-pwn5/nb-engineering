@@ -7,14 +7,14 @@ import { getService } from "../api/services.js";
 import "./ServiceDetail.css";
 
 const serviceImages = {
-  "generator-sales": "/images/generators/fg-wilson-p110-3.jpg",
-  "generator-purchase": "/images/generators/cummins-c110d5.jpg",
-  "generator-rental": "/images/generators/jcb-g150rs-v.jpg",
-  "generator-repair": "/images/home/services/generator-repair.jpeg",
-  "generator-maintenance": "/images/home/services/generator-maintenance.jpeg",
-  "ats-panels": "/images/site/ats-panel.jpg",
-  "canopy-work": "/images/home/services/canopy-work.jpeg",
-  "spare-parts": "/images/site/parts-stock.jpg",
+  "generator-sales": "/images/refresh/generator-100kva-commercial.webp",
+  "generator-purchase": "/images/refresh/generator-250kva-project.webp",
+  "generator-rental": "/images/refresh/generator-installation-site.webp",
+  "generator-repair": "/images/refresh/generator-maintenance-technician.webp",
+  "generator-maintenance": "/images/refresh/generator-maintenance-technician.webp",
+  "ats-panels": "/images/refresh/ats-amf-panel-installation.webp",
+  "canopy-work": "/images/refresh/hero-generator-150kva.webp",
+  "spare-parts": "/images/refresh/generator-parts-workbench.webp",
 };
 
 const serviceDetails = {
@@ -322,15 +322,11 @@ function ServiceDetail() {
         }
       } catch (err) {
         console.error("Failed to load service:", err);
-        const localService = serviceDetails[slug];
-        if (mounted && localService) {
-          setService({
-            slug,
-            name: localService.title,
-            description: localService.intro,
-          });
-        } else if (mounted) {
-          setError("This service is not available in the current catalogue.");
+
+        if (mounted) {
+          setError(
+            err.message || "Unable to load this service from the server."
+          );
         }
       } finally {
         if (mounted) {
@@ -397,7 +393,9 @@ function ServiceDetail() {
 
   const details = serviceDetails[slug] || fallbackDetails;
 
-  const image = serviceImages[slug] || "/images/site/generator-100kva-canopy.png";
+  const image =
+    serviceImages[slug] ||
+    service.image_url;
 
   const serviceName =
     service.name || details.title || "Generator Service";
@@ -427,9 +425,6 @@ function ServiceDetail() {
               className="service-detail-hero-image"
               src={image}
               alt={service.name}
-              onError={(event) => {
-                event.currentTarget.src = "/images/site/generator-100kva-canopy.png";
-              }}
             />
           )}
 

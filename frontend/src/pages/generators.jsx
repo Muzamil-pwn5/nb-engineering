@@ -9,25 +9,33 @@ import { motion } from "motion/react";
 import "../ui/site.css";
 
 const localImages = {
-  "fg-wilson-p110-3": "/images/generators/fg-wilson-p110-3.jpg",
-  "fg-wilson-p180p2-180kva": "/images/generators/fg-wilson-p180p2-180kva.jpeg",
-  "cummins-c110d5": "/images/generators/cummins-c110d5.jpg",
-  "cummins-180kva": "/images/generators/cummins-180kva.jpeg",
-  "cat-c18-generator": "/images/generators/cat-c18-generator.jpg",
-  "perkins-1104a-generator": "/images/generators/perkins-1104a-generator.jpg",
-  "iveco-aifo-100kva": "/images/generators/iveco-aifo-100kva.jpeg",
-  "jcb-g200rs-v": "/images/generators/jcb-g200rs-v.jpg",
+  "fg-wilson-p110-3": "/images/refresh/generator-100kva-commercial.webp",
+  "fg-wilson-p180p2-180kva": "/images/refresh/generator-180kva-industrial.webp",
+  "cummins-c110d5": "/images/refresh/generator-100kva-commercial.webp",
+  "cummins-180kva": "/images/refresh/generator-180kva-industrial.webp",
+  "cat-c18-generator": "/images/refresh/generator-500kva-powerhouse.webp",
+  "perkins-1104a-generator": "/images/refresh/generator-control-room.webp",
+  "iveco-aifo-100kva": "/images/refresh/generator-100kva-commercial.webp",
+  "jcb-g200rs-v": "/images/refresh/generator-250kva-project.webp",
 };
 const fallback = [
-  { id: "local-1", name: "FG Wilson P110-3 Diesel Generator", slug: "fg-wilson-p110-3", brand: { name: "FG Wilson" }, kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/fg-wilson-p110-3.jpg", description: "110 kVA diesel generator for dependable commercial and standby power." },
-  { id: "local-2", name: "Cummins C110D5 Generator", slug: "cummins-c110d5", brand: { name: "Cummins" }, kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/cummins-c110d5.jpg", description: "Compact 110 kVA Cummins system for commercial and critical backup applications." },
-  { id: "local-3", name: "Caterpillar C18 Generator", slug: "cat-c18-generator", brand: { name: "Caterpillar" }, kva: 500, kw: 400, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/cat-c18-generator.jpg", description: "High-capacity Caterpillar power for demanding industrial operations." },
-  { id: "local-4", name: "FG Wilson P180P2 Generator", slug: "fg-wilson-p180p2-180kva", brand: { name: "FG Wilson" }, kva: 180, kw: 144, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/fg-wilson-p180p2-180kva.jpeg", description: "180 kVA generator for commercial, industrial and prime-power requirements." },
-  { id: "local-5", name: "Perkins 1104A Generator", slug: "perkins-1104a-generator", brand: { name: "Perkins" }, kva: 60, kw: 48, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/perkins-1104a-generator.jpg", description: "Reliable 60 kVA Perkins-powered generator for standby requirements." },
-  { id: "local-6", name: "JCB G200RS-V Generator", slug: "jcb-g200rs-v", brand: { name: "JCB" }, kva: 200, kw: 160, fuel_type: "Diesel", is_available: true, image_url: "/images/generators/jcb-g200rs-v.jpg", description: "200 kVA JCB generator for commercial, construction and temporary power." },
+  { id: "local-1", name: "FG Wilson P110-3 Diesel Generator", slug: "fg-wilson-p110-3", brand: { name: "FG Wilson" }, kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, description: "110 kVA diesel generator for dependable commercial and standby power." },
+  { id: "local-2", name: "Cummins C110D5 Generator", slug: "cummins-c110d5", brand: { name: "Cummins" }, kva: 110, kw: 88, fuel_type: "Diesel", is_available: true, description: "Compact 110 kVA Cummins system for commercial and critical backup applications." },
+  { id: "local-3", name: "Caterpillar C18 Generator", slug: "cat-c18-generator", brand: { name: "Caterpillar" }, kva: 500, kw: 400, fuel_type: "Diesel", is_available: true, description: "High-capacity Caterpillar power for demanding industrial operations." },
+  { id: "local-4", name: "FG Wilson P180P2 Generator", slug: "fg-wilson-p180p2-180kva", brand: { name: "FG Wilson" }, kva: 180, kw: 144, fuel_type: "Diesel", is_available: true, description: "180 kVA generator for commercial, industrial and prime-power requirements." },
+  { id: "local-5", name: "Perkins 1104A Generator", slug: "perkins-1104a-generator", brand: { name: "Perkins" }, kva: 60, kw: 48, fuel_type: "Diesel", is_available: true, description: "Reliable 60 kVA Perkins-powered generator for standby requirements." },
+  { id: "local-6", name: "JCB G200RS-V Generator", slug: "jcb-g200rs-v", brand: { name: "JCB" }, kva: 200, kw: 160, fuel_type: "Diesel", is_available: true, description: "200 kVA JCB generator for commercial, construction and temporary power." },
 ];
 const brandOf = (g) => g.brand?.name || ["FG Wilson", "Cummins", "Caterpillar", "Perkins", "Doosan", "JCB"].find((b) => g.name?.toLowerCase().includes(b.toLowerCase())) || "Power system";
-const imageFor = (g) => localImages[g.slug] || g.image_url || HERO_IMAGE;
+const imageFor = (g) => {
+  if (localImages[g.slug]) return localImages[g.slug];
+  const kva = Number(g.kva || 0);
+  if (kva >= 400) return "/images/refresh/generator-500kva-powerhouse.webp";
+  if (kva >= 220) return "/images/refresh/generator-250kva-project.webp";
+  if (kva >= 150) return "/images/refresh/generator-180kva-industrial.webp";
+  if (kva >= 100) return "/images/refresh/generator-100kva-commercial.webp";
+  return "/images/refresh/generator-control-room.webp";
+};
 
 export default function Generators() {
   const [items, setItems] = useState(fallback);

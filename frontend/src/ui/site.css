@@ -4,7 +4,7 @@
 @media(max-width:580px){.site-shell{width:calc(100% - 32px)}.display{font-size:clamp(48px,15vw,76px)}.card-grid,.card-grid-4,.form-row{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}.footer-bottom{display:block}.footer-bottom>*+*{margin-top:10px}.page-hero{min-height:590px}.button{width:100%}}
 
 /* Editorial type, real-photo cards, and direct-contact polish */
-:root { --display-font:"Space Grotesk", sans-serif; --body-font:"DM Sans", sans-serif; }
+:root { --display-font:"Bricolage Grotesque", sans-serif; --body-font:"DM Sans", sans-serif; }
 .display,.section-heading h2,.service-card-modern h3,.proof-card h3,.category-card h3,.journey-feature-copy h3,.journey-step h3 { font-family:var(--display-font); font-weight:600; }
 body,.lead,.button,.eyebrow,.pill,.card-link,.contact-form,.footer-modern { font-family:var(--body-font); }
 .footer-modern { padding:86px 0 24px; }
@@ -25,7 +25,9 @@ body,.lead,.button,.eyebrow,.pill,.card-link,.contact-form,.footer-modern { font
 .contact-direct span { color:#a7b0ad; font-size:11px; }
 .contact-location { margin:18px 0 0; color:#8d9994; font-size:13px; line-height:1.6; }
 .category-card img,.journey-feature-image img,.journey-panel-image img,.home-solution-image img,.service-card-modern img { filter:saturate(.82) contrast(1.03); }
-@media(max-width:580px){.contact-direct{grid-template-columns:1fr}.footer-intro{padding-right:0}.footer-direct a{display:block!important}.footer-direct a span{display:block;margin-top:5px}.footer-modern{padding-top:60px}}
+@media(max-width:580px){.contact-direct{grid-template-columns:1fr}.footer-intro{padding-right:0}.footer-direct a{display:block!important}.footer-direct a span{display:block;margin-top:5px}.footer-modern{padding-top:60px}.home-hero-media img,.page-hero-media img{object-position:62% center}.service-card-modern img{height:190px!important}.button{min-height:52px}.marquee-track{animation-duration:42s}}
+
+@media (hover:none) and (pointer:coarse){.spotlight-card:hover{transform:none;box-shadow:0 16px 40px rgba(15,24,19,.06)}.button:hover{transform:none;box-shadow:none}.category-card:hover img,.journey-feature-image:hover img,.journey-panel-image:hover img,.home-solution-image:hover img,.spotlight-card:hover img{transform:none}}
 
 /* Final motion system */
 .site-scroll-progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:100;transform-origin:left center;background:var(--acid);box-shadow:0 0 18px rgba(217,54,74,.65)}
