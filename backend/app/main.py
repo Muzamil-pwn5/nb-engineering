@@ -1,4 +1,8 @@
-﻿from fastapi import Depends, FastAPI
+﻿from pathlib import Path
+
+from alembic import command
+from alembic.config import Config
+from fastapi import Depends, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.middleware.base import BaseHTTPMiddleware
 
@@ -26,6 +30,14 @@ app = FastAPI(
     title="NB Engineering & Services API",
     version="1.0.0",
 )
+
+
+@app.on_event("startup")
+def run_database_migrations() -> None:
+    """Bring the deployed database to the checked-in schema before serving traffic."""
+    backend_dir = Path(__file__).resolve().parents[2]
+    alembic_config = Config(str(backend_dir / "alembic.ini"))
+    command.upgrade(alembic_config, "head")
 
 
 class SecurityHeadersMiddleware(BaseHTTPMiddleware):
