@@ -35,7 +35,7 @@ app = FastAPI(
 @app.on_event("startup")
 def run_database_migrations() -> None:
     """Bring the deployed database to the checked-in schema before serving traffic."""
-    backend_dir = Path(__file__).resolve().parents[2]
+    backend_dir = Path(__file__).resolve().parents[1]
     alembic_config = Config(str(backend_dir / "alembic.ini"))
     command.upgrade(alembic_config, "head")
 
