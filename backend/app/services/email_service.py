@@ -14,7 +14,12 @@ class InquiryNotificationError(RuntimeError):
 
 
 def send_inquiry_notification(inquiry: Inquiry) -> None:
-    if not settings.smtp_host or not settings.smtp_username or not settings.smtp_password:
+    smtp_host = settings.smtp_host.strip()
+    smtp_username = settings.smtp_username.strip()
+    # Gmail displays app passwords in groups separated by spaces; those spaces
+    # are formatting, not part of the credential.
+    smtp_password = "".join(settings.smtp_password.split())
+    if not smtp_host or not smtp_username or not smtp_password:
         raise InquiryNotificationError(
             "Inquiry notification email is not configured on the API server."
         )
@@ -23,9 +28,9 @@ def send_inquiry_notification(inquiry: Inquiry) -> None:
     recipient = settings.inquiry_notification_email
     message = EmailMessage()
     message["Subject"] = inquiry.subject or "New website inquiry"
-    message["From"] = settings.smtp_from_email or settings.smtp_username
-    message["To"] = recipient
-    message["Reply-To"] = customer.email or settings.smtp_from_email or settings.smtp_username
+    message["From"] = settings.smtp_from_email.strip() or smtp_username
+    message["To"] = recipient.strip()
+    message["Reply-To"] = customer.email or settings.smtp_from_email.strip() or smtp_username
     message.set_content(
         "A new inquiry was submitted through nbengineerings.com.\n\n"
         f"Name: {customer.name}\n"
@@ -38,12 +43,12 @@ def send_inquiry_notification(inquiry: Inquiry) -> None:
 
     try:
         context = ssl.create_default_context()
-        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as smtp:
+        with smtplib.SMTP(smtp_host, settings.smtp_port, timeout=20) as smtp:
             smtp.ehlo()
             if settings.smtp_use_tls:
                 smtp.starttls(context=context)
                 smtp.ehlo()
-            smtp.login(settings.smtp_username, settings.smtp_password)
+            smtp.login(smtp_username, smtp_password)
             smtp.send_message(message)
     except (OSError, smtplib.SMTPException) as exc:
         logger.exception("Failed to deliver inquiry %s notification", inquiry.id)
