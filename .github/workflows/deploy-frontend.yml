@@ -37,7 +37,12 @@ jobs:
         run: npm run build
 
       - name: Preserve SPA routes on GitHub Pages
-        run: cp frontend/dist/index.html frontend/dist/404.html
+        run: |
+          cp frontend/dist/index.html frontend/dist/404.html
+          for route in contact generators services brands spare-parts privacy-policy terms-and-conditions; do
+            mkdir -p "frontend/dist/${route}"
+            cp frontend/dist/index.html "frontend/dist/${route}/index.html"
+          done
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
