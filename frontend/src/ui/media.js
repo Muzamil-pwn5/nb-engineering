@@ -1,5 +1,5 @@
 // Optimized local photographs: distinct contexts, no white-background product renders.
-export const HERO_IMAGE = "/images/refresh/hero-generator-150kva.webp";
+export const HERO_IMAGE = "/images/refresh/hero-generator-150kva-text-safe.webp";
 export const GENERATOR_IMAGE = "/images/refresh/generator-180kva-industrial.webp";
 export const CANOPY_GENERATOR_IMAGE = "/images/refresh/generator-installation-site.webp";
 export const PANEL_IMAGE = "/images/refresh/ats-amf-panel-installation.webp";
