@@ -153,8 +153,16 @@ body { color: var(--nb-ink) !important; }
 .spotlight-card::before { background: radial-gradient(300px circle at var(--x,50%) var(--y,50%), rgba(255, 20, 147, .12), transparent 65%) !important; }
 .journey-step { background: #fff4f9 !important; }
 .detail-layout .display, .dark-section .display, .dark-section h2, .dark-section .lead,
-.page-hero .display, .page-hero h1, .service-detail-hero h1, .generator-detail-hero h1,
+.service-detail-hero h1, .generator-detail-hero h1,
 .contact-intro .display, .contact-intro .lead { color: var(--nb-ink) !important; }
+.page-hero .display, .page-hero h1 {
+  color: #fff !important;
+  text-shadow: 0 4px 22px rgba(10, 13, 15, .48);
+}
+.page-hero .display em {
+  color: #ff4660 !important;
+  text-shadow: 0 3px 18px rgba(10, 13, 15, .7), 0 0 1px rgba(255, 255, 255, .45);
+}
 .page-hero::after, .service-detail-hero-gradient, .generator-detail-hero::after { display: none !important; }
 .page-hero-media img { opacity: 1 !important; }
 .stats-row { background: var(--nb-line) !important; }
