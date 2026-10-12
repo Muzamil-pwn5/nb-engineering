@@ -37,6 +37,7 @@ def run_database_migrations() -> None:
     """Bring the deployed database to the checked-in schema before serving traffic."""
     backend_dir = Path(__file__).resolve().parents[1]
     alembic_config = Config(str(backend_dir / "alembic.ini"))
+    alembic_config.set_main_option("prepend_sys_path", str(backend_dir))
     command.upgrade(alembic_config, "head")
 
 
@@ -126,6 +127,12 @@ def health_check():
         "status": "ok",
         "service": "NB Engineering & Services API",
     }
+
+
+@app.get(f"{API_PREFIX}/health")
+def api_health_check():
+    """Compatibility alias for monitors that namespace all API routes."""
+    return health_check()
 
 
 @app.get("/")
