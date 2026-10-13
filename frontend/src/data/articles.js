@@ -1,6 +1,6 @@
 export const articles = [
   {
-    slug: "cat-c18-generator-capacity-and-applications",
+    slug: "cat-c18",
     category: "Generator guide",
     title: "Where a 500 kVA generator fits: a practical guide to the CAT C18",
     description: "A plain-English look at the listed CAT C18 generator’s 500 kVA / 400 kW rating, the loads to assess, and what to confirm before specifying it.",
@@ -14,7 +14,7 @@ export const articles = [
     related: { label: "View the CAT C18 listing", href: "/generators/cat-c18-generator" },
   },
   {
-    slug: "cummins-c110d5-generator-guide",
+    slug: "cummins-c110d5",
     category: "Generator guide",
     title: "Cummins C110D5: what to check before choosing a 110 kVA generator",
     description: "A practical selection guide to the listed Cummins C110D5, including its 110 kVA / 88 kW figures and the site questions worth answering first.",
@@ -28,7 +28,7 @@ export const articles = [
     related: { label: "View the Cummins C110D5 listing", href: "/generators/cummins-c110d5" },
   },
   {
-    slug: "cummins-c33d5-33-kva-guide",
+    slug: "cummins-c33d5",
     category: "Generator guide",
     title: "Is a 33 kVA generator enough? A guide to the Cummins C33D5",
     description: "Understand the listed Cummins C33D5 33 kVA / 26.4 kW rating and how to compare it with your essential loads and motor starts.",
@@ -42,7 +42,7 @@ export const articles = [
     related: { label: "View the Cummins C33D5 listing", href: "/generators/cummins-c33d5" },
   },
   {
-    slug: "fg-wilson-p110-3-110-kva-guide",
+    slug: "fg-wilson-p110-3",
     category: "Generator guide",
     title: "Planning around the FG Wilson P110-3: a 110 kVA selection guide",
     description: "A practical look at the listed FG Wilson P110-3 110 kVA / 88 kW generator and the electrical and installation details to confirm.",
@@ -56,7 +56,7 @@ export const articles = [
     related: { label: "View the FG Wilson P110-3 listing", href: "/generators/fg-wilson-p110-3" },
   },
   {
-    slug: "fg-wilson-p22-5-1s-small-generator-guide",
+    slug: "fg-wilson-p22-5-1s",
     category: "Generator guide",
     title: "Choosing a compact backup set: the FG Wilson P22.5-1S explained",
     description: "A buyer’s guide to the listed FG Wilson P22.5-1S at 22.5 kVA / 18 kW, with practical questions about essential loads and starting demand.",
@@ -70,7 +70,7 @@ export const articles = [
     related: { label: "View the FG Wilson P22.5-1S listing", href: "/generators/fg-wilson-p22-5-1s" },
   },
   {
-    slug: "perkins-1104a-60-kva-generator-guide",
+    slug: "perkins-1104a",
     category: "Generator guide",
     title: "Perkins 1104A generator: making sense of the listed 60 kVA rating",
     description: "A practical guide to the catalogue’s Perkins 1104A generator at 60 kVA / 48 kW, including the details to confirm before purchase.",
@@ -84,7 +84,7 @@ export const articles = [
     related: { label: "View the Perkins 1104A listing", href: "/generators/perkins-1104a-generator" },
   },
   {
-    slug: "choosing-generator-size-kva-kw-loads",
+    slug: "generator-sizing",
     category: "Power planning",
     title: "How to size a generator without guessing from the building size",
     description: "A step-by-step load-planning guide to essential circuits, motor starts, kVA versus kW and the information to prepare before asking for a quote.",
@@ -99,7 +99,7 @@ export const articles = [
     related: { label: "Explore generator options", href: "/generators" },
   },
   {
-    slug: "generator-maintenance-checklist-and-service-intervals",
+    slug: "generator-maintenance",
     category: "Maintenance",
     title: "A generator maintenance checklist that starts with the manual",
     description: "A practical owner’s checklist for keeping generator maintenance organised—without replacing manufacturer service schedules or qualified inspection.",
@@ -114,7 +114,7 @@ export const articles = [
     related: { label: "Explore generator maintenance service", href: "/services/generator-maintenance" },
   },
   {
-    slug: "generator-sales-questions-before-you-buy",
+    slug: "buying-a-generator",
     category: "Buying guide",
     title: "Buying a generator: the questions worth answering before you request a quote",
     description: "A practical checklist for generator buyers covering loads, duty, configuration, installation, service, availability and written quote details.",
@@ -128,7 +128,7 @@ export const articles = [
     related: { label: "Discuss a generator purchase", href: "/services/generator-purchase" },
   },
   {
-    slug: "generator-rental-planning-temporary-power",
+    slug: "generator-rental-guide",
     category: "Temporary power",
     title: "Generator rental for a project: what to plan before the unit arrives",
     description: "A field-ready planning guide to temporary generator rentals, covering load needs, run time, delivery access, transfer, fuel and site coordination.",
@@ -142,7 +142,7 @@ export const articles = [
     related: { label: "Explore generator rental", href: "/services/generator-rental" },
   },
   {
-    slug: "generator-repair-symptoms-and-safe-troubleshooting",
+    slug: "generator-troubleshooting",
     category: "Troubleshooting",
     title: "Generator trouble? What to record before calling for repair",
     description: "A safe troubleshooting guide to generator symptoms, alarms and information that can help a service technician diagnose the problem.",
@@ -156,7 +156,7 @@ export const articles = [
     related: { label: "Explore generator repair", href: "/services/generator-repair" },
   },
   {
-    slug: "ats-generator-automatic-transfer-switch-guide",
+    slug: "ats-panels-guide",
     category: "Electrical systems",
     title: "What an ATS does—and what to check before connecting one to a generator",
     description: "A clear guide to automatic transfer switches, generator compatibility, site loads and the installation details an electrical professional should verify.",
@@ -170,7 +170,7 @@ export const articles = [
     related: { label: "Explore ATS panel solutions", href: "/services/ats-panels" },
   },
   {
-    slug: "generator-repair-or-replacement-decision-guide",
+    slug: "repair-or-replace",
     category: "Buying and service",
     title: "Repair or replace a generator? A practical way to frame the decision",
     description: "Compare generator repair and replacement using fault history, duty, parts, safety, downtime and lifecycle cost—not a single repair quote.",
@@ -184,7 +184,7 @@ export const articles = [
     related: { label: "Explore repair service", href: "/services/generator-repair" },
   },
   {
-    slug: "generator-rental-or-buying-comparison",
+    slug: "rent-vs-buy-generator",
     category: "Power planning",
     title: "Rent or buy a generator? Compare the job, not just the monthly price",
     description: "A practical rent-versus-buy comparison for temporary, seasonal and ongoing generator needs, including service, transport and changing demand.",
@@ -198,7 +198,7 @@ export const articles = [
     related: { label: "Explore generator rental", href: "/services/generator-rental" },
   },
   {
-    slug: "generator-canopy-ventilation-access-planning",
+    slug: "generator-canopy",
     category: "Installation planning",
     title: "Planning a generator canopy: ventilation and service access come first",
     description: "A practical overview of generator canopy planning, including airflow, heat, exhaust, access, noise goals and equipment-specific fit.",
@@ -212,7 +212,7 @@ export const articles = [
     related: { label: "Explore canopy work", href: "/services/canopy-work" },
   },
   {
-    slug: "generator-spare-parts-identification-guide",
+    slug: "generator-parts",
     category: "Maintenance and parts",
     title: "Ordering generator spare parts: details that prevent a wrong match",
     description: "A practical guide to identifying generator parts accurately using the set model, serial number, component data and the failed part’s details.",
@@ -226,7 +226,7 @@ export const articles = [
     related: { label: "Explore generator spare-parts support", href: "/services/spare-parts" },
   },
   {
-    slug: "generator-installation-site-readiness-checklist",
+    slug: "generator-installation-checklist",
     category: "Installation planning",
     title: "Generator site readiness: a checklist before installation day",
     description: "Prepare for generator installation with a coordinated checklist for access, foundation, ventilation, exhaust, fuel, electrical connections and commissioning.",
@@ -240,7 +240,7 @@ export const articles = [
     related: { label: "Explore installation and engineering services", href: "/services" },
   },
   {
-    slug: "generator-fuel-use-operating-cost-basics",
+    slug: "generator-fuel-costs",
     category: "Power planning",
     title: "What affects a generator’s fuel use and running cost?",
     description: "Understand the main factors behind generator fuel consumption and operating cost, and what information to request for a meaningful estimate.",
@@ -254,7 +254,7 @@ export const articles = [
     related: { label: "Explore generator options", href: "/generators" },
   },
   {
-    slug: "comparing-generator-brands-and-models",
+    slug: "compare-generator-brands",
     category: "Buying guide",
     title: "Comparing generator brands: look past the badge and compare the set",
     description: "A fair framework for comparing generator brands and models by rating, configuration, support, documentation, installation and lifecycle needs.",
@@ -270,3 +270,25 @@ export const articles = [
 ];
 
 export const getArticle = (slug) => articles.find((article) => article.slug === slug);
+
+export const articleSlugRedirects = {
+  "cat-c18-generator-capacity-and-applications": "cat-c18",
+  "cummins-c110d5-generator-guide": "cummins-c110d5",
+  "cummins-c33d5-33-kva-guide": "cummins-c33d5",
+  "fg-wilson-p110-3-110-kva-guide": "fg-wilson-p110-3",
+  "fg-wilson-p22-5-1s-small-generator-guide": "fg-wilson-p22-5-1s",
+  "perkins-1104a-60-kva-generator-guide": "perkins-1104a",
+  "choosing-generator-size-kva-kw-loads": "generator-sizing",
+  "generator-maintenance-checklist-and-service-intervals": "generator-maintenance",
+  "generator-sales-questions-before-you-buy": "buying-a-generator",
+  "generator-rental-planning-temporary-power": "generator-rental-guide",
+  "generator-repair-symptoms-and-safe-troubleshooting": "generator-troubleshooting",
+  "ats-generator-automatic-transfer-switch-guide": "ats-panels-guide",
+  "generator-repair-or-replacement-decision-guide": "repair-or-replace",
+  "generator-rental-or-buying-comparison": "rent-vs-buy-generator",
+  "generator-canopy-ventilation-access-planning": "generator-canopy",
+  "generator-spare-parts-identification-guide": "generator-parts",
+  "generator-installation-site-readiness-checklist": "generator-installation-checklist",
+  "generator-fuel-use-operating-cost-basics": "generator-fuel-costs",
+  "comparing-generator-brands-and-models": "compare-generator-brands",
+};

@@ -1,8 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import SEO from "../components/SEO.jsx";
-import { articles, getArticle } from "../data/articles.js";
+import { articles, articleSlugRedirects, getArticle } from "../data/articles.js";
 import "./Articles.css";
 
 function ArticleCard({ article, number }) {
@@ -45,6 +45,8 @@ export function ArticlesIndex() {
 
 export default function ArticlePage() {
   const { slug } = useParams();
+  const redirectedSlug = articleSlugRedirects[slug];
+  if (redirectedSlug) return <Navigate to={`/guides/${redirectedSlug}`} replace />;
   const article = getArticle(slug);
 
   if (!article) {

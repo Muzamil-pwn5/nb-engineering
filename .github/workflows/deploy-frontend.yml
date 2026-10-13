@@ -72,7 +72,26 @@ jobs:
             guides/generator-spare-parts-identification-guide \
             guides/generator-installation-site-readiness-checklist \
             guides/generator-fuel-use-operating-cost-basics \
-            guides/comparing-generator-brands-and-models; do
+            guides/comparing-generator-brands-and-models \
+            guides/cat-c18 \
+            guides/cummins-c110d5 \
+            guides/cummins-c33d5 \
+            guides/fg-wilson-p110-3 \
+            guides/fg-wilson-p22-5-1s \
+            guides/perkins-1104a \
+            guides/generator-sizing \
+            guides/generator-maintenance \
+            guides/buying-a-generator \
+            guides/generator-rental-guide \
+            guides/generator-troubleshooting \
+            guides/ats-panels-guide \
+            guides/repair-or-replace \
+            guides/rent-vs-buy-generator \
+            guides/generator-canopy \
+            guides/generator-parts \
+            guides/generator-installation-checklist \
+            guides/generator-fuel-costs \
+            guides/compare-generator-brands; do
             mkdir -p "frontend/dist/${route}"
             cp frontend/dist/index.html "frontend/dist/${route}/index.html"
           done
