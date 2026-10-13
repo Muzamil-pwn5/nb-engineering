@@ -17,6 +17,8 @@ function ServiceCard({
           <img
             src={image}
             alt={title}
+            loading="lazy"
+            decoding="async"
           />
         </div>
 

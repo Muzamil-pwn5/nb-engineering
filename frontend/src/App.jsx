@@ -1,20 +1,48 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import Home from "./pages/Home.jsx";
-import Generators from "./pages/generators.jsx";
-import GeneratorDetail from "./pages/GeneratorDetail.jsx";
-import Services from "./pages/Services.jsx";
-import ServiceDetail from "./pages/ServiceDetail.jsx";
-import Contact from "./pages/Contact.jsx";
-import Brand from "./pages/Brand.jsx";
-import SpareParts from "./pages/SpareParts.jsx";
-import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
-import Terms from "./pages/Terms.jsx";
 import CookieConsent from "./components/CookieConsent.jsx";
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
-import GsapAnimations from "./ui/GsapAnimations.jsx";
+
+const Home = lazy(() => import("./pages/Home.jsx"));
+const Generators = lazy(() => import("./pages/generators.jsx"));
+const GeneratorDetail = lazy(() => import("./pages/GeneratorDetail.jsx"));
+const Services = lazy(() => import("./pages/Services.jsx"));
+const ServiceDetail = lazy(() => import("./pages/ServiceDetail.jsx"));
+const Contact = lazy(() => import("./pages/Contact.jsx"));
+const Brand = lazy(() => import("./pages/Brand.jsx"));
+const SpareParts = lazy(() => import("./pages/SpareParts.jsx"));
+const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
+const Terms = lazy(() => import("./pages/Terms.jsx"));
+
+function DeferredGsapAnimations() {
+  const [Animation, setAnimation] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    let idleId;
+    let timeoutId;
+
+    const load = () => import("./ui/GsapAnimations.jsx").then((module) => {
+      if (!cancelled) setAnimation(() => module.default);
+    });
+
+    if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(load, { timeout: 1800 });
+    } else {
+      timeoutId = window.setTimeout(load, 900);
+    }
+
+    return () => {
+      cancelled = true;
+      if (idleId) window.cancelIdleCallback(idleId);
+      if (timeoutId) window.clearTimeout(timeoutId);
+    };
+  }, []);
+
+  return Animation ? <Animation /> : null;
+}
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -123,20 +151,22 @@ function App() {
       <SkipLink />
       <SiteMotion />
       <CookieConsent />
-      <GsapAnimations />
+      <DeferredGsapAnimations />
       <div id="main-content" tabIndex="-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/generators" element={<Generators />} />
-          <Route path="/generators/:slug" element={<GeneratorDetail />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/brands" element={<Brand />} />
-          <Route path="/spare-parts" element={<SpareParts />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-and-conditions" element={<Terms />} />
-        </Routes>
+        <Suspense fallback={<div className="route-loading" role="status">Loading page…</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/generators" element={<Generators />} />
+            <Route path="/generators/:slug" element={<GeneratorDetail />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/brands" element={<Brand />} />
+            <Route path="/spare-parts" element={<SpareParts />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<Terms />} />
+          </Routes>
+        </Suspense>
       </div>
     </BrowserRouter>
   );

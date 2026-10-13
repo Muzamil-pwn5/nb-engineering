@@ -39,7 +39,21 @@ jobs:
       - name: Preserve SPA routes on GitHub Pages
         run: |
           cp frontend/dist/index.html frontend/dist/404.html
-          for route in contact generators services brands spare-parts privacy-policy terms-and-conditions; do
+          for route in contact generators services brands spare-parts privacy-policy terms-and-conditions \
+            generators/cat-c18-generator \
+            generators/cummins-c110d5 \
+            generators/cummins-c33d5 \
+            generators/fg-wilson-p110-3 \
+            generators/fg-wilson-p22-5-1s \
+            generators/perkins-1104a-generator \
+            services/ats-panels \
+            services/canopy-work \
+            services/generator-maintenance \
+            services/generator-purchase \
+            services/generator-rental \
+            services/generator-repair \
+            services/generator-sales \
+            services/spare-parts; do
             mkdir -p "frontend/dist/${route}"
             cp frontend/dist/index.html "frontend/dist/${route}/index.html"
           done

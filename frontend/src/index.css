@@ -80,11 +80,6 @@ body { accent-color: var(--nb-pink); }
 .journey-step { background: #fff0f3 !important; }
 .journey-feature-image, .journey-panel-image, .home-solution-image, .image-panel { background: #f6d5dc !important; }
 
-.contact-form, .service-detail-content, .generator-detail-content { background: var(--nb-pink) !important; color: var(--nb-white) !important; }
-.contact-form label, .contact-form input, .contact-form textarea, .contact-form select { color: var(--nb-white) !important; }
-.contact-form input, .contact-form textarea, .contact-form select { background: rgba(23, 16, 20, .14) !important; border-color: rgba(255, 249, 250, .34) !important; }
-.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255, 249, 250, .68) !important; }
-.contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus { border-color: var(--nb-white) !important; }
 
 /* Footer intentionally remains black with white text only. */
 .footer-modern { background: #000 !important; color: #fff !important; }
@@ -108,7 +103,7 @@ img { display: block; }
 }
 html, body, .site-page, main, .section, .home-proof, .home-categories, .journey-section,
 .home-solution, .home-cta, .dark-section, .page-hero, .service-detail-hero, .generator-detail-hero,
-.contact-intro, .contact-form, .service-detail-content, .generator-detail-content {
+.contact-intro, .service-detail-content, .generator-detail-content {
   background: var(--nb-white) !important;
   color: var(--nb-ink) !important;
 }
@@ -169,8 +164,6 @@ body { color: var(--nb-ink) !important; }
 .stat { background: #fff !important; }
 .stat strong { color: var(--nb-pink) !important; }
 .stat span { color: var(--nb-muted) !important; }
-.contact-form input, .contact-form textarea, .contact-form select { background: #fff !important; color: var(--nb-ink) !important; border-color: var(--nb-line) !important; }
-.contact-form label { color: var(--nb-ink) !important; }
 .footer-modern { background: var(--nb-white) !important; color: var(--nb-ink) !important; border-top: 1px solid var(--nb-line); }
 .footer-modern h3, .footer-brand span, .footer-hours, .footer-modern a, .footer-brand-copy, .footer-location, .footer-bottom, .footer-direct a span { color: var(--nb-ink) !important; }
 .footer-modern .button-primary { background: var(--nb-pink) !important; color: #fff !important; }
@@ -284,7 +277,6 @@ body { color: var(--nb-ink) !important; }
 .contact-direct a small { color: var(--nb-pink) !important; }
 .contact-direct a strong { color: var(--nb-ink) !important; }
 .contact-direct a span { color: var(--nb-muted) !important; }
-.contact-form .button-primary,
 .contact-cta .contact-primary-button,
 .contact-primary-button {
   background: var(--nb-pink) !important;
