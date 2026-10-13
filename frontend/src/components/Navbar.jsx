@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import "../ui/site.css";
 import "./Navbar.css";
 
-const items = [{ label: "Services", path: "/services" }, { label: "Generators", path: "/generators" }, { label: "ATS / AMF", path: "/services/ats-panels" }, { label: "Brands", path: "/brands" }];
+const items = [{ label: "Services", path: "/services" }, { label: "Generators", path: "/generators" }, { label: "ATS / AMF", path: "/services/ats-panels" }, { label: "Guides", path: "/guides" }, { label: "Brands", path: "/brands" }];
 
 export default function Navbar() {
   const location = useLocation();

@@ -13,6 +13,8 @@ const ServiceDetail = lazy(() => import("./pages/ServiceDetail.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
 const Brand = lazy(() => import("./pages/Brand.jsx"));
 const SpareParts = lazy(() => import("./pages/SpareParts.jsx"));
+const GuideArticle = lazy(() => import("./pages/Articles.jsx"));
+const ArticlesIndex = lazy(() => import("./pages/Articles.jsx").then((module) => ({ default: module.ArticlesIndex })));
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy.jsx"));
 const Terms = lazy(() => import("./pages/Terms.jsx"));
 
@@ -116,6 +118,10 @@ function RouteSEO() {
       title: "Generator Spare Parts | NB Engineering & Services | Pakistan",
       description: "Generator spare parts and related power generation components from NB Engineering & Services.",
     },
+    "/guides": {
+      title: "Generator Guides & Practical Advice | NB Engineering",
+      description: "Practical, plain-English guides to choosing, installing, maintaining and troubleshooting generators and power systems.",
+    },
     "/privacy-policy": {
       title: "Privacy Policy | NB Engineering & Services",
       description: "Privacy policy for the NB Engineering & Services website and direct contact.",
@@ -156,6 +162,8 @@ function App() {
         <Suspense fallback={<div className="route-loading" role="status">Loading page…</div>}>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/guides" element={<ArticlesIndex />} />
+            <Route path="/guides/:slug" element={<GuideArticle />} />
             <Route path="/generators" element={<Generators />} />
             <Route path="/generators/:slug" element={<GeneratorDetail />} />
             <Route path="/services" element={<Services />} />

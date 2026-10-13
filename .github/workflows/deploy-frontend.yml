@@ -39,7 +39,7 @@ jobs:
       - name: Preserve SPA routes on GitHub Pages
         run: |
           cp frontend/dist/index.html frontend/dist/404.html
-          for route in contact generators services brands spare-parts privacy-policy terms-and-conditions \
+          for route in contact generators services brands spare-parts guides privacy-policy terms-and-conditions \
             generators/cat-c18-generator \
             generators/cummins-c110d5 \
             generators/cummins-c33d5 \
@@ -53,7 +53,26 @@ jobs:
             services/generator-rental \
             services/generator-repair \
             services/generator-sales \
-            services/spare-parts; do
+            services/spare-parts \
+            guides/cat-c18-generator-capacity-and-applications \
+            guides/cummins-c110d5-generator-guide \
+            guides/cummins-c33d5-33-kva-guide \
+            guides/fg-wilson-p110-3-110-kva-guide \
+            guides/fg-wilson-p22-5-1s-small-generator-guide \
+            guides/perkins-1104a-60-kva-generator-guide \
+            guides/choosing-generator-size-kva-kw-loads \
+            guides/generator-maintenance-checklist-and-service-intervals \
+            guides/generator-sales-questions-before-you-buy \
+            guides/generator-rental-planning-temporary-power \
+            guides/generator-repair-symptoms-and-safe-troubleshooting \
+            guides/ats-generator-automatic-transfer-switch-guide \
+            guides/generator-repair-or-replacement-decision-guide \
+            guides/generator-rental-or-buying-comparison \
+            guides/generator-canopy-ventilation-access-planning \
+            guides/generator-spare-parts-identification-guide \
+            guides/generator-installation-site-readiness-checklist \
+            guides/generator-fuel-use-operating-cost-basics \
+            guides/comparing-generator-brands-and-models; do
             mkdir -p "frontend/dist/${route}"
             cp frontend/dist/index.html "frontend/dist/${route}/index.html"
           done
