@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import apiRequest from "../api/client.js";
+import { experience } from "../data/catalog.js";
 import { Reveal, SpotlightCard, Stagger, staggerItem } from "../ui/MotionPrimitives.jsx";
 import { ATS_TRANSFER_IMAGE, GENERATOR_IMAGE, PARTS_STOCK_IMAGE } from "../ui/media.js";
 import "./JourneySection.css";
@@ -22,8 +22,7 @@ const journeySteps = [
 ];
 
 export default function JourneySection() {
-  const [sectors, setSectors] = useState(fallbackSectors);
-  const [stats, setStats] = useState(null);
-  useEffect(() => { apiRequest("/experience").then((data) => { if (data?.sectors?.length) setSectors(data.sectors); if (data?.stats) setStats(data.stats); }).catch(() => {}); }, []);
+  const [sectors] = useState(experience.sectors?.length ? experience.sectors : fallbackSectors);
+  const stats = null;
   return <section className="journey-section" id="experience"><div className="site-shell"><div className="journey-intro"><Reveal><div><span className="eyebrow">03 / NB’s journey</span><h2>Power across<br /><em>real operations.</em></h2></div></Reveal><Reveal delay={.12}><div><p className="journey-kicker">Experience is not a number on a wall. It is the ability to understand what must keep working when the main supply does not.</p>{stats?.organizations ? <div className="journey-live-stat"><strong>{stats.organizations}+</strong><span>organizations represented in our live field data</span></div> : <div className="journey-live-stat"><strong>01 → 04</strong><span>from first brief to long-term support</span></div>}</div></Reveal></div><div className="journey-image-row"><Reveal direction="left"><Link className="journey-feature-image tile-link" to="/generators"><img src={GENERATOR_IMAGE} alt="Industrial generator system" /><span>01 / Generation</span></Link></Reveal><Reveal><Link className="journey-feature-copy tile-link" to="/services"><span className="eyebrow">The footprint</span><h3>Every environment changes the story.</h3><p>Our original experience module mapped the sectors where reliable power matters most. That thinking stays at the heart of NB: understand the environment, then engineer the right response.</p><div className="pill-list">{sectors.map((sector) => <span className="pill" key={sector.name}>{sector.name}</span>)}</div></Link></Reveal></div><Stagger className="journey-steps">{journeySteps.map((step) => <motion.div key={step.no} variants={staggerItem}><SpotlightCard className="journey-step"><span>{step.no}</span><div><h3>{step.title}</h3><p>{step.text}</p></div><Link className="card-link" to={step.href}>Explore this step <span>↗</span></Link></SpotlightCard></motion.div>)}</Stagger><div className="journey-bottom-grid"><Reveal><Link className="journey-panel-image tile-link" to="/services/ats-panels"><img src={ATS_TRANSFER_IMAGE} alt="ATS and AMF changeover panel" /><span>02 / Automation</span></Link></Reveal><Reveal delay={.12}><Link className="journey-panel-image tile-link" to="/spare-parts"><img src={PARTS_STOCK_IMAGE} alt="Generator parts and service stock" /><span>03 / Support</span></Link></Reveal></div></div></section>;
 }

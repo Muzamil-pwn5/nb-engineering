@@ -37,7 +37,7 @@
 
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://api.nbengineerings.com; upgrade-insecure-requests; block-all-mixed-content"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; upgrade-insecure-requests; block-all-mixed-content"
     />
 
     <meta
@@ -131,14 +131,6 @@
   </head>
 
   <body>
-    <form name="nb-inquiry" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="text" name="phone" />
-      <input type="email" name="email" />
-      <input type="text" name="service" />
-      <textarea name="message"></textarea>
-      <input type="text" name="bot-field" />
-    </form>
     <div id="root"></div>
 
     <script

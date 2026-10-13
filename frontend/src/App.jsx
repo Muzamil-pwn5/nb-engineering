@@ -90,7 +90,7 @@ function RouteSEO() {
     },
     "/privacy-policy": {
       title: "Privacy Policy | NB Engineering & Services",
-      description: "Privacy policy for the NB Engineering & Services website and inquiry forms.",
+      description: "Privacy policy for the NB Engineering & Services website and direct contact.",
     },
     "/terms-and-conditions": {
       title: "Terms & Conditions | NB Engineering & Services",
@@ -102,7 +102,7 @@ function RouteSEO() {
   if (!seo && location.pathname.startsWith("/generators/")) {
     seo = {
       title: "Generator Details | NB Engineering & Services | Pakistan",
-      description: "View generator specifications, features, applications, and inquiry information.",
+      description: "View generator specifications, features, applications, and contact information.",
     };
   }
   if (!seo && location.pathname.startsWith("/services/")) {

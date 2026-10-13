@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-import apiRequest from "../api/client";
+import { experience } from "../data/catalog.js";
 import "./ExperienceSection.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -61,8 +61,7 @@ export default function ExperienceSection() {
   const panelRef = useRef(null);
   const cursorRef = useRef(null);
 
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [data] = useState(experience);
   const [activeSector, setActiveSector] = useState(0);
 
   const sectors = useMemo(
@@ -76,37 +75,6 @@ export default function ExperienceSection() {
   const currentMetrics = getSectorMetrics(
     currentSector
   );
-
-  useEffect(() => {
-    let cancelled = false;
-
-    async function loadExperience() {
-      try {
-        setLoading(true);
-
-        const result = await apiRequest("/experience");
-
-        if (!cancelled) {
-          setData(result);
-        }
-      } catch (error) {
-        console.error(
-          "Experience data failed to load:",
-          error
-        );
-      } finally {
-        if (!cancelled) {
-          setLoading(false);
-        }
-      }
-    }
-
-    loadExperience();
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
 
   /*
    * ---------------------------------------------------------
@@ -511,19 +479,6 @@ export default function ExperienceSection() {
         });
       }
     });
-  }
-
-  if (!data && loading) {
-    return (
-      <section
-        ref={sectionRef}
-        className="experience-section"
-      >
-        <div className="experience-loading">
-          Loading experience...
-        </div>
-      </section>
-    );
   }
 
   return (

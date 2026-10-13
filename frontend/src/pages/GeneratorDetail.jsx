@@ -63,7 +63,7 @@ function GeneratorDetail() {
       <>
         <SEO
           title="Generator Details | NB Engineering & Services | Pakistan"
-          description="View generator specifications, features, applications, and inquiry information from NB Engineering & Services."
+          description="View generator specifications, features, applications, and contact information from NB Engineering & Services."
         />
 
         <Navbar />
@@ -198,7 +198,7 @@ function GeneratorDetail() {
                     )}`}
                     className="detail-primary-button"
                   >
-                    Request to Buy
+                    Contact about this unit
                   </Link>
 
                   <Link
@@ -306,7 +306,7 @@ function GeneratorDetail() {
           </div>
         </section>
 
-        {/* INQUIRY CTA */}
+        {/* DIRECT CONTACT CTA */}
         <section className="generator-inquiry-section">
           <div className="generator-detail-container">
             <div className="generator-inquiry">
@@ -330,7 +330,7 @@ function GeneratorDetail() {
                 )}`}
                 className="detail-inquiry-button"
               >
-                Request Information
+                Contact the team
                 <span>→</span>
               </Link>
             </div>

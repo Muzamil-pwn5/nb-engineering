@@ -1,9 +1,12 @@
-import apiRequest from "./client";
+import { generators } from "../data/catalog.js";
 
-export async function getGenerators() {
-  return apiRequest("/generators");
+export function getGenerators() {
+  return Promise.resolve(generators);
 }
 
-export async function getGenerator(slug) {
-  return apiRequest(`/generators/${slug}`);
+export function getGenerator(slug) {
+  const generator = generators.find((item) => item.slug === slug);
+  return generator
+    ? Promise.resolve(generator)
+    : Promise.reject(new Error("Generator not found."));
 }
