@@ -58,6 +58,9 @@ export default function ArticlePage() {
     );
   }
 
+  const articleText = [article.title, article.intro, article.takeaway, ...article.sections.flatMap((section) => [section.heading, ...section.paragraphs])].join(" ");
+  const readingMinutes = Math.max(1, Math.ceil(articleText.split(/\s+/).length / 220));
+
   return (
     <div className="site-page guide-page">
       <SEO title={`${article.title} | NB Engineering`} description={article.description} />
@@ -69,7 +72,7 @@ export default function ArticlePage() {
             <p className="eyebrow">{article.category.toUpperCase()} / NB ENGINEERING FIELD NOTES</p>
             <h1>{article.title}</h1>
             <p className="guide-article-intro">{article.intro}</p>
-            <span className="guide-reading-note">A practical guide · Updated for clarity as specifications and site needs vary</span>
+            <span className="guide-reading-note">About {readingMinutes} min read <span aria-hidden="true">·</span> NB Engineering field notes</span>
           </div>
         </header>
         <article className="guide-article-body site-shell">
@@ -82,7 +85,6 @@ export default function ArticlePage() {
               </section>
             ))}
             <aside className="guide-takeaway"><span className="eyebrow">THE SHORT VERSION</span><p>{article.takeaway}</p></aside>
-            <p className="guide-disclaimer">Generator ratings, configurations and site conditions vary. Confirm current specifications with the equipment documentation and have electrical and installation work reviewed by qualified professionals.</p>
             <div className="guide-article-actions">
               {article.related && <Link className="button button-ink" to={article.related.href}>{article.related.label} <span>↗</span></Link>}
               <Link className="button button-outline" to="/contact">Ask us about your requirement <span>↗</span></Link>
