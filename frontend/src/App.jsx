@@ -6,6 +6,7 @@ import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
 import { routeSeo, serviceSeo } from "./seoRoutes.js";
 import { articles } from "./data/articles.js";
+import { canonicalUrl, createServiceSchema } from "./structuredData.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Generators = lazy(() => import("./pages/generators.jsx"));
@@ -108,9 +109,7 @@ function RouteStructuredData() {
     const schemaId = "nb-engineering-service-schema";
     let schemaScript = document.getElementById(schemaId);
     const metadata = serviceSeo[pathname];
-    const canonical = pathname === "/"
-      ? "https://nbengineerings.com/"
-      : `https://nbengineerings.com${pathname}/`;
+    const canonical = canonicalUrl(pathname);
 
     if (!metadata?.content) {
       schemaScript?.remove();
@@ -122,17 +121,7 @@ function RouteStructuredData() {
         document.head.appendChild(schemaScript);
       }
 
-      schemaScript.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Service",
-        "@id": `${canonical}#service`,
-        name: metadata.content.heading,
-        serviceType: metadata.content.eyebrow,
-        description: metadata.description,
-        url: canonical,
-        areaServed: { "@type": "Country", name: "Pakistan" },
-        provider: { "@id": "https://nbengineerings.com/#business" },
-      });
+      schemaScript.textContent = JSON.stringify(createServiceSchema(pathname, metadata));
     }
 
     const articleScriptId = "nb-engineering-article-schema";

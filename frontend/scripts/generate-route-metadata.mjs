@@ -5,6 +5,7 @@ import { businessSchema } from "../src/businessSchema.js";
 import { articles } from "../src/data/articles.js";
 import { generators, services } from "../src/data/catalog.js";
 import { routeSeo, serviceSeo } from "../src/seoRoutes.js";
+import { createServiceSchema } from "../src/structuredData.js";
 
 const frontendDir = fileURLToPath(new URL("..", import.meta.url));
 const distDir = join(frontendDir, "dist");
@@ -46,18 +47,7 @@ function localBusinessScript() {
 }
 
 function serviceSchemaScript(route, metadata) {
-  const canonical = canonicalUrl(route);
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${canonical}#service`,
-    name: metadata.content.heading,
-    serviceType: metadata.content.eyebrow,
-    description: metadata.description,
-    url: canonical,
-    areaServed: { "@type": "Country", name: "Pakistan" },
-    provider: { "@id": "https://nbengineerings.com/#business" },
-  };
+  const schema = createServiceSchema(route, metadata);
   return `<script id="nb-engineering-service-schema" type="application/ld+json">${safeJson(schema)}</script>`;
 }
 

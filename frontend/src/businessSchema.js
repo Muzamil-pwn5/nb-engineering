@@ -10,6 +10,17 @@ export const businessSchema = {
     "NB Engineering & Services provides generator sales, rental, maintenance, repair, ATS/AMF panel solutions, canopy work and spare parts across Pakistan.",
   telephone: "+923205636673",
   email: "nbengineerings@gmail.com",
+  sameAs: [
+    "https://www.facebook.com/profile.php?id=61594814075420",
+    "https://www.tiktok.com/@shahmanmubarak",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+923205636673",
+    contactType: "customer service",
+    areaServed: "PK",
+    availableLanguage: ["English", "Urdu"],
+  },
   areaServed: {
     "@type": "Country",
     name: "Pakistan",
