@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 import { getService } from "../api/services.js";
+import { serviceSeo } from "../seoRoutes.js";
 import "./ServiceDetail.css";
 
 const serviceImages = {
@@ -400,10 +401,11 @@ function ServiceDetail() {
   const serviceName =
     service.name || details.title || "Generator Service";
 
-  const seoTitle =
+  const routeSeo = serviceSeo[`/services/${slug}`];
+  const seoTitle = routeSeo?.title ||
     `${serviceName} | NB Engineering & Services | Pakistan`;
 
-  const seoDescription =
+  const seoDescription = routeSeo?.description ||
     service.description ||
     details.intro ||
     `Explore ${serviceName} from NB Engineering & Services, including technical support and power generation solutions in Pakistan.`;

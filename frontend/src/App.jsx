@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import CookieConsent from "./components/CookieConsent.jsx";
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
+import { serviceSeo } from "./seoRoutes.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Generators = lazy(() => import("./pages/generators.jsx"));
@@ -93,6 +94,7 @@ function SkipLink() {
 
 function RouteSEO() {
   const location = useLocation();
+  const pathname = location.pathname.replace(/\/+$/, "") || "/";
   const seoData = {
     "/": {
       title: "NB Engineering & Services | Generator Solutions in Pakistan",
@@ -102,10 +104,6 @@ function RouteSEO() {
       title: "Generators | NB Engineering & Services | Pakistan",
       description: "Explore generator solutions from NB Engineering & Services, including diesel generators and power generation equipment for commercial, industrial, and residential requirements.",
     },
-    "/services": {
-      title: "Generator Services | NB Engineering & Services | Pakistan",
-      description: "Explore generator sales, installation, repair, maintenance, rental, ATS panels, canopy work, and other power generation services from NB Engineering & Services.",
-    },
     "/contact": {
       title: "Contact NB Engineering & Services | Pakistan",
       description: "Contact NB Engineering & Services for generator sales, power generation solutions, installation, maintenance, repair, rental, and technical support in Pakistan.",
@@ -113,10 +111,6 @@ function RouteSEO() {
     "/brands": {
       title: "Generator Brands | NB Engineering & Services | Pakistan",
       description: "Explore generator brands and power generation equipment available through NB Engineering & Services.",
-    },
-    "/spare-parts": {
-      title: "Generator Spare Parts | NB Engineering & Services | Pakistan",
-      description: "Generator spare parts and related power generation components from NB Engineering & Services.",
     },
     "/guides": {
       title: "Generator Guides & Practical Advice | NB Engineering",
@@ -132,14 +126,14 @@ function RouteSEO() {
     },
   };
 
-  let seo = seoData[location.pathname];
-  if (!seo && location.pathname.startsWith("/generators/")) {
+  let seo = serviceSeo[pathname] || seoData[pathname];
+  if (!seo && pathname.startsWith("/generators/")) {
     seo = {
       title: "Generator Details | NB Engineering & Services | Pakistan",
       description: "View generator specifications, features, applications, and contact information.",
     };
   }
-  if (!seo && location.pathname.startsWith("/services/")) {
+  if (!seo && pathname.startsWith("/services/")) {
     seo = {
       title: "Generator Service | NB Engineering & Services | Pakistan",
       description: "Explore generator service solutions from NB Engineering & Services.",

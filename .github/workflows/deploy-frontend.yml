@@ -96,6 +96,8 @@ jobs:
             cp frontend/dist/index.html "frontend/dist/${route}/index.html"
           done
 
+          node frontend/scripts/generate-route-metadata.mjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

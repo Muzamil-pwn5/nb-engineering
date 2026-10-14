@@ -15,7 +15,8 @@ function SEO({ title, description }) {
     document.title = title;
     setMeta('meta[name="description"]', "name", "description", description);
 
-    const canonicalUrl = `https://nbengineerings.com${window.location.pathname}`;
+    const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+    const canonicalUrl = `https://nbengineerings.com${pathname}`;
     let canonical = document.head.querySelector('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement("link");
