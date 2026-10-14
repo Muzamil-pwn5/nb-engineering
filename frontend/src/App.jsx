@@ -108,7 +108,9 @@ function RouteStructuredData() {
     const schemaId = "nb-engineering-service-schema";
     let schemaScript = document.getElementById(schemaId);
     const metadata = serviceSeo[pathname];
-    const canonical = `https://nbengineerings.com${pathname}`;
+    const canonical = pathname === "/"
+      ? "https://nbengineerings.com/"
+      : `https://nbengineerings.com${pathname}/`;
 
     if (!metadata?.content) {
       schemaScript?.remove();

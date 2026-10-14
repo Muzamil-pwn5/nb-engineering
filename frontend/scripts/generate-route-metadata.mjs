@@ -18,6 +18,10 @@ function escapeHtml(value) {
     .replaceAll(">", "&gt;");
 }
 
+function canonicalUrl(route) {
+  return route === "/" ? "https://nbengineerings.com/" : `https://nbengineerings.com${route}/`;
+}
+
 function replaceContent(html, tagPattern, value, label) {
   if (!tagPattern.test(html)) {
     throw new Error(`Could not find ${label} tag in frontend/index.html`);
@@ -35,7 +39,7 @@ function localBusinessScript() {
 }
 
 function serviceSchemaScript(route, metadata) {
-  const canonical = `https://nbengineerings.com${route}`;
+  const canonical = canonicalUrl(route);
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -51,7 +55,7 @@ function serviceSchemaScript(route, metadata) {
 }
 
 function articleSchemaScript(route, article) {
-  const canonical = `https://nbengineerings.com${route}`;
+  const canonical = canonicalUrl(route);
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -169,7 +173,7 @@ function prerenderStaticRoute(route, metadata) {
 }
 
 for (const [route, metadata] of Object.entries(routeSeo)) {
-  const canonical = `https://nbengineerings.com${route}`;
+  const canonical = canonicalUrl(route);
   let html = template;
   html = replaceContent(html, /(<title>)[\s\S]*?(<\/title>)/i, metadata.title, "title");
   html = replaceContent(html, /(<meta\s+name="description"\s+content=")[^"]*("\s*\/>)/i, metadata.description, "description");
@@ -200,7 +204,7 @@ for (const [route, metadata] of Object.entries(routeSeo)) {
 }
 
 const sitemapUrls = Object.keys(routeSeo)
-  .map((route) => `  <url><loc>https://nbengineerings.com${route}</loc></url>`)
+  .map((route) => `  <url><loc>${canonicalUrl(route)}</loc></url>`)
   .join("\n");
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`;
 await writeFile(join(frontendDir, "public", "sitemap.xml"), sitemap);
