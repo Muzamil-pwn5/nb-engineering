@@ -303,6 +303,7 @@ const fallbackDetails = {
 
 function ServiceDetail() {
   const { slug } = useParams();
+  const routeSeo = serviceSeo[`/services/${slug}`];
 
   const [service, setService] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -347,8 +348,8 @@ function ServiceDetail() {
     return (
       <>
         <SEO
-          title="Generator Service | NB Engineering & Services | Pakistan"
-          description="Explore generator and power service solutions from NB Engineering & Services."
+          title={routeSeo?.title || "Generator Service | NB Engineering & Services | Pakistan"}
+          description={routeSeo?.description || "Explore generator and power service solutions from NB Engineering & Services."}
         />
 
         <Navbar />
@@ -392,7 +393,7 @@ function ServiceDetail() {
     );
   }
 
-  const details = serviceDetails[slug] || fallbackDetails;
+  const details = routeSeo?.content || serviceDetails[slug] || fallbackDetails;
 
   const image =
     serviceImages[slug] ||
@@ -401,7 +402,6 @@ function ServiceDetail() {
   const serviceName =
     service.name || details.title || "Generator Service";
 
-  const routeSeo = serviceSeo[`/services/${slug}`];
   const seoTitle = routeSeo?.title ||
     `${serviceName} | NB Engineering & Services | Pakistan`;
 
@@ -469,12 +469,6 @@ function ServiceDetail() {
               </p>
 
               <h2>{service.name}</h2>
-
-              {service.description && (
-                <p className="service-detail-description">
-                  {service.description}
-                </p>
-              )}
 
               <div className="service-detail-sections">
                 {details.sections.map((section, index) => (

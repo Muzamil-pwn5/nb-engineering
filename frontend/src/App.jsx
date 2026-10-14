@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import CookieConsent from "./components/CookieConsent.jsx";
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
-import { serviceSeo } from "./seoRoutes.js";
+import { routeSeo, serviceSeo } from "./seoRoutes.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Generators = lazy(() => import("./pages/generators.jsx"));
@@ -95,58 +95,59 @@ function SkipLink() {
 function RouteSEO() {
   const location = useLocation();
   const pathname = location.pathname.replace(/\/+$/, "") || "/";
-  const seoData = {
-    "/": {
-      title: "NB Engineering & Services | Generator Solutions in Pakistan",
-      description: "NB Engineering & Services provides generators, power generation solutions, installation, maintenance, and after-sales support for commercial, industrial, and residential requirements in Pakistan.",
-    },
-    "/generators": {
-      title: "Generators | NB Engineering & Services | Pakistan",
-      description: "Explore generator solutions from NB Engineering & Services, including diesel generators and power generation equipment for commercial, industrial, and residential requirements.",
-    },
-    "/contact": {
-      title: "Contact NB Engineering & Services | Pakistan",
-      description: "Contact NB Engineering & Services for generator sales, power generation solutions, installation, maintenance, repair, rental, and technical support in Pakistan.",
-    },
-    "/brands": {
-      title: "Generator Brands | NB Engineering & Services | Pakistan",
-      description: "Explore generator brands and power generation equipment available through NB Engineering & Services.",
-    },
-    "/guides": {
-      title: "Generator Guides & Practical Advice | NB Engineering",
-      description: "Practical, plain-English guides to choosing, installing, maintaining and troubleshooting generators and power systems.",
-    },
-    "/privacy-policy": {
-      title: "Privacy Policy | NB Engineering & Services",
-      description: "Privacy policy for the NB Engineering & Services website and direct contact.",
-    },
-    "/terms-and-conditions": {
-      title: "Terms & Conditions | NB Engineering & Services",
-      description: "Terms and conditions for using the NB Engineering & Services website.",
-    },
-  };
+  const seo = routeSeo[pathname] || routeSeo["/"];
+  return <SEO title={seo.title} description={seo.description} />;
+}
 
-  let seo = serviceSeo[pathname] || seoData[pathname];
-  if (!seo && pathname.startsWith("/generators/")) {
-    seo = {
-      title: "Generator Details | NB Engineering & Services | Pakistan",
-      description: "View generator specifications, features, applications, and contact information.",
-    };
-  }
-  if (!seo && pathname.startsWith("/services/")) {
-    seo = {
-      title: "Generator Service | NB Engineering & Services | Pakistan",
-      description: "Explore generator service solutions from NB Engineering & Services.",
-    };
-  }
-  return <SEO title={(seo || seoData["/"]).title} description={(seo || seoData["/"]).description} />;
+function RouteStructuredData() {
+  const location = useLocation();
+  const pathname = location.pathname.replace(/\/+$/, "") || "/";
+
+  useEffect(() => {
+    const schemaId = "nb-engineering-service-schema";
+    let schemaScript = document.getElementById(schemaId);
+    const metadata = serviceSeo[pathname];
+
+    if (!metadata?.content) {
+      schemaScript?.remove();
+      return;
+    }
+
+    if (!schemaScript) {
+      schemaScript = document.createElement("script");
+      schemaScript.id = schemaId;
+      schemaScript.type = "application/ld+json";
+      document.head.appendChild(schemaScript);
+    }
+
+    const canonical = `https://nbengineerings.com${pathname}`;
+    schemaScript.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${canonical}#service`,
+      name: metadata.content.heading,
+      serviceType: metadata.content.eyebrow,
+      description: metadata.description,
+      url: canonical,
+      areaServed: { "@type": "Country", name: "Pakistan" },
+      provider: { "@id": "https://nbengineerings.com/#business" },
+    });
+  }, [pathname]);
+
+  return null;
 }
 
 function App() {
+  useEffect(() => {
+    const staticContent = document.getElementById("seo-prerendered-content");
+    if (staticContent) window.requestAnimationFrame(() => staticContent.remove());
+  }, []);
+
   return (
     <BrowserRouter>
       <BusinessSchema />
       <RouteSEO />
+      <RouteStructuredData />
       <ScrollToTop />
       <SkipLink />
       <SiteMotion />

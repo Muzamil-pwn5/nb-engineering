@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 import { getGenerator } from "../api/generators.js";
+import { routeSeo } from "../seoRoutes.js";
 import "./GeneratorDetail.css";
 
 const generatorImages = {
@@ -28,6 +29,7 @@ const fallbackGenerators = [
 
 function GeneratorDetail() {
   const { slug } = useParams();
+  const pageSeo = routeSeo[`/generators/${slug}`];
 
   const [generator, setGenerator] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -62,8 +64,8 @@ function GeneratorDetail() {
     return (
       <>
         <SEO
-          title="Generator Details | NB Engineering & Services | Pakistan"
-          description="View generator specifications, features, applications, and contact information from NB Engineering & Services."
+          title={pageSeo?.title || "Generator Details | NB Engineering & Services | Pakistan"}
+          description={pageSeo?.description || "View generator specifications, features, applications, and contact information from NB Engineering & Services."}
         />
 
         <Navbar />
@@ -110,16 +112,11 @@ function GeneratorDetail() {
   const generatorName =
     generator.name || "Generator";
 
-  const generatorModel = generator.model
-    ? ` | Model ${generator.model}`
-    : "";
+  const seoTitle = pageSeo?.title || `${generatorName} | NB Engineering & Services`;
 
-  const seoTitle =
-    `${generatorName}${generatorModel} | NB Engineering & Services | Pakistan`;
-
-  const seoDescription =
+  const seoDescription = pageSeo?.description ||
     generator.description ||
-    `Explore ${generatorName}${generatorModel}, including specifications, availability, and power generation information from NB Engineering & Services.`;
+    `Explore ${generatorName}, including specifications and power generation information from NB Engineering & Services.`;
 
   return (
     <>

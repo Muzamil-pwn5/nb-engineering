@@ -116,14 +116,14 @@ export const generators = [
 ];
 
 export const services = [
-  { name: "ATS Panels", slug: "ats-panels", description: "Automatic Transfer Switch panel solutions for reliable power transfer.", image_url: null, is_featured: true, is_active: true, id: 6 },
-  { name: "Canopy Work", slug: "canopy-work", description: "Generator canopy fabrication and related engineering work.", image_url: null, is_featured: false, is_active: true, id: 8 },
-  { name: "Generator Maintenance", slug: "generator-maintenance", description: "Preventive and corrective generator maintenance services.", image_url: null, is_featured: true, is_active: true, id: 5 },
-  { name: "Generator Purchase", slug: "generator-purchase", description: "Purchase and sourcing of generators according to customer requirements.", image_url: null, is_featured: false, is_active: true, id: 2 },
-  { name: "Generator Rental", slug: "generator-rental", description: "Generator rental solutions for temporary and project-based power requirements.", image_url: null, is_featured: true, is_active: true, id: 3 },
-  { name: "Generator Repair", slug: "generator-repair", description: "Generator inspection, troubleshooting, repair and restoration services.", image_url: null, is_featured: true, is_active: true, id: 4 },
-  { name: "Generator Sales", slug: "generator-sales", description: "Sale of generators and complete power generation solutions.", image_url: null, is_featured: true, is_active: true, id: 1 },
-  { name: "Spare Parts", slug: "spare-parts", description: "Generator spare parts and replacement components.", image_url: null, is_featured: true, is_active: true, id: 7 },
+  { name: "ATS Panels", slug: "ats-panels", description: "ATS/AMF panels for automatic utility-to-generator transfer, planned around generator controls and site electrical requirements.", image_url: null, is_featured: true, is_active: true, id: 6 },
+  { name: "Canopy Work", slug: "canopy-work", description: "Generator canopy fabrication planned around equipment dimensions, ventilation, exhaust and service access.", image_url: null, is_featured: false, is_active: true, id: 8 },
+  { name: "Generator Maintenance", slug: "generator-maintenance", description: "Generator inspections and preventive maintenance planned around model, operating hours and manufacturer guidance.", image_url: null, is_featured: true, is_active: true, id: 5 },
+  { name: "Generator Purchase", slug: "generator-purchase", description: "Generator purchase planning based on load, kVA, operating duty, site conditions and installation scope.", image_url: null, is_featured: false, is_active: true, id: 2 },
+  { name: "Generator Rental", slug: "generator-rental", description: "Temporary and project-based generator rental planning for load, runtime, access and connection requirements.", image_url: null, is_featured: true, is_active: true, id: 3 },
+  { name: "Generator Repair", slug: "generator-repair", description: "Generator fault diagnosis, repair planning and operational checks for mechanical, electrical and control issues.", image_url: null, is_featured: true, is_active: true, id: 4 },
+  { name: "Generator Sales", slug: "generator-sales", description: "Diesel generator sales and supply options for commercial, industrial and standby power applications.", image_url: null, is_featured: true, is_active: true, id: 1 },
+  { name: "Spare Parts", slug: "spare-parts", description: "Generator spare-parts enquiries matched to equipment make, model, serial details and component requirements.", image_url: null, is_featured: true, is_active: true, id: 7 },
 ];
 
 export const experience = {

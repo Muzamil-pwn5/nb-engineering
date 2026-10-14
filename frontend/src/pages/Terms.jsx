@@ -25,7 +25,7 @@ export default function Terms() {
             </div>
             <dl className="legal-meta">
               <div><dt>Effective date</dt><dd>7 October 2026</dd></div>
-              <div><dt>Applies to</dt><dd>nbengineering.com</dd></div>
+              <div><dt>Applies to</dt><dd>nbengineerings.com</dd></div>
               <div><dt>Jurisdiction</dt><dd>Pakistan</dd></div>
             </dl>
           </div>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://nbengineerings.com/</loc></url>
   <url><loc>https://nbengineerings.com/generators</loc></url>
   <url><loc>https://nbengineerings.com/services</loc></url>
@@ -9,14 +9,6 @@
   <url><loc>https://nbengineerings.com/guides</loc></url>
   <url><loc>https://nbengineerings.com/privacy-policy</loc></url>
   <url><loc>https://nbengineerings.com/terms-and-conditions</loc></url>
-
-  <url><loc>https://nbengineerings.com/generators/cat-c18-generator</loc></url>
-  <url><loc>https://nbengineerings.com/generators/cummins-c110d5</loc></url>
-  <url><loc>https://nbengineerings.com/generators/cummins-c33d5</loc></url>
-  <url><loc>https://nbengineerings.com/generators/fg-wilson-p110-3</loc></url>
-  <url><loc>https://nbengineerings.com/generators/fg-wilson-p22-5-1s</loc></url>
-  <url><loc>https://nbengineerings.com/generators/perkins-1104a-generator</loc></url>
-
   <url><loc>https://nbengineerings.com/services/ats-panels</loc></url>
   <url><loc>https://nbengineerings.com/services/canopy-work</loc></url>
   <url><loc>https://nbengineerings.com/services/generator-maintenance</loc></url>
@@ -25,7 +17,12 @@
   <url><loc>https://nbengineerings.com/services/generator-repair</loc></url>
   <url><loc>https://nbengineerings.com/services/generator-sales</loc></url>
   <url><loc>https://nbengineerings.com/services/spare-parts</loc></url>
-
+  <url><loc>https://nbengineerings.com/generators/cat-c18-generator</loc></url>
+  <url><loc>https://nbengineerings.com/generators/cummins-c110d5</loc></url>
+  <url><loc>https://nbengineerings.com/generators/cummins-c33d5</loc></url>
+  <url><loc>https://nbengineerings.com/generators/fg-wilson-p110-3</loc></url>
+  <url><loc>https://nbengineerings.com/generators/fg-wilson-p22-5-1s</loc></url>
+  <url><loc>https://nbengineerings.com/generators/perkins-1104a-generator</loc></url>
   <url><loc>https://nbengineerings.com/guides/cat-c18</loc></url>
   <url><loc>https://nbengineerings.com/guides/cummins-c110d5</loc></url>
   <url><loc>https://nbengineerings.com/guides/cummins-c33d5</loc></url>

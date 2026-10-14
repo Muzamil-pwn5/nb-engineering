@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
 import SEO from "../components/SEO.jsx";
 import { articles, articleSlugRedirects, getArticle } from "../data/articles.js";
+import { routeSeo } from "../seoRoutes.js";
 import "./Articles.css";
 
 function ArticleCard({ article, number }) {
@@ -62,10 +63,11 @@ export default function ArticlePage() {
 
   const articleText = [article.title, article.intro, article.takeaway, ...article.sections.flatMap((section) => [section.heading, ...section.paragraphs])].join(" ");
   const readingMinutes = Math.max(1, Math.ceil(articleText.split(/\s+/).length / 220));
+  const pageSeo = routeSeo[`/guides/${slug}`];
 
   return (
     <div className="site-page guide-page">
-      <SEO title={`${article.title} | NB Engineering`} description={article.description} />
+      <SEO title={pageSeo.title} description={pageSeo.description} />
       <Navbar />
       <main>
         <header className="guide-article-hero">

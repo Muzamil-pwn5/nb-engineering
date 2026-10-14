@@ -1,0 +1,47 @@
+export const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://nbengineerings.com/#business",
+  name: "NB Engineering & Services",
+  url: "https://nbengineerings.com/",
+  logo: "https://nbengineerings.com/logo.jpeg",
+  image: "https://nbengineerings.com/logo.jpeg",
+  description:
+    "NB Engineering & Services provides generator sales, rental, maintenance, repair, ATS/AMF panel solutions, canopy work and spare parts across Pakistan.",
+  telephone: "+923205636673",
+  email: "nbengineerings@gmail.com",
+  areaServed: {
+    "@type": "Country",
+    name: "Pakistan",
+  },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Tarnol",
+    addressRegion: "Islamabad Capital Territory",
+    addressCountry: "PK",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "https://schema.org/Monday",
+      "https://schema.org/Tuesday",
+      "https://schema.org/Wednesday",
+      "https://schema.org/Thursday",
+      "https://schema.org/Friday",
+      "https://schema.org/Saturday",
+    ],
+    opens: "09:00",
+    closes: "18:00",
+  },
+  knowsAbout: [
+    "Diesel generators",
+    "Generator sales and supply",
+    "Generator rental",
+    "Generator repair",
+    "Generator maintenance",
+    "ATS/AMF panels",
+    "Generator canopy work",
+    "Generator spare parts",
+    "Power generation systems",
+  ],
+};
