@@ -24,9 +24,9 @@ function canonicalUrl(route) {
 }
 
 function normalizeInternalLinks(html) {
-  return html.replace(/href="(\/[^"?#]*)(\?[^"#]*)?(#[^"]*)?"/g, (_match, path, query = "", hash = "") => {
+  return html.replace(/(<a\b[^>]*\bhref=")(\/[^"?#]*)(\?[^"#]*)?(#[^"]*)?("\s*>)/gi, (_match, prefix, path, query = "", hash = "", suffix) => {
     const normalizedPath = path === "/" || path.endsWith("/") ? path : `${path}/`;
-    return `href="${normalizedPath}${query}${hash}"`;
+    return `${prefix}${normalizedPath}${query}${hash}${suffix}`;
   });
 }
 
