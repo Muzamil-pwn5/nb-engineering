@@ -181,8 +181,8 @@ export const routeSeo = {
     description: "Contact NB Engineering for generator supply, maintenance, repair, rental, spare parts and ATS/AMF panel enquiries across Pakistan.",
   },
   "/spare-parts": {
-    title: "Generator Spare Parts in Pakistan | NB Engineering",
-    description: "Explore generator spare parts for maintenance, repairs and replacement. Contact NB Engineering with your equipment details.",
+    title: "Generator Spare Parts & Components in Pakistan | NB Engineering",
+    description: "Explore generator spare parts and replacement components for maintenance and repairs. Share your equipment details with NB Engineering.",
   },
   "/guides": {
     title: "Generator Guides & Practical Advice | NB Engineering",

@@ -22,6 +22,13 @@ function canonicalUrl(route) {
   return route === "/" ? "https://nbengineerings.com/" : `https://nbengineerings.com${route}/`;
 }
 
+function normalizeInternalLinks(html) {
+  return html.replace(/href="(\/[^"?#]*)(\?[^"#]*)?(#[^"]*)?"/g, (_match, path, query = "", hash = "") => {
+    const normalizedPath = path === "/" || path.endsWith("/") ? path : `${path}/`;
+    return `href="${normalizedPath}${query}${hash}"`;
+  });
+}
+
 function replaceContent(html, tagPattern, value, label) {
   if (!tagPattern.test(html)) {
     throw new Error(`Could not find ${label} tag in frontend/index.html`);
@@ -168,7 +175,12 @@ function prerenderStaticRoute(route, metadata) {
   if (route === "/contact") return prerenderContact();
   if (route === "/spare-parts") return prerenderSpareParts();
   if (route === "/brands") return prerenderBrands();
-  if (route === "/privacy-policy" || route === "/terms-and-conditions") return "";
+  if (route === "/privacy-policy") {
+    return staticMain(`<p>Legal / NB Engineering &amp; Services</p><h1>Privacy Policy</h1><p>Read how NB Engineering &amp; Services handles information and essential browser storage on this website. The site does not provide user accounts or collect service requests through forms.</p><p><a href="/contact/">Contact NB Engineering</a> about questions relating to direct communications.</p>`);
+  }
+  if (route === "/terms-and-conditions") {
+    return staticMain(`<p>Legal / NB Engineering &amp; Services</p><h1>Terms &amp; Conditions</h1><p>Read the terms that apply when you access and use the NB Engineering &amp; Services website for information about generator and power-system services.</p><p><a href="/contact/">Contact NB Engineering</a> with questions about the website.</p>`);
+  }
   return staticMain(`<h1>${escapeHtml(metadata.title)}</h1><p>${escapeHtml(metadata.description)}</p><p><a href="/contact">Contact NB Engineering</a></p>`);
 }
 
@@ -192,6 +204,7 @@ for (const [route, metadata] of Object.entries(routeSeo)) {
 
   const staticContent = prerenderStaticRoute(route, metadata);
   html = html.replace('<div id="root"></div>', `${staticContent}<div id="root"></div>`);
+  html = normalizeInternalLinks(html);
 
   const outputPath = join(distDir, route.replace(/^\//, ""), "index.html");
   if (route === "/") {
