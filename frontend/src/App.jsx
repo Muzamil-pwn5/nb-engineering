@@ -14,6 +14,7 @@ const GeneratorDetail = lazy(() => import("./pages/GeneratorDetail.jsx"));
 const Services = lazy(() => import("./pages/Services.jsx"));
 const ServiceDetail = lazy(() => import("./pages/ServiceDetail.jsx"));
 const Contact = lazy(() => import("./pages/Contact.jsx"));
+const Tarnol = lazy(() => import("./pages/Tarnol.jsx"));
 const Brand = lazy(() => import("./pages/Brand.jsx"));
 const SpareParts = lazy(() => import("./pages/SpareParts.jsx"));
 const GuideArticle = lazy(() => import("./pages/Articles.jsx"));
@@ -187,6 +188,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/tarnol" element={<Tarnol />} />
             <Route path="/brands" element={<Brand />} />
             <Route path="/spare-parts" element={<SpareParts />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />

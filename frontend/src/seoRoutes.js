@@ -180,6 +180,10 @@ export const routeSeo = {
     title: "Contact NB Engineering | Generator Support in Pakistan",
     description: "Contact NB Engineering for generator supply, maintenance, repair, rental, spare parts and ATS/AMF panel enquiries across Pakistan.",
   },
+  "/tarnol": {
+    title: "Generator Services in Tarnol, Islamabad | NB Engineering",
+    description: "NB Engineering provides generator sales, rental, installation, repair, maintenance and spare-parts support from Tarnol, Islamabad.",
+  },
   "/spare-parts": {
     title: "Generator Spare Parts & Components in Pakistan | NB Engineering",
     description: "Explore generator spare parts and replacement components for maintenance and repairs. Share your equipment details with NB Engineering.",

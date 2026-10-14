@@ -105,7 +105,7 @@ function prerenderHome() {
 }
 
 function prerenderServiceIndex() {
-  return staticMain(`<p>Generator services / Pakistan</p><h1>Generator services for commercial and industrial power</h1><p>Explore generator installation, sales, purchase planning, rental, repair, maintenance, ATS/AMF panels, canopy work and spare parts. Service scope and site requirements vary by project and location.</p>${linkList(services.map((item) => ({ href: `/services/${item.slug}`, label: item.name, description: item.description })))}<p><a href="/contact">Discuss a service requirement</a></p>`);
+  return staticMain(`<p>Generator services / Pakistan</p><h1>Generator services for commercial and industrial power</h1><p>Explore generator installation, sales, purchase planning, rental, repair, maintenance, ATS/AMF panels, canopy work and spare parts. Service scope and site requirements vary by project and location.</p>${linkList(services.map((item) => ({ href: `/services/${item.slug}`, label: item.name, description: item.description })))}<p><a href="/tarnol">Generator services in Tarnol, Islamabad</a> · <a href="/contact">Discuss a service requirement</a></p>`);
 }
 
 function prerenderGeneratorIndex() {
@@ -128,6 +128,10 @@ function prerenderGuidesIndex() {
 
 function prerenderContact() {
   return staticMain(`<p>Contact / NB Engineering &amp; Services</p><h1>Discuss your generator or power requirement</h1><p>Contact NB Engineering directly about generator installation, supply, service support, rental power, spare parts and technical guidance for projects across Pakistan.</p><ul><li>Telephone: <a href="tel:+923205636673">+92 320 563 6673</a></li><li>Email: <a href="mailto:nbengineerings@gmail.com">nbengineerings@gmail.com</a></li><li>Location: Tarnol, Islamabad, Pakistan</li><li>Hours: Monday–Saturday, 09:00–18:00</li></ul><p>For a useful first discussion, share the site location, application, approximate generator capacity, loads and requested service.</p>`);
+}
+
+function prerenderTarnol() {
+  return staticMain(`<p>Local generator support / Tarnol, Islamabad</p><h1>Generator services in Tarnol, Islamabad</h1><p>NB Engineering &amp; Services supports generator and power-system requirements from Tarnol, Islamabad, including supply, rental, installation planning, repair, maintenance and spare parts.</p><section><h2>Generator supply</h2><p>Discuss generator options for commercial, industrial and standby applications, with capacity and configuration matched to the actual load.</p><p><a href="/services/generator-sales">Explore generator sales and supply</a></p></section><section><h2>Service and repair</h2><p>Share the generator model, symptoms, alarm information and service history so a repair or maintenance requirement can be assessed properly.</p><p><a href="/services/generator-repair">Explore generator repair support</a></p></section><section><h2>Temporary power</h2><p>Plan rental requirements around the load, operating period, placement, delivery access and electrical connection arrangement.</p><p><a href="/services/generator-rental">Explore generator rental solutions</a></p></section><p>Location: Tarnol, Islamabad, Pakistan. Hours: Monday–Saturday, 09:00–18:00.</p><p><a href="/contact">Contact NB Engineering about a Tarnol requirement</a></p>`);
 }
 
 function prerenderSpareParts() {
@@ -163,6 +167,7 @@ function prerenderStaticRoute(route, metadata) {
   if (route === "/generators") return prerenderGeneratorIndex();
   if (route === "/guides") return prerenderGuidesIndex();
   if (route === "/contact") return prerenderContact();
+  if (route === "/tarnol") return prerenderTarnol();
   if (route === "/spare-parts") return prerenderSpareParts();
   if (route === "/brands") return prerenderBrands();
   if (route === "/privacy-policy") {
