@@ -32,71 +32,9 @@ jobs:
         working-directory: frontend
         run: npm ci
 
-      - name: Build frontend
+      - name: Build frontend and prerender SEO routes
         working-directory: frontend
         run: npm run build
-
-      - name: Preserve SPA routes on GitHub Pages
-        run: |
-          cp frontend/dist/index.html frontend/dist/404.html
-          for route in contact generators services brands spare-parts guides privacy-policy terms-and-conditions \
-            generators/cat-c18-generator \
-            generators/cummins-c110d5 \
-            generators/cummins-c33d5 \
-            generators/fg-wilson-p110-3 \
-            generators/fg-wilson-p22-5-1s \
-            generators/perkins-1104a-generator \
-            services/ats-panels \
-            services/canopy-work \
-            services/generator-maintenance \
-            services/generator-purchase \
-            services/generator-rental \
-            services/generator-repair \
-            services/generator-sales \
-            services/spare-parts \
-            guides/cat-c18-generator-capacity-and-applications \
-            guides/cummins-c110d5-generator-guide \
-            guides/cummins-c33d5-33-kva-guide \
-            guides/fg-wilson-p110-3-110-kva-guide \
-            guides/fg-wilson-p22-5-1s-small-generator-guide \
-            guides/perkins-1104a-60-kva-generator-guide \
-            guides/choosing-generator-size-kva-kw-loads \
-            guides/generator-maintenance-checklist-and-service-intervals \
-            guides/generator-sales-questions-before-you-buy \
-            guides/generator-rental-planning-temporary-power \
-            guides/generator-repair-symptoms-and-safe-troubleshooting \
-            guides/ats-generator-automatic-transfer-switch-guide \
-            guides/generator-repair-or-replacement-decision-guide \
-            guides/generator-rental-or-buying-comparison \
-            guides/generator-canopy-ventilation-access-planning \
-            guides/generator-spare-parts-identification-guide \
-            guides/generator-installation-site-readiness-checklist \
-            guides/generator-fuel-use-operating-cost-basics \
-            guides/comparing-generator-brands-and-models \
-            guides/cat-c18 \
-            guides/cummins-c110d5 \
-            guides/cummins-c33d5 \
-            guides/fg-wilson-p110-3 \
-            guides/fg-wilson-p22-5-1s \
-            guides/perkins-1104a \
-            guides/generator-sizing \
-            guides/generator-maintenance \
-            guides/buying-a-generator \
-            guides/generator-rental-guide \
-            guides/generator-troubleshooting \
-            guides/ats-panels-guide \
-            guides/repair-or-replace \
-            guides/rent-vs-buy-generator \
-            guides/generator-canopy \
-            guides/generator-parts \
-            guides/generator-installation-checklist \
-            guides/generator-fuel-costs \
-            guides/compare-generator-brands; do
-            mkdir -p "frontend/dist/${route}"
-            cp frontend/dist/index.html "frontend/dist/${route}/index.html"
-          done
-
-          node frontend/scripts/generate-route-metadata.mjs
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
