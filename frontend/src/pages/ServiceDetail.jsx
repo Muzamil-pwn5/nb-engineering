@@ -444,7 +444,7 @@ function ServiceDetail() {
               {details.eyebrow}
             </p>
 
-            <h1>{details.title}</h1>
+            <h1>{details.heading || details.title}</h1>
 
             <p className="service-detail-intro">
               {details.intro}
@@ -504,6 +504,12 @@ function ServiceDetail() {
                     </li>
                   ))}
                 </ul>
+                {details.related && (
+                  <Link to={details.related.href} className="service-detail-contact-button">
+                    {details.related.label}
+                    <span>→</span>
+                  </Link>
+                )}
               </div>
 
               <div className="service-detail-panel service-detail-contact-panel">

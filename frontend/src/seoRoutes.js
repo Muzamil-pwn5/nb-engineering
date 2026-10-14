@@ -2,6 +2,25 @@ import { articles } from "./data/articles.js";
 import { generators } from "./data/catalog.js";
 
 export const serviceSeo = {
+  "/services/generator-installation": {
+    title: "Generator Installation in Pakistan | NB Engineering",
+    description:
+      "Generator installation services across Pakistan. Plan loads, site placement, ventilation, exhaust, ATS/AMF connection and commissioning scope.",
+    content: {
+      eyebrow: "GENERATOR INSTALLATION",
+      heading: "Generator Installation Services in Pakistan",
+      intro:
+        "NB Engineering provides generator installation services for projects across Pakistan. The installation scope depends on the generator, site layout, connected loads, transfer equipment and commissioning requirements; confirm the location, timing and responsibilities for each project.",
+      sections: [
+        { title: "Plan the generator and load", text: "Share the make and model, capacity if known, application, load list, voltage and phase. Starting demand, operating duty and manufacturer ratings influence whether the selected set suits the site." },
+        { title: "Review placement and installation conditions", text: "Confirm delivery access, space, support or base requirements, ventilation, exhaust routing, fuel arrangements and routine maintenance access. Site drawings or clear photographs can help identify constraints before work is scheduled." },
+        { title: "Coordinate the electrical system", text: "Discuss the connection point, protection, isolation, earthing and transfer arrangement with qualified electrical professionals. If an ATS/AMF panel is required, its rating and controls should be checked against the generator and existing equipment." },
+        { title: "Clarify testing and handover", text: "Agree which tasks are included in the installation scope, who is responsible for electrical work and approvals, and what commissioning checks and handover documents will be provided. All work should follow the equipment manufacturer's instructions and applicable site requirements." },
+      ],
+      highlights: ["Generator installation planning and service", "Site and load coordination", "Ventilation and exhaust considerations", "ATS/AMF integration planning", "Commissioning and handover scope", "Enquiries from projects across Pakistan"],
+      related: { label: "Read the generator installation checklist", href: "/guides/generator-installation-pakistan" },
+    },
+  },
   "/services/ats-panels": {
     title: "ATS/AMF Panels in Pakistan | NB Engineering",
     description:
@@ -197,6 +216,7 @@ const guideTitles = {
   "fg-wilson-p22-5-1s": "FG Wilson P22.5-1S Generator Guide | NB Engineering",
   "perkins-1104a": "Perkins 1104A 60 kVA Generator Guide | NB Engineering",
   "generator-sizing": "Generator Sizing: kVA & Load Guide | NB Engineering",
+  "generator-installation-pakistan": "Generator Installation in Pakistan | NB Engineering",
   "generator-maintenance": "Generator Maintenance Checklist | NB Engineering",
   "buying-a-generator": "Buying a Generator: What to Check | NB Engineering",
   "generator-rental-guide": "Generator Rental Project Guide | NB Engineering",

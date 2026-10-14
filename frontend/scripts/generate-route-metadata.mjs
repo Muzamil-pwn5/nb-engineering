@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { businessSchema } from "../src/businessSchema.js";
+import { articles } from "../src/data/articles.js";
 import { routeSeo, serviceSeo } from "../src/seoRoutes.js";
 
 const frontendDir = fileURLToPath(new URL("..", import.meta.url));
@@ -48,6 +49,23 @@ function serviceSchemaScript(route, metadata) {
   return `<script id="nb-engineering-service-schema" type="application/ld+json">${safeJson(schema)}</script>`;
 }
 
+function articleSchemaScript(route, article) {
+  const canonical = `https://nbengineerings.com${route}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${canonical}#article`,
+    headline: article.title,
+    description: article.description,
+    mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+    author: { "@type": "Organization", name: "NB Engineering & Services", "@id": "https://nbengineerings.com/#business" },
+    publisher: { "@id": "https://nbengineerings.com/#business" },
+    datePublished: article.datePublished,
+    dateModified: article.datePublished,
+  };
+  return `<script id="nb-engineering-article-schema" type="application/ld+json">${safeJson(schema)}</script>`;
+}
+
 function prerenderServiceContent(metadata) {
   const content = metadata.content;
   const sections = content.sections
@@ -56,8 +74,21 @@ function prerenderServiceContent(metadata) {
   const highlights = content.highlights
     .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join("\n");
+  const related = content.related
+    ? `<p><a href="${escapeHtml(content.related.href)}">${escapeHtml(content.related.label)}</a></p>`
+    : "";
 
-  return `<main id="seo-prerendered-content" class="seo-prerendered-content"><article><p>${escapeHtml(content.eyebrow)}</p><h1>${escapeHtml(content.heading)}</h1><p>${escapeHtml(content.intro)}</p>${sections}<section><h2>Service scope</h2><ul>${highlights}</ul></section><p><a href="/contact">Contact NB Engineering about this service</a></p></article></main>`;
+  return `<main id="seo-prerendered-content" class="seo-prerendered-content"><article><p>${escapeHtml(content.eyebrow)}</p><h1>${escapeHtml(content.heading)}</h1><p>${escapeHtml(content.intro)}</p>${sections}<section><h2>Service scope</h2><ul>${highlights}</ul></section>${related}<p><a href="/contact">Contact NB Engineering about this service</a></p></article></main>`;
+}
+
+function prerenderArticleContent(article) {
+  const sections = article.sections
+    .map((section) => `<section><h2>${escapeHtml(section.heading)}</h2>${section.paragraphs.map((paragraph) => `<p>${escapeHtml(paragraph)}</p>`).join("\n")}</section>`)
+    .join("\n");
+  const published = article.datePublished
+    ? `<p>Published ${new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${article.datePublished}T00:00:00Z`))}</p>`
+    : "";
+  return `<main id="seo-prerendered-content" class="seo-prerendered-content"><article><p>${escapeHtml(article.category)}</p><h1>${escapeHtml(article.title)}</h1>${published}<p>${escapeHtml(article.intro)}</p>${sections}<aside><h2>Key takeaway</h2><p>${escapeHtml(article.takeaway)}</p></aside><p><a href="/services/generator-installation">Explore generator installation services across Pakistan</a></p><p><a href="/contact">Contact NB Engineering</a></p></article></main>`;
 }
 
 for (const [route, metadata] of Object.entries(routeSeo)) {
@@ -111,11 +142,15 @@ for (const [route, metadata] of Object.entries(routeSeo)) {
   if (serviceSeo[route]?.content) {
     headExtras += serviceSchemaScript(route, serviceSeo[route]);
   }
+  const routeArticle = articles.find((article) => `/guides/${article.slug}` === route);
+  if (routeArticle?.datePublished) headExtras += articleSchemaScript(route, routeArticle);
   html = html.replace("</head>", `${headExtras}\n</head>`);
 
   const staticContent = serviceSeo[route]?.content
     ? prerenderServiceContent(serviceSeo[route])
-    : "";
+    : routeArticle
+      ? prerenderArticleContent(routeArticle)
+      : "";
   html = html.replace('<div id="root"></div>', `${staticContent}<div id="root"></div>`);
 
   const outputPath = join(distDir, route.replace(/^\//, ""), "index.html");

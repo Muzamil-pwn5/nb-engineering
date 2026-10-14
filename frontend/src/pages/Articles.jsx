@@ -63,6 +63,9 @@ export default function ArticlePage() {
 
   const articleText = [article.title, article.intro, article.takeaway, ...article.sections.flatMap((section) => [section.heading, ...section.paragraphs])].join(" ");
   const readingMinutes = Math.max(1, Math.ceil(articleText.split(/\s+/).length / 220));
+  const publishedDate = article.datePublished
+    ? new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${article.datePublished}T00:00:00Z`))
+    : null;
   const pageSeo = routeSeo[`/guides/${slug}`];
 
   return (
@@ -76,7 +79,7 @@ export default function ArticlePage() {
             <p className="eyebrow">{article.category.toUpperCase()} / NB ENGINEERING FIELD NOTES</p>
             <h1>{article.title}</h1>
             <p className="guide-article-intro">{article.intro}</p>
-            <span className="guide-reading-note">About {readingMinutes} min read <span aria-hidden="true">·</span> NB Engineering field notes</span>
+            <span className="guide-reading-note">About {readingMinutes} min read <span aria-hidden="true">·</span> NB Engineering field notes{publishedDate && <> <span aria-hidden="true">·</span> Published {publishedDate}</>}</span>
           </div>
         </header>
         <article className="guide-article-body site-shell">

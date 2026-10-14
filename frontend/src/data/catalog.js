@@ -116,6 +116,7 @@ export const generators = [
 ];
 
 export const services = [
+  { name: "Generator Installation", slug: "generator-installation", description: "Generator installation planning and project support for equipment, site layout, electrical transfer and commissioning needs.", image_url: null, is_featured: true, is_active: true, id: 9 },
   { name: "ATS Panels", slug: "ats-panels", description: "ATS/AMF panels for automatic utility-to-generator transfer, planned around generator controls and site electrical requirements.", image_url: null, is_featured: true, is_active: true, id: 6 },
   { name: "Canopy Work", slug: "canopy-work", description: "Generator canopy fabrication planned around equipment dimensions, ventilation, exhaust and service access.", image_url: null, is_featured: false, is_active: true, id: 8 },
   { name: "Generator Maintenance", slug: "generator-maintenance", description: "Generator inspections and preventive maintenance planned around model, operating hours and manufacturer guidance.", image_url: null, is_featured: true, is_active: true, id: 5 },

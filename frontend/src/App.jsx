@@ -5,6 +5,7 @@ import CookieConsent from "./components/CookieConsent.jsx";
 import SEO from "./components/SEO.jsx";
 import BusinessSchema from "./components/BusinessSchema.jsx";
 import { routeSeo, serviceSeo } from "./seoRoutes.js";
+import { articles } from "./data/articles.js";
 
 const Home = lazy(() => import("./pages/Home.jsx"));
 const Generators = lazy(() => import("./pages/generators.jsx"));
@@ -107,30 +108,61 @@ function RouteStructuredData() {
     const schemaId = "nb-engineering-service-schema";
     let schemaScript = document.getElementById(schemaId);
     const metadata = serviceSeo[pathname];
+    const canonical = `https://nbengineerings.com${pathname}`;
 
     if (!metadata?.content) {
       schemaScript?.remove();
+    } else {
+      if (!schemaScript) {
+        schemaScript = document.createElement("script");
+        schemaScript.id = schemaId;
+        schemaScript.type = "application/ld+json";
+        document.head.appendChild(schemaScript);
+      }
+
+      schemaScript.textContent = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "@id": `${canonical}#service`,
+        name: metadata.content.heading,
+        serviceType: metadata.content.eyebrow,
+        description: metadata.description,
+        url: canonical,
+        areaServed: { "@type": "Country", name: "Pakistan" },
+        provider: { "@id": "https://nbengineerings.com/#business" },
+      });
+    }
+
+    const articleScriptId = "nb-engineering-article-schema";
+    let articleScript = document.getElementById(articleScriptId);
+    const articleSlug = pathname.startsWith("/guides/")
+      ? pathname.slice("/guides/".length)
+      : "";
+    const article = articles.find((item) => item.slug === articleSlug && item.datePublished);
+
+    if (!article) {
+      articleScript?.remove();
       return;
     }
 
-    if (!schemaScript) {
-      schemaScript = document.createElement("script");
-      schemaScript.id = schemaId;
-      schemaScript.type = "application/ld+json";
-      document.head.appendChild(schemaScript);
+    if (!articleScript) {
+      articleScript = document.createElement("script");
+      articleScript.id = articleScriptId;
+      articleScript.type = "application/ld+json";
+      document.head.appendChild(articleScript);
     }
 
-    const canonical = `https://nbengineerings.com${pathname}`;
-    schemaScript.textContent = JSON.stringify({
+    articleScript.textContent = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Service",
-      "@id": `${canonical}#service`,
-      name: metadata.content.heading,
-      serviceType: metadata.content.eyebrow,
-      description: metadata.description,
-      url: canonical,
-      areaServed: { "@type": "Country", name: "Pakistan" },
-      provider: { "@id": "https://nbengineerings.com/#business" },
+      "@type": "Article",
+      "@id": `${canonical}#article`,
+      headline: article.title,
+      description: article.description,
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+      author: { "@type": "Organization", name: "NB Engineering & Services", "@id": "https://nbengineerings.com/#business" },
+      publisher: { "@id": "https://nbengineerings.com/#business" },
+      datePublished: article.datePublished,
+      dateModified: article.datePublished,
     });
   }, [pathname]);
 
