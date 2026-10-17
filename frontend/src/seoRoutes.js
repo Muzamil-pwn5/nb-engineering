@@ -165,7 +165,7 @@ export const routeSeo = {
     description: "Generator sales, rental, maintenance, repair, ATS/AMF panels and spare parts for commercial and industrial power needs across Pakistan.",
   },
   "/generators": {
-    title: "Diesel Generators for Sale in Pakistan | NB Engineering",
+    title: "Diesel Generators 5–1000+ kVA in Pakistan | NB Engineering",
     description: "Explore diesel generator options for standby, commercial and industrial applications. Compare models and discuss your power requirement across Pakistan.",
   },
   "/services": {
