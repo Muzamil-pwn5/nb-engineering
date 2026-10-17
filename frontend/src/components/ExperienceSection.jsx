@@ -527,9 +527,7 @@ export default function ExperienceSection() {
 
           <div className="experience-hero-bottom">
             <p>
-              Infrastructure delivered across
-              operational environments where
-              reliable power is critical.
+              Operating since 2009, with documented generator, maintenance and power-support references across Pakistan.
             </p>
 
             <div className="experience-hero-meta">
@@ -565,7 +563,7 @@ export default function ExperienceSection() {
                 </strong>
 
                 <span>
-                  Sites
+                  Branch sites
                 </span>
               </div>
             </div>
@@ -839,6 +837,23 @@ export default function ExperienceSection() {
             </div>
           </div>
 
+        </div>
+
+        <div className="experience-history">
+          <div className="experience-history-heading">
+            <p className="experience-label">04 / DOCUMENTED REFERENCES</p>
+            <h3>Selected project history.</h3>
+            <p>These examples are taken from the company profile supplied by NB Engineering &amp; Services. They are selected references, not a complete current customer list.</p>
+          </div>
+          <div className="experience-history-grid">
+            {(data?.history || []).map((item) => (
+              <article className="experience-history-card" key={`${item.year}-${item.title}`}>
+                <span>{item.year}</span>
+                <h4>{item.title}</h4>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -128,13 +128,22 @@ export const services = [
 ];
 
 export const experience = {
-  stats: { organizations: 0, sectors: 6, sites: 0, equipment: 0, service_records: 0 },
+  stats: { organizations: 50, sectors: 7, sites: 47, equipment: 0, service_records: 0 },
   sectors: [
-    { name: "Banks / Financial", description: "Power infrastructure for banking and financial operations.", customers: [], organization_count: 0 },
-    { name: "Embassies / Diplomatic", description: "Dependable power support for diplomatic facilities.", customers: [], organization_count: 0 },
-    { name: "Hotels / Hospitality", description: "Power systems supporting hospitality and guest operations.", customers: [], organization_count: 0 },
-    { name: "Healthcare", description: "Generator and electrical support for healthcare environments.", customers: [], organization_count: 0 },
-    { name: "Corporate / Commercial", description: "Power solutions for commercial and business facilities.", customers: [], organization_count: 0 },
-    { name: "Government / Public Sector", description: "Infrastructure support across public-sector facilities.", customers: [], organization_count: 0 },
+    { name: "Banks / Financial", description: "Generator sales, maintenance and on-call support across banking operations in the North zone.", organization_count: 4, customers: [{ name: "Dubai Islamic Bank", sites: 47, equipment: 0, service_records: 1 }, { name: "Habib Bank Ltd", sites: 1, equipment: 0, service_records: 1 }, { name: "Al Baraka Bank", sites: 1, equipment: 0, service_records: 1 }, { name: "Summit Bank North Project", sites: 1, equipment: 0, service_records: 1 }] },
+    { name: "Embassies / Diplomatic", description: "Documented generator supply and maintenance references for diplomatic facilities in Islamabad.", organization_count: 5, customers: [{ name: "Mauritius High Commission", sites: 4, equipment: 4, service_records: 1 }, { name: "Ethiopia, Romania, Bangladesh and Egypt missions", sites: 4, equipment: 7, service_records: 4 }] },
+    { name: "Hotels / Hospitality", description: "Generator systems and support for hotels, hospitality venues and related operations.", organization_count: 7, customers: [{ name: "Ramada Hotel Islamabad", sites: 1, equipment: 2, service_records: 1 }, { name: "Ambassador, Sarena, Grand Arena and Potohar references", sites: 4, equipment: 0, service_records: 4 }] },
+    { name: "Healthcare", description: "Generator supply and service references for hospitals and healthcare facilities in the Islamabad–Rawalpindi area.", organization_count: 6, customers: [{ name: "KKT, Azmat Rasheed, Batool, Hayat Wali, Instant Health Care and Nusrat Hospital", sites: 6, equipment: 0, service_records: 6 }] },
+    { name: "Corporate / Commercial", description: "Power systems and service support for offices, retailers, builders, warehouses and commercial facilities.", organization_count: 17, customers: [{ name: "Corporate, retail, construction and warehouse references", sites: 17, equipment: 0, service_records: 17 }] },
+    { name: "Government / Public Sector", description: "Generator and electrical support references across public-sector and government-linked operations.", organization_count: 5, customers: [{ name: "CPPA, Custom House and public-sector references", sites: 5, equipment: 0, service_records: 5 }] },
+    { name: "Industrial / Technical", description: "Generator, parts, ATS and maintenance support for industrial and technical operations.", organization_count: 6, customers: [{ name: "Sehgal Motors, Green Tower, Atlas Battery and technical references", sites: 6, equipment: 0, service_records: 6 }] },
+  ],
+  history: [
+    { year: "Since 2009", title: "Operating experience", text: "The company profile states that NB Engineering & Services has been operating since 2009, serving organizations large and small." },
+    { year: "2014 / 2 years", title: "Mauritius High Commission", text: "A documented maintenance contract covered four generator sets installed at diplomatic residences in Islamabad, with monthly service reporting." },
+    { year: "47 branches", title: "Dubai Islamic Bank", text: "The profile records AMC support for Dubai Islamic Bank across 47 North-zone branches." },
+    { year: "North zone", title: "Banking support", text: "The reference list includes Habib Bank Ltd and Al Baraka Bank on North-zone on-call bases, alongside a Summit Bank North Project subcontract." },
+    { year: "2 × 400 kVA", title: "Ramada Hotel Islamabad", text: "The listed references include two 400 kVA generator sets for Ramada Hotel Islamabad." },
+    { year: "2 × 150 kVA", title: "Romania Embassy Islamabad", text: "The diplomatic references include two 150 kVA generator sets for the Romania Embassy in Islamabad." },
   ],
 };
