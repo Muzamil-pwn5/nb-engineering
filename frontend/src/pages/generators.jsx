@@ -10,10 +10,8 @@ import "../ui/site.css";
 
 const localImages = {
   "fg-wilson-p110-3": REAL_GENERATOR_PHOTOS[1].src,
-  "fg-wilson-p22-5-1s": REAL_GENERATOR_PHOTOS[6].src,
   "fg-wilson-p180p2-180kva": REAL_GENERATOR_PHOTOS[2].src,
   "cummins-c110d5": REAL_GENERATOR_PHOTOS[0].src,
-  "cummins-c33d5": REAL_GENERATOR_PHOTOS[5].src,
   "cummins-180kva": REAL_GENERATOR_PHOTOS[3].src,
   "cat-c18-generator": REAL_GENERATOR_PHOTOS[6].src,
   "perkins-1104a-generator": REAL_GENERATOR_PHOTOS[4].src,
