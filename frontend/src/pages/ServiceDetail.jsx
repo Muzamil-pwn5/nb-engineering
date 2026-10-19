@@ -444,7 +444,7 @@ function ServiceDetail() {
               {details.eyebrow}
             </p>
 
-            <h1>{details.heading || details.title}</h1>
+            <h1>{slug === "ats-panels" ? <>ATS/AMF Panels for <span className="service-detail-hero-accent">Generator Systems</span></> : details.heading || details.title}</h1>
 
             <p className="service-detail-intro">
               {details.intro}

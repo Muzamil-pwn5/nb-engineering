@@ -94,13 +94,13 @@
   letter-spacing: -0.065em;
   font-weight: 700;
   color: #ffffff;
-  background: linear-gradient(100deg, #ffffff 0%, #ffffff 56%, #ff7567 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
   text-shadow:
     0 5px 20px rgba(0, 0, 0, 0.55),
     0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+.service-detail-hero-accent {
+  color: #ff7567;
 }
 
 .service-detail-intro {
