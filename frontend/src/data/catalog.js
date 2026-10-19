@@ -128,7 +128,7 @@ export const services = [
 ];
 
 export const experience = {
-  stats: { organizations: 50, sectors: 7, sites: 47, equipment: 0, service_records: 0 },
+  stats: { organizations: 50, sectors: 7, sites: 47, equipment: 13, service_records: 48 },
   sectors: [
     { name: "Banks / Financial", description: "Generator sales, maintenance and on-call support across banking operations in the North zone.", organization_count: 4, customers: [{ name: "Dubai Islamic Bank", sites: 47, equipment: 0, service_records: 1 }, { name: "Habib Bank Ltd", sites: 1, equipment: 0, service_records: 1 }, { name: "Al Baraka Bank", sites: 1, equipment: 0, service_records: 1 }, { name: "Summit Bank North Project", sites: 1, equipment: 0, service_records: 1 }] },
     { name: "Embassies / Diplomatic", description: "Documented generator supply and maintenance references for diplomatic facilities in Islamabad.", organization_count: 5, customers: [{ name: "Mauritius High Commission", sites: 4, equipment: 4, service_records: 1 }, { name: "Ethiopia, Romania, Bangladesh and Egypt missions", sites: 4, equipment: 7, service_records: 4 }] },
@@ -140,9 +140,9 @@ export const experience = {
   ],
   history: [
     { year: "Since 2009", title: "Operating experience", text: "The company profile states that NB Engineering & Services has been operating since 2009, serving organizations large and small." },
-    { year: "2014 / 2 years", title: "Mauritius High Commission", text: "A documented maintenance contract covered four generator sets installed at diplomatic residences in Islamabad, with monthly service reporting." },
+    { year: "2-year contract", title: "Mauritius High Commission", text: "A documented maintenance contract covered four generator sets installed at diplomatic residences in Islamabad, with monthly service reporting." },
     { year: "47 branches", title: "Dubai Islamic Bank", text: "The profile records AMC support for Dubai Islamic Bank across 47 North-zone branches." },
-    { year: "North zone", title: "Banking support", text: "The reference list includes Habib Bank Ltd and Al Baraka Bank on North-zone on-call bases, alongside a Summit Bank North Project subcontract." },
+    { year: "4 bank references", title: "North-zone banking support", text: "The documented banking references include Dubai Islamic Bank, Habib Bank Ltd, Al Baraka Bank and a Summit Bank North Project subcontract." },
     { year: "2 × 400 kVA", title: "Ramada Hotel Islamabad", text: "The listed references include two 400 kVA generator sets for Ramada Hotel Islamabad." },
     { year: "2 × 150 kVA", title: "Romania Embassy Islamabad", text: "The diplomatic references include two 150 kVA generator sets for the Romania Embassy in Islamabad." },
   ],
