@@ -93,14 +93,16 @@
   line-height: 0.94;
   letter-spacing: -0.065em;
   font-weight: 700;
-  color: #ffffff;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
   text-shadow:
     0 5px 20px rgba(0, 0, 0, 0.55),
     0 15px 40px rgba(0, 0, 0, 0.35);
 }
 
 .service-detail-hero-accent {
-  color: #ff7567;
+  color: #ff7567 !important;
+  -webkit-text-fill-color: #ff7567 !important;
 }
 
 .service-detail-intro {
