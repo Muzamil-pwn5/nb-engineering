@@ -13,6 +13,7 @@ const serviceImages = {
   "generator-rental": "/images/refresh/generator-installation-site.webp",
   "generator-repair": "/images/refresh/generator-maintenance-technician.webp",
   "generator-maintenance": "/images/refresh/generator-maintenance-technician.webp",
+  "generator-installation": "/images/refresh/generator-installation-site.webp",
   "ats-panels": "/images/refresh/ats-amf-panel-installation.webp",
   "canopy-work": "/images/refresh/hero-generator-150kva.webp",
   "spare-parts": "/images/refresh/generator-parts-workbench.webp",
