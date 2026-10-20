@@ -301,6 +301,27 @@ const fallbackDetails = {
   ],
 };
 
+function HeroHeading({ slug, heading }) {
+  const words = heading.trim().split(/\s+/);
+
+  if (slug === "ats-panels") {
+    return (
+      <>
+        ATS/AMF Panels for <span className="service-detail-hero-accent">Generator Systems</span>
+      </>
+    );
+  }
+
+  const splitAt = Math.max(1, words.length - 2);
+
+  return (
+    <>
+      {words.slice(0, splitAt).join(" ")} {" "}
+      <span className="service-detail-hero-accent">{words.slice(splitAt).join(" ")}</span>
+    </>
+  );
+}
+
 function ServiceDetail() {
   const { slug } = useParams();
   const routeSeo = serviceSeo[`/services/${slug}`];
@@ -444,7 +465,7 @@ function ServiceDetail() {
               {details.eyebrow}
             </p>
 
-            <h1>{slug === "ats-panels" ? <>ATS/AMF Panels for <span className="service-detail-hero-accent">Generator Systems</span></> : details.heading || details.title}</h1>
+            <h1><HeroHeading slug={slug} heading={details.heading || details.title} /></h1>
 
             <p className="service-detail-intro">
               {details.intro}
