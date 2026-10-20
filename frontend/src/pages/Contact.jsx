@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar.jsx";
 import Footer from "../components/Footer.jsx";
+import LocalBusinessSection from "../components/LocalBusinessSection.jsx";
 import { BlurIn, Reveal } from "../ui/MotionPrimitives.jsx";
 import "../ui/site.css";
 
@@ -68,6 +69,7 @@ export default function Contact() {
             </Reveal>
           </div>
         </section>
+        <LocalBusinessSection compact />
         <section className="section">
           <div className="site-shell">
             <Reveal>

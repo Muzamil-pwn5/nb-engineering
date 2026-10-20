@@ -59,11 +59,10 @@ function ScrollToTop() {
 }
 
 function SiteMotion() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
-    const done = window.setTimeout(() => setLoading(false), 650);
+    const done = window.setTimeout(() => setLoading(false), 1050);
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? window.scrollY / max : 0);
@@ -82,8 +81,20 @@ function SiteMotion() {
       <AnimatePresence>
         {loading && (
           <motion.div className="site-loader" role="status" aria-label="Loading NB Engineering website" initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.45 }}>
-            <motion.img src="/logo.jpeg" alt="NB Engineering" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.45 }} />
-            <motion.span aria-hidden="true" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.55, ease: "easeInOut" }} />
+            <div className="site-loader-grid" aria-hidden="true" />
+            <div className="site-loader-corner site-loader-corner-left">NB / 00</div>
+            <div className="site-loader-corner site-loader-corner-right">POWER SYSTEMS / ISLAMABAD</div>
+            <div className="site-loader-core">
+              <motion.div className="site-loader-orbit" aria-hidden="true" initial={{ rotate: -18, scale: .92 }} animate={{ rotate: 0, scale: 1 }} transition={{ duration: .9, ease: "easeOut" }}>
+                <img src="/logo.jpeg" alt="NB Engineering" />
+              </motion.div>
+              <div className="site-loader-copy">
+                <span>NB ENGINEERING & SERVICES</span>
+                <strong>Power systems<br /><em>for the real world.</em></strong>
+                <div className="site-loader-progress" aria-hidden="true"><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .85, ease: "easeInOut" }} /></div>
+                <small>Loading the next move</small>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
