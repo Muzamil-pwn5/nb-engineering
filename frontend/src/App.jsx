@@ -62,7 +62,7 @@ function SiteMotion() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   useEffect(() => {
-    const done = window.setTimeout(() => setLoading(false), 1050);
+    const done = window.setTimeout(() => setLoading(false), 1500);
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? window.scrollY / max : 0);
@@ -91,7 +91,7 @@ function SiteMotion() {
               <div className="site-loader-copy">
                 <span>NB ENGINEERING & SERVICES</span>
                 <strong>Power systems<br /><em>for the real world.</em></strong>
-                <div className="site-loader-progress" aria-hidden="true"><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: .85, ease: "easeInOut" }} /></div>
+                <div className="site-loader-progress" aria-hidden="true"><motion.i initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 1.25, ease: "easeInOut" }} /></div>
                 <small>Loading the next move</small>
               </div>
             </div>
