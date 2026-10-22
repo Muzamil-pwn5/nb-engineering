@@ -89,7 +89,6 @@ body { accent-color: var(--nb-pink); }
 .footer-modern .button-primary { background: #fff !important; color: #000 !important; }
 .footer-modern .button-primary:hover { background: var(--nb-pink) !important; color: #fff !important; }
 
-/* Remove accidental remote image dependencies from cards if backend data contains one. */
 img { display: block; }
 
 

@@ -6,4 +6,4 @@ Please report suspected security vulnerabilities privately to **nbengineerings@g
 
 ## User safety
 
-The public website is served over HTTPS. The API accepts requests only from the configured site origins and returns browser security headers. Never send passwords, API tokens, or payment information through the public inquiry form.
+The public website is served over HTTPS. It is a static frontend hosted on GitHub Pages and does not expose a backend API or store inquiry submissions. Never send passwords, personal data, or payment information through public website links or external communication services.
