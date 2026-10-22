@@ -42,13 +42,12 @@ export default function LocalBusinessSection({ compact = false }) {
           </div>
 
           <div className="local-business-map-wrap">
-            <iframe
-              className="local-business-map"
-              title="NB Engineering & Services location in Tarnol, Islamabad"
-              src={LOCAL_BUSINESS.mapEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            <img className="local-business-map" src={LOCAL_BUSINESS.mapImage} alt="Map of the Tarnol and Main G.T. Road area in Islamabad" />
+            <div className="local-business-map-marker" aria-label="Approximate NB Engineering location">
+              <span>NB</span>
+              <i aria-hidden="true" />
+            </div>
+            <span className="local-business-map-attribution">Map data © OpenStreetMap</span>
             <div className="local-business-map-caption">
               <span>Malik Market / Main G.T. Road / Tarnol</span>
               <a href={LOCAL_BUSINESS.googleUrl} target="_blank" rel="noopener noreferrer">Get directions <span>↗</span></a>
