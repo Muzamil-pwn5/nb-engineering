@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import CookieConsent from "./components/CookieConsent.jsx";
@@ -59,10 +59,15 @@ function ScrollToTop() {
 }
 
 function SiteMotion() {
-  const [loading, setLoading] = useState(true);
+  const { pathname } = useLocation();
+  const [donePath, setDonePath] = useState(null);
   const [progress, setProgress] = useState(0);
+  const firstLoad = useRef(true);
+  const loading = donePath !== pathname;
   useEffect(() => {
-    const done = window.setTimeout(() => setLoading(false), 1500);
+    const duration = firstLoad.current ? 1500 : 700;
+    firstLoad.current = false;
+    const done = window.setTimeout(() => setDonePath(pathname), duration);
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       setProgress(max > 0 ? window.scrollY / max : 0);
@@ -73,7 +78,7 @@ function SiteMotion() {
       window.clearTimeout(done);
       window.removeEventListener("scroll", onScroll);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <>
@@ -189,7 +194,7 @@ function App() {
       <CookieConsent />
       <DeferredGsapAnimations />
       <div id="main-content" tabIndex="-1">
-        <Suspense fallback={<div className="route-loading" role="status">Loading page…</div>}>
+        <Suspense fallback={<div className="route-loading" role="status"><span>NB / LOADING</span><strong>Preparing the next move.</strong></div>}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/guides" element={<ArticlesIndex />} />
