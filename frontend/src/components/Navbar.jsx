@@ -7,9 +7,10 @@ import "./Navbar.css";
 const items = [{ label: "Services", path: "/services" }, { label: "Generators", path: "/generators" }, { label: "ATS / AMF", path: "/services/ats-panels" }, { label: "Guides", path: "/guides" }, { label: "Brands", path: "/brands" }];
 
 function isNavActive(pathname, itemPath) {
-  if (itemPath === "/services") return pathname === "/services" || (pathname.startsWith("/services/") && pathname !== "/services/ats-panels");
-  if (itemPath === "/services/ats-panels") return pathname === itemPath;
-  return pathname === itemPath || pathname.startsWith(`${itemPath}/`);
+  const normalizedPath = pathname.replace(/\/+$/, "") || "/";
+  if (itemPath === "/services") return normalizedPath === "/services" || (normalizedPath.startsWith("/services/") && normalizedPath !== "/services/ats-panels");
+  if (itemPath === "/services/ats-panels") return normalizedPath === itemPath;
+  return normalizedPath === itemPath || normalizedPath.startsWith(`${itemPath}/`);
 }
 
 export default function Navbar() {
