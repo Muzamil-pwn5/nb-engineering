@@ -34,10 +34,12 @@ function SEO({ title, description }) {
     setMeta('meta[property="og:url"]', "property", "og:url", canonicalUrl);
     setMeta('meta[property="og:site_name"]', "property", "og:site_name", "NB Engineering & Services");
     setMeta('meta[property="og:image"]', "property", "og:image", "https://nbengineerings.com/logo.jpeg");
+    setMeta('meta[property="og:image:alt"]', "property", "og:image:alt", "NB Engineering & Services logo");
     setMeta('meta[name="twitter:card"]', "name", "twitter:card", "summary_large_image");
     setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMeta('meta[name="twitter:description"]', "name", "twitter:description", description);
     setMeta('meta[name="twitter:image"]', "name", "twitter:image", "https://nbengineerings.com/logo.jpeg");
+    setMeta('meta[name="twitter:image:alt"]', "name", "twitter:image:alt", "NB Engineering & Services logo");
   }, [title, description]);
 
   return null;
