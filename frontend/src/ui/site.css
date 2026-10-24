@@ -17,6 +17,9 @@ body,.lead,.button,.eyebrow,.pill,.card-link,.footer-modern { font-family:var(--
 .footer-direct a span { color:#8d9994; font-size:11px; }
 .footer-location,.footer-hours { display:block; margin-top:13px; color:#8d9994; font-size:13px; line-height:1.6; }
 .footer-hours { color:var(--acid); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+.preferred-source { display:grid; gap:8px; margin-top:24px; }
+.preferred-source-label { color:#9eaba4; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
+.preferred-source [google-add-preferred-source-btn] { min-height:42px; }
 .contact-direct { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:34px; max-width:620px; }
 .contact-direct a { display:flex; flex-direction:column; gap:8px; padding:18px; border:1px solid rgba(255,255,255,.15); background:#11171b; color:#fff; text-decoration:none; transition:transform .25s ease,border-color .25s ease,background .25s ease; }
 .contact-direct a:hover { transform:translateY(-3px); border-color:var(--acid); background:#172126; }
