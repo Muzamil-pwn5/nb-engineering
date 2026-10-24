@@ -19,7 +19,9 @@ body,.lead,.button,.eyebrow,.pill,.card-link,.footer-modern { font-family:var(--
 .footer-hours { color:var(--acid); font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
 .preferred-source { display:grid; gap:8px; margin-top:24px; }
 .preferred-source-label { color:#9eaba4; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; }
-.preferred-source [google-add-preferred-source-btn] { min-height:42px; }
+.preferred-source-button { min-height:42px; padding:0 14px; border:1px solid rgba(255,255,255,.25); background:#11171b; color:#fff; font:700 10px/1 var(--body-font); letter-spacing:.1em; text-align:left; text-transform:uppercase; cursor:pointer; transition:background .25s ease,border-color .25s ease,transform .25s ease; }
+.preferred-source-button:hover:not(:disabled) { border-color:var(--acid); background:var(--acid); color:var(--ink); transform:translateY(-2px); }
+.preferred-source-button:disabled { cursor:wait; opacity:.65; }
 .contact-direct { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:34px; max-width:620px; }
 .contact-direct a { display:flex; flex-direction:column; gap:8px; padding:18px; border:1px solid rgba(255,255,255,.15); background:#11171b; color:#fff; text-decoration:none; transition:transform .25s ease,border-color .25s ease,background .25s ease; }
 .contact-direct a:hover { transform:translateY(-3px); border-color:var(--acid); background:#172126; }

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "../ui/site.css";
 
@@ -26,5 +27,19 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  return <footer className="footer-modern"><div className="site-shell footer-grid"><div className="footer-intro"><div className="footer-brand">NB ENGINEERING<span> & SERVICES</span></div><p className="footer-brand-copy">Reliable power systems, generator supply, service support and technical solutions for operations that cannot stop.</p><Link className="button button-primary" to="/contact">Contact the team <span>↗</span></Link><div className="footer-direct"><a href="tel:+923205636673" aria-label="Call NB Engineering">Call NB <span>+92 320 563 6673</span></a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry" aria-label="Email NB Engineering">Email NB <span>nbengineerings@gmail.com</span></a></div><div className="footer-socials" aria-label="Social media links">{socialLinks.map((social) => <a key={social.label} className="footer-social" href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`Open NB Engineering on ${social.label}`} title={social.label}>{social.icon}</a>)}</div></div><div><h3>Solutions</h3><Link to="/generators">Generators</Link><Link to="/services">Services</Link><Link to="/services/ats-panels">ATS / AMF automation</Link><Link to="/brands">Brands</Link></div><div><h3>Support</h3><Link to="/services/generator-maintenance">Maintenance</Link><Link to="/services/generator-repair">Repair</Link><Link to="/services/ats-panels">ATS / AMF panels</Link><Link to="/contact">Contact the team</Link></div><div><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span><span className="footer-hours">Mon–Sat / 09:00–18:00</span><div className="preferred-source"><span className="preferred-source-label">Stay close to NB</span><div google-add-preferred-source-btn data-theme="dark" data-lang="en"></div></div></div></div><div className="site-shell footer-bottom"><span>© {new Date().getFullYear()} NB Engineering & Services</span><span>Power systems for the real world.</span></div></footer>;
+  const preferredSource = useRef(null);
+  const [preferredSourceReady, setPreferredSourceReady] = useState(false);
+
+  useEffect(() => {
+    window.PREFERRED_SOURCE = window.PREFERRED_SOURCE || [];
+    window.PREFERRED_SOURCE.push((api) => {
+      api.init({ theme: "dark", lang: "en" });
+      preferredSource.current = api;
+      setPreferredSourceReady(true);
+    });
+  }, []);
+
+  const addPreferredSource = () => preferredSource.current?.addPreferredSource();
+
+  return <footer className="footer-modern"><div className="site-shell footer-grid"><div className="footer-intro"><div className="footer-brand">NB ENGINEERING<span> & SERVICES</span></div><p className="footer-brand-copy">Reliable power systems, generator supply, service support and technical solutions for operations that cannot stop.</p><Link className="button button-primary" to="/contact">Contact the team <span>↗</span></Link><div className="footer-direct"><a href="tel:+923205636673" aria-label="Call NB Engineering">Call NB <span>+92 320 563 6673</span></a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry" aria-label="Email NB Engineering">Email NB <span>nbengineerings@gmail.com</span></a></div><div className="footer-socials" aria-label="Social media links">{socialLinks.map((social) => <a key={social.label} className="footer-social" href={social.href} target="_blank" rel="noopener noreferrer" aria-label={`Open NB Engineering on ${social.label}`} title={social.label}>{social.icon}</a>)}</div></div><div><h3>Solutions</h3><Link to="/generators">Generators</Link><Link to="/services">Services</Link><Link to="/services/ats-panels">ATS / AMF automation</Link><Link to="/brands">Brands</Link></div><div><h3>Support</h3><Link to="/services/generator-maintenance">Maintenance</Link><Link to="/services/generator-repair">Repair</Link><Link to="/services/ats-panels">ATS / AMF panels</Link><Link to="/contact">Contact the team</Link></div><div><h3>Find us</h3><Link to="/contact">Contact us</Link><a href="tel:+923205636673">+92 320 563 6673</a><a href="mailto:nbengineerings@gmail.com?subject=NB%20Engineering%20power%20inquiry">nbengineerings@gmail.com</a><span className="footer-location">Tarnol, Islamabad<br />Pakistan</span><span className="footer-hours">Mon–Sat / 09:00–18:00</span><div className="preferred-source"><span className="preferred-source-label">Stay close to NB</span><button type="button" className="preferred-source-button" onClick={addPreferredSource} disabled={!preferredSourceReady}>Add NB to preferred sources</button></div></div></div><div className="site-shell footer-bottom"><span>© {new Date().getFullYear()} NB Engineering & Services</span><span>Power systems for the real world.</span></div></footer>;
 }
